@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<scriptDescription>
+  <description>Изменение формата файлов, прикрепленных к имеюшимся НПД. Вместо Microsoft Office Word используется формат RTF.</description>
+  <script
+    filename="Doc2RTF.vb"
+    language="vb"
+    priority="3"
+    creationDate="26.02.2007"
+    ronVersion="794"
+    >
+    <references>
+      <lib name="System.Windows.Forms.dll" type="system" />
+      <lib name="NCHLOE.dll" type="internal" />
+      <lib name="Interop.Word.dll" type="internal" />
+    </references>
+  </script>
+</scriptDescription>
+<!-- Copyright (C) 2007 ICIE. All Rights Reserved. Все права защищены. -->

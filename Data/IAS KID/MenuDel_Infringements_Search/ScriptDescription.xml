@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<scriptDescription>
+  <description>
+    <task>Удаление пункта меню "Нарушение".</task>
+    <solution>Удаление экземпляра 'infringements_search' класса 'menuHandle'.</solution>
+  </description>
+  <script
+    filename="MenuDel_Infringements_Search.vb"
+    language="vb"
+    priority="5"
+    creationDate="28.02.2007"
+    ronVersion="893"
+    >
+    <references>
+      <lib name="NCHLOE.dll" type="internal" />
+    </references>
+  </script>
+</scriptDescription>
+<!-- Copyright (C) 2007 ICIE. All Rights Reserved. Все права защищены. -->

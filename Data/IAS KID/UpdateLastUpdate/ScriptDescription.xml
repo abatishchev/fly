@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<scriptDescription>
+  <description>Заполнение у всех объектов типа НПД, ОГ, ОЮФЛ, ИАМ параметра 'last_update', в случае если он не задан.</description>
+  <script
+    filename="UpdateLastUpdate.vb"
+    language="vb"
+    priority="5"
+    creationDate="27.04.2007"
+    ronVersion="1092"
+    >
+    <references>
+      <lib name="NCHLOE.dll" type="internal" />
+    </references>
+  </script>
+</scriptDescription>
+<!-- Copyright (C) 2007 ICIE. All Rights Reserved. Все права защищены. -->

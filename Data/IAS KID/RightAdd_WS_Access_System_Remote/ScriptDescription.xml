@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<scriptDescription>
+  <description>Добавить право 'WS_Access' и назначить его группе "System_Remote", убрать другие права из этой группы</description>
+  <script
+    filename="RightAdd_WS_Access_System_Remote.vb"
+    language="vb"
+    priority="3"
+    creationDate="28.02.2007"
+    ronVersion="893"
+    >
+    <references>
+      <lib name="NCHLOE.dll" type="internal" />
+    </references>
+  </script>
+</scriptDescription>
+<!-- Copyright (C) 2007 ICIE. All Rights Reserved. Все права защищены. -->

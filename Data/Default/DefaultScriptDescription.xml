@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<scriptDescription>
+  <!-- Поставленная задача дял скрипта -->
+  <description>Сделать то-то</description>
+  <!-- 
+  Имя скрипта должно соответствовать имени файла в архиве.
+  Язык может быть либо C# либо VB.
+  Приоритет выполнения скрипта. Чем меньше, тем выше. 0 - максимальный. 5 - нормальный.
+  Дата создания скрипта (формат DD.MM.YYYY).
+  Версия ron2.xml на которой скрипт был проверен и/или отлажен.
+  -->
+  <script
+    filename="Script.vb"
+    language="vb"
+    priority="1"
+    creationDate="02.03.2007"
+    ronVersion="666"
+    >
+    <references>
+      <!-- Библиотеки типа system ищутся по мета-данным -->
+      <lib name="System.Windows.Forms.dll" type="system"/>
+      <!-- Библиотеки типа internal ищутся в папке ~/Bin/ -->
+      <lib name="NCHLOE.dll" type="internal" />
+      <!-- Библиотеки типа internal ищутся в архиве со скриптом и копируются во временную папку -->
+      <lib name="Word.Interop.dll" type="external" />
+    </references>
+  </script>
+</scriptDescription>
+<!-- Copyright (C) 2007 ICIE. All Rights Reserved. Все права защищены. -->

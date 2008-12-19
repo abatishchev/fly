@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<scriptDescription>
+  <description>Отображение элементов классификатора 'уровни образования' в виде вложенных в элемент 'Инспектируемая организация'. Т.е. в разделе Инспекцинных проверок пункт Инспектируемая организация/образовательное учреждение расскрывается на выпадающий список различных типов образовательных учреждений.</description>
+  <script
+    filename="Element_Ghost.vb"
+    language="vb"
+    priority="1"
+    creationDate="20.02.2007"
+    ronVersion="794"
+    >
+    <references>
+      <lib name="NCHLOE.dll" type="internal" />
+    </references>
+  </script>
+</scriptDescription>
+<!-- Copyright (C) 2007 ICIE. All Rights Reserved. Все права защищены. -->

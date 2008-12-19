@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<scriptDescription>
+  <description>Сделать то-то</description>
+  <script
+    filename="DefaultCS.cs"
+    language="C#"
+    priority="5"
+    creationDate="02.03.2007"
+    ronVersion="666"
+    >
+    <references>
+      <lib name="NCHLOE.dll" type="internal" />
+    </references>
+  </script>
+</scriptDescription>
+<!-- Copyright (C) 2007 ICIE. All Rights Reserved. Все права защищены. -->
