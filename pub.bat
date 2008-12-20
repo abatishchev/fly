@@ -24,6 +24,7 @@ call psftp.exe -b pub-batch.bat abatishchev@web.sourceforge.net
 
 set DIST=..\..\release\chloe-1.0
 
+mkdir %DIST%
 move /y fly-chloe-1.0-lib.zip %DIST%
 move /y  fly-chloe-1.0-lib+data.zip %DIST%
 move /y  fly-chloe-1.0-source.zip %DIST%
