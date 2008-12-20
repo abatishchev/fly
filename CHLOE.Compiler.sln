@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnTheFlyCompiler", "OnTheFlyCompiler.csproj", "{0A16C549-14AC-43D2-B450-1E1968F46A51}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CHLOE.Compiler", "CHLOE.Compiler.csproj", "{0A16C549-14AC-43D2-B450-1E1968F46A51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
