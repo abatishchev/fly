@@ -1,4 +1,5 @@
 ﻿// Copyright (C) 2007 Alexander M. Batishchev aka Godfather (abatishchev at gmail.com)
+// Copyright (C) ICIE
 
 using System;
 using System.Reflection;
@@ -6,8 +7,8 @@ using System.Resources;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("On-the-Fly .NET Compiler")]
-[assembly: AssemblyCompany("Godfather Software Foundation")]
-[assembly: AssemblyProduct("OnTheFlyCompiler")]
+[assembly: AssemblyCompany("ICIE")]
+[assembly: AssemblyProduct("CHLOE.Compiler")]
 [assembly: AssemblyCopyright("Copyright (C) 2007 Alexander M. Batishchev aka Godfather")]
 
 [assembly: NeutralResourcesLanguageAttribute("en-US")]

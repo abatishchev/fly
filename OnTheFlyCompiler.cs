@@ -1,4 +1,5 @@
 // Copyright (C) 2007 Alexander M. Batishchev aka Godfather (abatishchev at gmail.com)
+// Copyright (C) ICIE
 
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
-namespace OnTheFlyCompiler
+namespace CHLOE.Compiler
 {
 	public class OnTheFlyCompiler
 	{

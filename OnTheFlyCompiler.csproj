@@ -7,7 +7,7 @@
     <ProjectGuid>{0A16C549-14AC-43D2-B450-1E1968F46A51}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OnTheFlyCompiler</RootNamespace>
+    <RootNamespace>CHLOE.Compiler</RootNamespace>
     <AssemblyName>OnTheFlyCompiler</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
