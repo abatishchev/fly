@@ -6,7 +6,7 @@ set CMD=A -afzip -o+ -s -ibck -t
 
 set FILES=Compiler.cs Errors.cs Events.cs Output.cs Settings.cs Properties\AssemblyInfo.cs
 set FILES-LIB=OnTheFlyCompiler.csproj
-set FILES-TOOL= OnTheFlyCompiler-Tool.csproj ConsoleStub.cs Core.cs Examples\*.cs Settings\*.xml
+set FILES-TOOL=OnTheFlyCompiler-Tool.csproj ConsoleStub.cs Core.cs Examples\*.cs Settings\*.xml
 
 set LIB=bin\Release\fly.dll
 set TOOL=bin\Release\fly.exe
