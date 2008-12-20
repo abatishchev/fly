@@ -14,10 +14,10 @@ call winrar.exe %CMD% %NAME% %FILES%
 set NAME=fly-chloe-1.0-source+data.zip
 call winrar.exe %CMD% %NAME% %FILES% %DATA%
 
-set NAME=fly-chloe-1.0-lib.zip
+set NAME=fly-chloe-1.0-binary.zip
 call winrar.exe %CMD% %NAME% %DLL%
 
-set NAME=fly-chloe-1.0-lib+data.zip
+set NAME=fly-chloe-1.0-binary+data.zip
 call winrar.exe %CMD% %NAME% %DLL% %DATA%
 
 call psftp.exe -b pub-batch.bat abatishchev@web.sourceforge.net
@@ -25,7 +25,7 @@ call psftp.exe -b pub-batch.bat abatishchev@web.sourceforge.net
 set DIST=..\..\release\chloe-1.0
 
 mkdir %DIST%
-move /y fly-chloe-1.0-lib.zip %DIST%
-move /y  fly-chloe-1.0-lib+data.zip %DIST%
+move /y fly-chloe-1.0-binary.zip %DIST%
+move /y  fly-chloe-1.0-binary+data.zip %DIST%
 move /y  fly-chloe-1.0-source.zip %DIST%
 move /y  fly-chloe-1.0-source+data.zip %DIST%
