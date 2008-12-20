@@ -1,3 +1,5 @@
+rem Copyright (C) 2007-2008 Alexander M. Batishchev aka Godfather (abatishchev at gmail.com)
+
 set PATH=%PATH%;d:\Program Files\WinRar;d:\Program Files\PuTTy
 
 set CMD=A -afzip -r0 -o+ -s -ibck -t
