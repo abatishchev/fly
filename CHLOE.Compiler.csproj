@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CHLOE.Compiler</RootNamespace>
-    <AssemblyName>OnTheFlyCompiler</AssemblyName>
+    <AssemblyName>CHLOE.Compiler</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
