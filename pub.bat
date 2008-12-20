@@ -20,7 +20,7 @@ call winrar.exe %CMD% %NAME% %DLL%
 set NAME=fly-chloe-1.0-lib+data.zip
 call winrar.exe %CMD% %NAME% %DLL% %DATA%
 
-call psftp.exe -b psftp.bat abatishchev@web.sourceforge.net
+call psftp.exe -b pub-batch.bat abatishchev@web.sourceforge.net
 
 set DIST=..\..\release\chloe-1.0
 
