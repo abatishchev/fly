@@ -1,3 +1,4 @@
+#!/bin/bash
 # Copyright (C) 2007-2008 Alexander M. Batishchev aka Godfather (abatishchev at gmail.com)
 
 files='Compiler.cs Errors.cs Events.cs Output.cs Settings.cs Properties/AssemblyInfo.cs'
@@ -8,7 +9,7 @@ release='bin/Release'
 lib='fly.dll'
 tool='fly.exe'
 
-batch='batch.txt'
+batch='batch'
 rm $batch
 echo 'cd uploads' >> $batch
 
