@@ -10,7 +10,7 @@ lib='fly.dll'
 binary='fly.exe'
 
 batch='batch'
-rm $batch
+rm -f $batch
 echo 'cd uploads' >> $batch
 
 name='fly-2.0.1-source.tar.bz'
