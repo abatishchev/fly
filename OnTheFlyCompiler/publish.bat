@@ -6,10 +6,10 @@ set CMD=A -afzip -o+ -s -ibck -t
 
 set FILES=Compiler.cs Errors.cs Events.cs Output.cs Settings.cs Properties\AssemblyInfo.cs
 set FILES-LIB=OnTheFlyCompiler.csproj
-set FILES-TOOL=OnTheFlyCompiler-Tool.csproj ConsoleStub.cs Core.cs Examples\*.cs Settings\*.xml
+set FILES-BINARY=OnTheFlyCompiler-Tool.csproj ConsoleStub.cs Core.cs Examples\*.cs Settings\*.xml
 
 set LIB=bin\Release\fly.dll
-set TOOL=bin\Release\fly.exe
+set BINARY=bin\Release\fly.exe
 
 set BATCH=batch.txt
 del %BATCH%
@@ -20,7 +20,7 @@ call winrar.exe %CMD% %NAME% %FILES% %FILES-LIB%
 echo put %NAME% >> %BATCH%
 
 set NAME=fly-tool-2.0.1-source.zip
-call winrar.exe %CMD% %NAME% %FILES% %FILES-TOOL%
+call winrar.exe %CMD% %NAME% %FILES% %FILES-BINARY%
 echo put %NAME% >> %BATCH%
 
 set NAME=fly-2.0.1-binary.zip
@@ -28,7 +28,7 @@ call winrar.exe -ep %CMD% %NAME% %LIB%
 echo put %NAME% >> %BATCH%
 
 set NAME=fly-tool-2.0.1-binary.zip
-call winrar.exe -ep %CMD% %NAME% %TOOL%
+call winrar.exe -ep %CMD% %NAME% %BINARY%
 echo put %NAME% >> %BATCH%
 
 call psftp.exe -b %BATCH% abatishchev@web.sourceforge.net

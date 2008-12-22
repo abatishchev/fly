@@ -33,7 +33,7 @@ sftp -b $batch abatishchev@frs.sourceforge.net
 
 rm $batch
 
-dist='..\..\release\2.0.1'
+dist='..\..\release\'
 
 mkdir -p $dist
 mv -f fly-2.0.1-source.tar.bz2 $dist
