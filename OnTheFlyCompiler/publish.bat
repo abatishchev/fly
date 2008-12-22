@@ -1,6 +1,6 @@
 rem Copyright (C) 2007-2008 Alexander M. Batishchev aka Godfather (abatishchev at gmail.com)
 
-set PATH=%PATH%;d:\Program Files\WinRar;d:\Program Files\PuTTy
+set PATH=%PATH%;%PROGRAMFILES%\WinRar;%PROGRAMFILES%\PuTTY
 
 set CMD=A -afzip -o+ -s -ibck -t
 
@@ -11,21 +11,31 @@ set FILES-TOOL=OnTheFlyCompiler-Tool.csproj ConsoleStub.cs Core.cs Examples\*.cs
 set LIB=bin\Release\fly.dll
 set TOOL=bin\Release\fly.exe
 
+set BATCH=batch.txt
+del %BATCH%
+echo cd uploads >> %BATCH%
+
 set NAME=fly-2.0.1-source.zip
 call winrar.exe %CMD% %NAME% %FILES% %FILES-LIB%
+echo put %NAME% >> %BATCH%
 
 set NAME=fly-tool-2.0.1-source.zip
 call winrar.exe %CMD% %NAME% %FILES% %FILES-TOOL%
+echo put %NAME% >> %BATCH%
 
 set NAME=fly-2.0.1-binary.zip
 call winrar.exe -ep %CMD% %NAME% %LIB%
+echo put %NAME% >> %BATCH%
 
 set NAME=fly-tool-2.0.1-binary.zip
 call winrar.exe -ep %CMD% %NAME% %TOOL%
+echo put %NAME% >> %BATCH%
 
-rem call psftp.exe -b pub-batch.bat abatishchev@web.sourceforge.net
+call psftp.exe -b %BATCH% abatishchev@web.sourceforge.net
 
-set DIST=..\..\release\2.0.1
+del %BATCH%
+
+set DIST=..\..\release
 
 mkdir %DIST%
 move /y fly-2.0.1-source.zip %DIST%
