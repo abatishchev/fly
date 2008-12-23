@@ -129,6 +129,7 @@ namespace OnTheFly
 				}
 				return;
 			}
+			
 			output.Add(String.Format(CultureInfo.CurrentCulture, "Build started at {0}", DateTime.Now), 1);
 			if (this.OnBuildStart != null)
 			{

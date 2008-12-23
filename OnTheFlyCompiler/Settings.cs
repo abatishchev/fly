@@ -32,6 +32,13 @@ namespace OnTheFly.Settings
 		#endregion
 
 		#region Properties
+		public Dictionary<string, object> SettingsContainer
+		{
+			get
+			{
+				return this.container;
+			}
+		}
 		public string Language
 		{
 			get
@@ -103,168 +110,6 @@ namespace OnTheFly.Settings
 					throw new ParameterMissedException(name);
 				}
 			}
-		}
-		public static CompilerSettings Parse(string[] args)
-		{
-			CompilerSettings settings = new CompilerSettings();
-			for (int i = 0; i < args.Length; i++)
-			{
-				string name = args[i];
-				object value = null;
-
-				if (settings.container.ContainsKey(name))
-				{
-					throw new ParameterAlreadySetException(name);
-				}
-
-				try
-				{
-					switch (name)
-					{
-						case "--debug":
-							{
-								value = true;
-								settings.IncludeDebugInformation = true;
-								break;
-							}
-						case "--exe":
-							{
-								value = true;
-								settings.GenerateExecutable = true;
-								break;
-							}
-						case "-f":
-							{
-								string[] arr = args[++i].Split(';');
-								foreach (string str in arr)
-								{
-									settings.sources.Add(File.ReadAllText(str));
-								}
-								value = arr;
-								break;
-							}
-						case "-l":
-							{
-								string str = args[++i];
-								settings.language = str;
-								value = str;
-								break;
-							}
-						case "--memory":
-							{
-								value = true;
-								settings.GenerateInMemory = true;
-								break;
-							}
-						case "-n":
-							{
-								string str = args[++i];
-								value = str;
-								settings.methodName = str;
-								break;
-							}
-						case "-p":
-							{
-								settings.methodPath = args[++i];
-								break;
-							}
-						case "-r":
-							{
-								string[] arr = args[++i].Split(';');
-								value = arr;
-								settings.ReferencedAssemblies.AddRange(arr);
-								break;
-							}
-						case "-s":
-							{
-								string[] arr = args[++i].Split(';');
-								settings.sources.AddRange(arr);
-								value = arr;
-								break;
-							}
-						case "--threat":
-							{
-								value = true;
-								settings.TreatWarningsAsErrors = true;
-								break;
-							}
-						case "-v":
-							{
-								int level = Convert.ToInt32(args[++i]);
-								if (level > 2)
-								{
-									throw new ParameterOutOfRangeException(name, level.ToString());
-								}
-								else
-								{
-									settings.verbose = level;
-									value = level;
-								}
-								break;
-							}
-						case "-w":
-							{
-								try
-								{
-									int level = Convert.ToInt32(args[++i]);
-									if (level > 4)
-									{
-										throw new ParameterOutOfRangeException(name, level.ToString());
-									}
-									else
-									{
-										settings.WarningLevel = level;
-										value = level;
-									}
-								}
-								catch
-								{
-									throw new ParameterOutOfRangeException(name, (string)value);
-								}
-								break;
-							}
-						case "-x":
-							{
-								try
-								{
-									string xml = String.Empty; ;
-									XmlDocument doc = new XmlDocument();
-									try
-									{
-										xml = args[++i];
-										doc.Load(xml);
-										settings = Parse(doc);
-									}
-									catch
-									{
-										throw new ParameterOutOfRangeException(name, xml);
-									}
-
-
-								}
-								catch (NullReferenceException ex)
-								{
-									throw new ReadingXmlDescriptionException(ex);
-								}
-
-								break;
-							}
-						default:
-							{
-								throw new UnknownParameterException(name);
-							}
-					}
-					if (value != null)
-					{
-						settings.container.Add(name, value);
-					}
-				}
-				catch (IndexOutOfRangeException)
-				{
-					throw new ParameterNotSetException(name);
-				}
-			}
-			return settings;
 		}
 
 		public static CompilerSettings Parse(XmlDocument doc)
