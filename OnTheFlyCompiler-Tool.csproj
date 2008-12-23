@@ -44,6 +44,9 @@
     <Compile Include="Core.cs" />
     <Compile Include="Errors.cs" />
     <Compile Include="Events.cs" />
+    <Compile Include="Examples\i3rdparty.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Examples\world.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
