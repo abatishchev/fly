@@ -3,7 +3,7 @@
 using System;
 using System.Reflection;
 
-namespace OnTheFly.Events
+namespace OnTheFlyCompiler.Events
 {
 	public class BuildFailureEventArgs : EventArgs
 	{

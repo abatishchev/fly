@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnTheFlyCompiler", "OnTheFlyCompiler.csproj", "{976DFCDC-8E11-4F8B-AE1F-00B9DAF94A96}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libfly", "libfly.csproj", "{976DFCDC-8E11-4F8B-AE1F-00B9DAF94A96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnTheFlyCompiler-Tool", "OnTheFlyCompiler-Tool.csproj", "{8C047FC1-ED81-43F7-B2DE-6E2D84229F27}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fly", "fly.csproj", "{8C047FC1-ED81-43F7-B2DE-6E2D84229F27}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -7,11 +7,11 @@ using System.Reflection;
 
 using Microsoft.CSharp;
 
-using OnTheFly.Errors;
-using OnTheFly.Events;
-using OnTheFly.Settings;
+using OnTheFlyCompiler.Errors;
+using OnTheFlyCompiler.Events;
+using OnTheFlyCompiler.Settings;
 
-namespace OnTheFly
+namespace OnTheFlyCompiler
 {
 	public class Compiler
 	{

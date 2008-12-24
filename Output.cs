@@ -4,7 +4,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Text;
 
-namespace OnTheFly
+namespace OnTheFlyCompiler
 {
 	public class CompilerOutput : Collection<String>
 	{

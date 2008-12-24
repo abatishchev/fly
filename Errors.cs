@@ -4,7 +4,7 @@ using System;
 using System.Configuration;
 using System.Globalization;
 
-namespace OnTheFly.Errors
+namespace OnTheFlyCompiler.Errors
 {
 	#region Compiler
 

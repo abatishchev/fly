@@ -6,9 +6,9 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Xml;
 
-using OnTheFly.Errors;
+using OnTheFlyCompiler.Errors;
 
-namespace OnTheFly.Settings
+namespace OnTheFlyCompiler.Settings
 {
 	public class CompilerSettings : System.CodeDom.Compiler.CompilerParameters
 	{

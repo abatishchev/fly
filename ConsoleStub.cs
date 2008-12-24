@@ -5,10 +5,10 @@ using System.Globalization;
 using System.IO;
 using System.Xml;
 
-using OnTheFly.Errors;
-using OnTheFly.Settings;
+using OnTheFlyCompiler.Errors;
+using OnTheFlyCompiler.Settings;
 
-namespace OnTheFly
+namespace OnTheFlyCompiler
 {
 	static class ConsoleStub
 	{

@@ -8,13 +8,13 @@
     <ProjectGuid>{8C047FC1-ED81-43F7-B2DE-6E2D84229F27}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OnTheFly</RootNamespace>
+    <RootNamespace>OnTheFlyCompiler</RootNamespace>
     <AssemblyName>fly</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkSubset>
     </TargetFrameworkSubset>
-    <StartupObject>OnTheFly.ConsoleStub</StartupObject>
+    <StartupObject>OnTheFlyCompiler.ConsoleStub</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

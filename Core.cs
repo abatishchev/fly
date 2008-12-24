@@ -4,10 +4,10 @@ using System;
 using System.Reflection;
 using System.Windows.Forms;
 
-using OnTheFly.Errors;
-using OnTheFly.Settings;
+using OnTheFlyCompiler.Errors;
+using OnTheFlyCompiler.Settings;
 
-namespace OnTheFly
+namespace OnTheFlyCompiler
 {
 	static class Core
 	{
