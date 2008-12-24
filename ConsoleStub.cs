@@ -128,10 +128,10 @@ namespace OnTheFlyCompiler
 							}
 						case "-v":
 							{
-								int level = Convert.ToInt32(args[++i]);
+								int level = Convert.ToInt32(args[++i], CultureInfo.CurrentCulture);
 								if (level > 2)
 								{
-									throw new ParameterOutOfRangeException(name, level.ToString());
+									throw new ParameterOutOfRangeException(name, level.ToString(CultureInfo.CurrentCulture));
 								}
 								else
 								{
@@ -144,10 +144,10 @@ namespace OnTheFlyCompiler
 							{
 								try
 								{
-									int level = Convert.ToInt32(args[++i]);
+									int level = Convert.ToInt32(args[++i], CultureInfo.CurrentCulture);
 									if (level > 4)
 									{
-										throw new ParameterOutOfRangeException(name, level.ToString());
+										throw new ParameterOutOfRangeException(name, level.ToString(CultureInfo.CurrentCulture));
 									}
 									else
 									{

@@ -98,7 +98,13 @@ namespace OnTheFlyCompiler
 		#region Methods
 		public void Dispose()
 		{
-			this.settings.TempFiles.Delete();
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		public void Dispose(bool disposing)
+		{
+			this.settings.TempFiles.Delete();;
 		}
 		
 		public void Execute()
