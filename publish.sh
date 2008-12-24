@@ -2,11 +2,11 @@
 # Copyright (C) 2007-2008 Alexander M. Batishchev aka Godfather (abatishchev at gmail.com)
 
 source='CHANGELOG.txt Compiler.cs Errors.cs Events.cs LICENSE.txt Output.cs Settings.cs Properties/AssemblyInfo.cs'
-source_lib='OnTheFlyCompiler.csproj'
-source_binary='OnTheFlyCompiler-Tool.csproj ConsoleStub.cs Core.cs Examples/*.cs Settings/*.xml'
+source_lib='libfly.csproj'
+source_binary='fly.csproj ConsoleStub.cs Core.cs Examples/*.cs Settings/*.xml'
 
 release='bin/Release'
-lib='fly.dll'
+lib='libfly.dll'
 binary='fly.exe'
 
 batch='batch'
