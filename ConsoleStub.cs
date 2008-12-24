@@ -29,6 +29,10 @@ namespace OnTheFlyCompiler
 				Core.Init(Parse(args));
 				Core.Compiler.Compile();
 				Console.WriteLine(Core.Compiler.Output);
+				if (Core.Compiler.Settings.Execute)
+				{
+					Core.Compiler.Execute();
+				}
 			}
 			catch (Exception ex)
 			{
@@ -59,6 +63,12 @@ namespace OnTheFlyCompiler
 							{
 								value = true;
 								settings.GenerateExecutable = true;
+								break;
+							}
+						case "--exec":
+							{
+								value = true;
+								settings.Execute = true;
 								break;
 							}
 						case "-f":

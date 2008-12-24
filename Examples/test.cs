@@ -5,7 +5,7 @@ using System.Text;
 
 class Test
 {
-	public static void HelloWorld()
+	public static void Main()
 	{
 		Example example = new Example();
 		example.HelloWorld();

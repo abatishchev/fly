@@ -19,7 +19,7 @@ namespace OnTheFlyCompiler.Settings
 
 		int verbose = 2;
 
-		bool execute;
+		bool execute = false;
 
 		#region Constructors
 		public CompilerSettings()
