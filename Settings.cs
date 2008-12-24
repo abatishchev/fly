@@ -19,7 +19,9 @@ namespace OnTheFlyCompiler.Settings
 
 		int verbose = 2;
 
-		#region Constructor
+		bool execute;
+
+		#region Constructors
 		public CompilerSettings()
 		{
 			//
@@ -32,11 +34,15 @@ namespace OnTheFlyCompiler.Settings
 		#endregion
 
 		#region Properties
-		public Dictionary<string, object> SettingsContainer
+		public bool Execute
 		{
 			get
 			{
-				return this.container;
+				return this.execute;
+			}
+			set
+			{
+				this.execute = value;
 			}
 		}
 		public string Language
@@ -78,6 +84,14 @@ namespace OnTheFlyCompiler.Settings
 			}
 		}
 
+		public Dictionary<string, object> SettingsContainer
+		{
+			get
+			{
+				return this.container;
+			}
+		}
+
 		public StringCollection Sources
 		{
 			get
@@ -100,7 +114,7 @@ namespace OnTheFlyCompiler.Settings
 		}
 		#endregion
 
-		#region Mehods
+		#region Methods
 		public void Check()
 		{
 			foreach (string name in container.Keys)

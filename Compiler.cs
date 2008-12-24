@@ -13,7 +13,7 @@ using OnTheFlyCompiler.Settings;
 
 namespace OnTheFlyCompiler
 {
-	public class Compiler
+	public class Compiler : IDisposable
 	{
 		CodeDomProvider provider;
 		CompilerSettings settings;
@@ -24,7 +24,7 @@ namespace OnTheFlyCompiler
 
 		bool isReady = false;
 
-		#region Constructor
+		#region Constructors
 		public Compiler(CompilerSettings settings)
 		{
 			this.output = new CompilerOutput(this);
@@ -96,6 +96,11 @@ namespace OnTheFlyCompiler
 		#endregion
 
 		#region Methods
+		public void Dispose()
+		{
+			this.settings.TempFiles.Delete();
+		}
+		
 		public void Execute()
 		{
 			BindingFlags flags = BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static;
@@ -111,9 +116,9 @@ namespace OnTheFlyCompiler
 		public void Compile()
 		{
 			string[] sources = new string[settings.Sources.Count];
-			for (int i = 0; i < settings.Sources.Count; i++)
+			for (int i = 0; i < this.settings.Sources.Count; i++)
 			{
-				sources[i] = settings.Sources[i];
+				sources[i] = this.settings.Sources[i];
 			}
 			Compile(sources);
 		}

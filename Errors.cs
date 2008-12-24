@@ -36,7 +36,7 @@ namespace OnTheFlyCompiler.Errors
 	{
 		string parameterName, parameterValue;
 
-		#region Constructor
+		#region Constructors
 		protected ParameterException(string message, string name)
 			: base(message)
 		{
