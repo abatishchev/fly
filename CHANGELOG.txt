@@ -1,7 +1,9 @@
 On-the-Fly .NET Compiler Project Changelog:
 
-2.0.1.0 (-)
+2.0.2 (-)
+
+2.0.1 (2008.12.24)
 [+] Public preview release as open source project
 
-1.0.1.0 (2007.06.03)
+1.0.1 (2007.06.03)
 [+] Version 1.0 released as core module of the CHLOE project in ICIE
