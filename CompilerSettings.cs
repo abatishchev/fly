@@ -20,7 +20,6 @@ namespace OnTheFlyCompiler.Settings
 		Sources,
 		VerboseLevel,
 		WarningLevel
-
 	}
 
 	public class CompilerSettings : System.CodeDom.Compiler.CompilerParameters
@@ -315,16 +314,18 @@ namespace OnTheFlyCompiler.Settings
 		#endregion
 	}
 
-	public class ParameterContainer : Dictionary<ParameterRole, object>
+	public class ParameterContainer
 	{
+		Dictionary<ParameterRole, object> dic = new Dictionary<ParameterRole, object>();
+
 		#region Operators
-		public new object this[ParameterRole role]
+		public object this[ParameterRole role]
 		{
 			get
 			{
-				if (base.ContainsKey(role))
+				if (dic.ContainsKey(role))
 				{
-					return base[role];
+					return dic[role];
 				}
 				else
 				{
@@ -333,13 +334,13 @@ namespace OnTheFlyCompiler.Settings
 			}
 			set
 			{
-				if (base.ContainsKey(role))
+				if (dic.ContainsKey(role))
 				{
-					base[role] = value;
+					dic[role] = value;
 				}
 				else
 				{
-					base.Add(role, value);
+					dic.Add(role, value);
 				}
 			}
 		}

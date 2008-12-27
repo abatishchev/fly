@@ -103,6 +103,7 @@ namespace OnTheFlyCompiler
 
 		public void Dispose(bool disposing)
 		{
+			// free managed resources
 			this.settings.TempFiles.Delete();
 			if (disposing)
 			{
@@ -115,11 +116,6 @@ namespace OnTheFlyCompiler
 			BindingFlags flags = BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static;
 			Type type = this.ResultAssembly.GetType(settings.MethodPath);
 			this.resultObj = type.InvokeMember(settings.MethodName, flags, null, null, null, CultureInfo.CurrentCulture);
-		}
-
-		public void Clean()
-		{
-			this.result.TempFiles.Delete();
 		}
 
 		public void Compile()
