@@ -224,7 +224,7 @@ namespace OnTheFlyCompiler.Settings
 							{
 								try
 								{
-									string xml = String.Empty; ;
+									string xml = String.Empty;
 									XmlDocument doc = new XmlDocument();
 									try
 									{
@@ -328,7 +328,7 @@ namespace OnTheFlyCompiler.Settings
 				}
 				else
 				{
-					return null; ;
+					return null;
 				}
 			}
 			set
