@@ -103,9 +103,13 @@ namespace OnTheFlyCompiler
 
 		public void Dispose(bool disposing)
 		{
-			this.settings.TempFiles.Delete();;
+			this.settings.TempFiles.Delete();
+			if (disposing)
+			{
+				// free native resources
+			}
 		}
-		
+
 		public void Execute()
 		{
 			BindingFlags flags = BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static;

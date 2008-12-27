@@ -31,6 +31,7 @@ namespace OnTheFlyCompiler
 				{
 					Core.Compiler.Execute();
 				}
+				Core.Compiler.Dispose();
 			}
 			catch (Exception ex)
 			{
