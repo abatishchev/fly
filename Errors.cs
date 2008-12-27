@@ -1,7 +1,6 @@
 ﻿// Copyright (C) 2007-2008 Alexander M. Batishchev aka Godfather (abatishchev at gmail.com)
 
 using System;
-using System.Configuration;
 using System.Globalization;
 
 namespace OnTheFlyCompiler.Errors
