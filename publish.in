@@ -11,34 +11,36 @@ set FILES-BINARY=fly.csproj ConsoleStub.cs Core.cs Examples\*.cs Settings\*.xml
 set LIB=bin\Release\libfly.dll
 set BINARY=bin\Release\fly.exe
 
+set BUILD=2
+
 set BATCH=batch.txt
 del %BATCH%
 echo cd uploads >> %BATCH%
 
-set NAME=libfly-2.0.1-source.zip
+set NAME=libfly-2.0.%BUILD%.$WCREV$-source.zip
 call winrar.exe %CMD% %NAME% %FILES% %FILES-LIB%
 echo put %NAME% >> %BATCH%
 
-set NAME=libfly-2.0.1-binary.zip
+set NAME=libfly-2.0.%BUILD%.$WCREV$-binary.zip
 call winrar.exe -ep %CMD% %NAME% %LIB%
 echo put %NAME% >> %BATCH%
 
-set NAME=fly-2.0.1-source.zip
+set NAME=fly-2.0.%BUILD%.$WCREV$-source.zip
 call winrar.exe %CMD% %NAME% %FILES% %FILES-BINARY%
 echo put %NAME% >> %BATCH%
 
-set NAME=fly-2.0.1-binary.zip
+set NAME=fly-2.0.%BUILD%.$WCREV$-binary.zip
 call winrar.exe -ep %CMD% %NAME% %BINARY%
 echo put %NAME% >> %BATCH%
 
-call psftp.exe -b %BATCH% abatishchev@web.sourceforge.net
+call psftp.exe -b %BATCH% abatishchev@frs.sourceforge.net
 
 del %BATCH%
 
 set DIST=..\..\release
 
 mkdir %DIST%
-move /y libfly-2.0.1-source.zip %DIST%
-move /y libfly-2.0.1-binary.zip %DIST%
-move /y fly-2.0.1-source.zip %DIST%
-move /y fly-2.0.1-binary.zip %DIST%
+move /y libfly-2.0.%BUILD%.$WCREV$-source.zip %DIST%
+move /y libfly-2.0.%BUILD%.$WCREV$-binary.zip %DIST%
+move /y fly-2.0.%BUILD%.$WCREV$-source.zip %DIST%
+move /y fly-2.0.%BUILD%.$WCREV$-binary.zip %DIST%
