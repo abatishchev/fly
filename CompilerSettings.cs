@@ -10,6 +10,16 @@ using OnTheFlyCompiler.Errors;
 
 namespace OnTheFlyCompiler.Settings
 {
+	public enum ParameterRole
+	{
+		ExecuteFlag,
+		Language,
+		MethodName,
+		MethodPath,
+		VerboseLevel,
+		WarningLevel
+
+	}
 	public class CompilerSettings : System.CodeDom.Compiler.CompilerParameters
 	{
 		Dictionary<string, object> container = new Dictionary<string, object>();
