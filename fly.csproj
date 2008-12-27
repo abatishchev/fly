@@ -45,12 +45,12 @@
     <Compile Include="Core.cs" />
     <Compile Include="Errors.cs" />
     <Compile Include="Events.cs" />
-    <Compile Include="Examples\i3rdparty.cs">
+    <Content Include="Examples\i3rdparty.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Examples\world.cs">
+    </Content>
+    <Content Include="Examples\world.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
+    </Content>
     <Compile Include="Output.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Examples\test.cs">

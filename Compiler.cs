@@ -30,7 +30,6 @@ namespace OnTheFlyCompiler
 			this.output = new CompilerOutput(this);
 			try
 			{
-				settings.Check();
 				this.settings = settings;
 				if (!CodeDomProvider.IsDefinedLanguage(settings.Language))
 				{

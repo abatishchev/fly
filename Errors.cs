@@ -30,7 +30,6 @@ namespace OnTheFlyCompiler.Errors
 	#endregion
 
 	#region Parameters
-
 	[Serializable]
 	public abstract class ParameterException : Exception
 	{
