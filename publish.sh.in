@@ -15,6 +15,8 @@ release='bin/Release'
 lib='libfly.dll'
 binary='fly.exe'
 
+build=2
+
 batch='batch'
 rm -f $batch
 echo 'cd uploads' >> $batch
@@ -22,11 +24,11 @@ echo 'cd uploads' >> $batch
 #if [ mode=='all' || mode=='lib' ]
 #then
 
-name='libfly-2.0.1-source.tar.bz2'
+name='libfly-2.0.$build.$WCREV$-source.tar.bz2'
 tar cfjv $name $source $source_lib
 echo 'put '$name >> $batch
 
-name='libfly-2.0.1-binary.tar.bz2'
+name='libfly-2.0.$build.$WCREV$-binary.tar.bz2'
 tar cfjv $name -C $release $lib
 echo 'put '$name >> $batch
 
@@ -35,11 +37,11 @@ echo 'put '$name >> $batch
 #if [ mode=='all' || mode=='bin' ]
 #then
 
-name='fly-2.0.1-source.tar.bz2'
+name='fly-2.0.$build.$WCREV$-source.tar.bz2'
 tar cfjv $name $source $source_binary
 echo 'put '$name >> $batch
 
-name='fly-2.0.1-binary.tar.bz2'
+name='fly-2.0.$build.$WCREV$-binary.tar.bz2'
 tar cfjv $name -C $release $binary
 echo 'put '$name >> $batch
 
@@ -56,15 +58,15 @@ mkdir -p $dist
 #if [ mode=='all' || mode=='lib' ]
 #then
 
-mv -f libfly-2.0.1-source.tar.bz2 $dist
-mv -f libfly-2.0.1-binary.tar.bz2 $dist
+mv -f libfly-2.0.$build.$WCREV$-source.tar.bz2 $dist
+mv -f libfly-2.0.$build.$WCREV$-binary.tar.bz2 $dist
 
 #fi
 
 #if [ mode=='all' || mode=='bin' ]
 #then
 
-mv -f fly-2.0.1-source.tar.bz2 $dist
-mv -f fly-2.0.1-binary.tar.bz2 $dist
+mv -f fly-2.0.$build.$WCREV$-source.tar.bz2 $dist
+mv -f fly-2.0.$build.$WCREV$-binary.tar.bz2 $dist
 
 #fi
