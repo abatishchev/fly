@@ -1,7 +1,6 @@
 ﻿// Copyright (C) 2007-2008 Alexander M. Batishchev aka Godfather (abatishchev at gmail.com)
 
 using System;
-using System.Globalization;
 
 namespace OnTheFlyCompiler
 {
@@ -10,7 +9,7 @@ namespace OnTheFlyCompiler
 		[STAThread]
 		static void Main(string[] args)
 		{
-			Console.WriteLine(String.Format(CultureInfo.CurrentCulture, "{0} version {1}", Core.ApplicationTitle, Core.ApplicationVersion));
+			Console.WriteLine(String.Format(System.Globalization.CultureInfo.CurrentCulture, "{0} version {1}", Core.ApplicationTitle, Core.ApplicationVersion));
 			Console.WriteLine(Core.ApplicationCopyright);
 			Console.WriteLine();
 
