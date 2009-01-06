@@ -2,9 +2,6 @@
 
 using System;
 using System.Collections.Specialized;
-using System.Xml;
-
-using OnTheFlyCompiler.Errors;
 
 namespace OnTheFlyCompiler.Settings
 {
@@ -89,63 +86,6 @@ namespace OnTheFlyCompiler.Settings
 			{
 				this.verbose = value;
 			}
-		}
-		#endregion
-
-		#region Methods
-		public static CompilerSettings Parse(XmlDocument doc)
-		{
-			CompilerSettings settings = new CompilerSettings();
-
-			XmlNode nodeSettings = doc.SelectSingleNode("//settings");
-			XmlNode nodeCompiler = nodeSettings.SelectSingleNode("compiler");
-			XmlAttribute atrLanguage = nodeCompiler.Attributes["language"];
-			if (atrLanguage != null)
-			{
-				settings.Language = atrLanguage.Value;
-			}
-			else
-			{
-				throw new ReadingXmlDescriptionException(new XmlException("Required attribute 'Language' is missed"));
-			}
-
-			XmlAttribute atrWarning = nodeCompiler.Attributes["warning"];
-			if (atrWarning != null)
-			{
-				settings.WarningLevel = Convert.ToInt32(atrWarning.Value);
-			}
-
-			XmlNode nodeMethod = nodeSettings.SelectSingleNode("method");
-			XmlAttribute atrPath = nodeMethod.Attributes["path"];
-			if (atrPath != null)
-			{
-				settings.MethodPath = atrPath.Value;
-			}
-			else
-			{
-				throw new ReadingXmlDescriptionException(new XmlException("Required attribute 'Path' is missed"));
-			}
-			XmlAttribute atrName = nodeMethod.Attributes["name"];
-			if (atrName != null)
-			{
-				settings.MethodName = atrName.Value;
-			}
-			else
-			{
-				throw new ReadingXmlDescriptionException(new XmlException("Required attribute 'Name' is missed"));
-			}
-
-			foreach (XmlNode nodeRef in nodeSettings.SelectNodes("references/item"))
-			{
-				settings.ReferencedAssemblies.Add(nodeRef.InnerText);
-			}
-
-			foreach (XmlNode nodeFile in nodeSettings.SelectNodes("files/item"))
-			{
-				settings.Sources.Add(System.IO.File.ReadAllText(nodeFile.InnerText));
-			}
-
-			return settings;
 		}
 		#endregion
 	}

@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Compiler.cs" />
     <Compile Include="CompilerSettings.cs" />
+    <Compile Include="CompilerSettingsHelper.cs" />
     <Compile Include="ConsoleStub.cs" />
     <Compile Include="Core.cs" />
     <Compile Include="Errors.cs" />
