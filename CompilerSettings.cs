@@ -1,7 +1,6 @@
 ﻿// Copyright (C) 2007-2008 Alexander M. Batishchev aka Godfather (abatishchev at gmail.com)
 
 using System;
-using System.Collections.Specialized;
 
 namespace OnTheFlyCompiler.Settings
 {
@@ -10,7 +9,7 @@ namespace OnTheFlyCompiler.Settings
 		string language, methodName, methodPath;
 		int verbose = 2;
 		bool execute;
-		StringCollection sources;
+		System.Collections.Specialized.StringCollection sources;
 
 		#region Constructors
 		#endregion
@@ -64,7 +63,7 @@ namespace OnTheFlyCompiler.Settings
 			}
 		}
 
-		public StringCollection Sources
+		public System.Collections.Specialized.StringCollection Sources
 		{
 			get
 			{

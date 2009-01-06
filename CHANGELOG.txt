@@ -1,6 +1,8 @@
 On-the-Fly .NET Compiler Project Changelog:
 
 2.0.2 (-)
+[~] CompilerSettings creation moved to CompilerSettingsHelper class
+
 [-] No more ParameterContainer as proxy class for storing and accessing named properties
 
 2.0.1 (2008.12.24)

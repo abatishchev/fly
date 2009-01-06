@@ -4,16 +4,14 @@ using System;
 using System.Reflection;
 using System.Windows.Forms;
 
-using OnTheFlyCompiler.Errors;
 using OnTheFlyCompiler.Settings;
 
 namespace OnTheFlyCompiler
 {
 	static class Core
 	{
-		static Compiler compiler;
-
 		static string copyright, title;
+		static Compiler compiler;
 
 		#region Properties
 		public static string ApplicationCopyright
@@ -64,7 +62,7 @@ namespace OnTheFlyCompiler
 			}
 		}
 
-		public static Compiler Compiler
+		internal static Compiler Compiler
 		{
 			get
 			{
@@ -74,7 +72,7 @@ namespace OnTheFlyCompiler
 		#endregion
 
 		#region Methods
-		public static void Init(CompilerSettings settings)
+		internal static void Init(CompilerSettings settings)
 		{
 			compiler = new Compiler(settings);
 		}
