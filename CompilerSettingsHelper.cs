@@ -120,7 +120,7 @@ namespace OnTheFlyCompiler
 								try
 								{
 									string xml = String.Empty;
-									System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
+									XmlDocument doc = new XmlDocument();
 									try
 									{
 										xml = args[++i];
