@@ -21,13 +21,15 @@ namespace OnTheFlyCompiler
 			try
 			{
 				Core.Init(CompilerSettingsHelper.Parse(args));
-				Core.Compiler.Compile();
-				Console.WriteLine(Core.Compiler.Output);
-				if (Core.Compiler.Settings.Execute)
+				using (Core.Compiler)
 				{
-					Core.Compiler.Execute();
+					Core.Compiler.Compile();
+					Console.WriteLine(Core.Compiler.Output);
+					if (Core.Compiler.Settings.Execute)
+					{
+						Core.Compiler.Execute();
+					}
 				}
-				Core.Compiler.Dispose();
 			}
 			catch (Exception ex)
 			{
