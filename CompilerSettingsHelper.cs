@@ -120,14 +120,26 @@ namespace OnTheFlyCompiler
 								try
 								{
 									string xml = String.Empty;
-									XmlDocument doc = new XmlDocument();
 									try
 									{
 										xml = args[++i];
+										XmlDocument doc = new XmlDocument();
 										doc.Load(xml);
 										settings = Parse(doc);
 									}
-									catch
+									catch (IndexOutOfRangeException)
+									{
+										throw new ParameterNotSetException(name);
+									}
+									catch (System.IO.FileNotFoundException)
+									{
+										throw;
+									}
+									catch (XmlException ex)
+									{
+										throw new Exception(String.Format(CultureInfo.CurrentCulture, "Error parsing XmlConfiguration: {0}", ex.Message));
+									}
+									catch (Exception ex)
 									{
 										throw new ParameterOutOfRangeException(name, xml);
 									}
@@ -185,6 +197,7 @@ namespace OnTheFlyCompiler
 			{
 				throw new ReadingXmlDescriptionException(new XmlException("Required attribute 'Path' is missed"));
 			}
+
 			XmlAttribute atrName = nodeMethod.Attributes["name"];
 			if (atrName != null)
 			{
