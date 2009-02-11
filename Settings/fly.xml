@@ -1,13 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <settings>
 	<compiler language="csharp" warning="3" />
-	<method path="Test" name="HelloWorld" />
+	<method path="Test" name="Main" />
+	<executable type="exe" />
 	<references>
 		<item>System.dll</item>
-		<item>System.Windows.Forms.dll</item>
-		<item>..\..\..\Test\ThirdPartlyLib\bin\Debug\lib3rdparty.dll</item>
 	</references>
 	<files>
-		<item>Examples\test.cs</item>
+		<item>Examples\kill-excel.cs</item>
 	</files>
 </settings>
