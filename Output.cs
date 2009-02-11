@@ -6,9 +6,10 @@ using System.Text;
 
 namespace OnTheFlyCompiler
 {
-	public class CompilerOutput : Collection<String>
+	public class CompilerOutput
 	{
 		Compiler compiler;
+		Collection<String> output = new Collection<string>();
 
 		#region Constructors
 		public CompilerOutput(Compiler compiler)
@@ -27,14 +28,14 @@ namespace OnTheFlyCompiler
 		{
 			if (this.compiler.Settings.Verbose >= verbose)
 			{
-				this.Add(value);
+				this.output.Add(value);
 			}
 		}
 
 		public override string ToString()
 		{
-			StringBuilder sb = new StringBuilder(this.Count);
-			foreach (string str in this)
+			StringBuilder sb = new StringBuilder(this.output.Count);
+			foreach (string str in this.output)
 			{
 				sb.AppendLine(str);
 			}
