@@ -18,9 +18,14 @@ namespace OnTheFlyCompiler
 		#endregion
 
 		#region Methods
-		public void Add(string value, int verboseLevel)
+		public void Add(int verbose)
 		{
-			if (this.compiler.Settings.Verbose >= verboseLevel)
+			Add(String.Empty, verbose);
+		}
+
+		public void Add(string value, int verbose)
+		{
+			if (this.compiler.Settings.Verbose >= verbose)
 			{
 				this.Add(value);
 			}

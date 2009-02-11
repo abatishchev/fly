@@ -24,11 +24,11 @@ namespace OnTheFlyCompiler
 				using (Core.Compiler)
 				{
 					Core.Compiler.Compile();
-					Console.WriteLine(Core.Compiler.Output);
 					if (Core.Compiler.Settings.Execute)
 					{
 						Core.Compiler.Execute();
 					}
+					Console.WriteLine(Core.Compiler.Output);
 				}
 			}
 			catch (Exception ex)

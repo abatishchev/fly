@@ -139,7 +139,7 @@ namespace OnTheFlyCompiler
 									{
 										throw new Exception(String.Format(CultureInfo.CurrentCulture, "Error parsing XmlConfiguration: {0}", ex.Message));
 									}
-									catch (Exception ex)
+									catch (Exception)
 									{
 										throw new ParameterOutOfRangeException(name, xml);
 									}
@@ -171,6 +171,7 @@ namespace OnTheFlyCompiler
 
 			XmlNode nodeSettings = doc.SelectSingleNode("//settings");
 			XmlNode nodeCompiler = nodeSettings.SelectSingleNode("compiler");
+
 			XmlAttribute atrLanguage = nodeCompiler.Attributes["language"];
 			if (atrLanguage != null)
 			{
@@ -188,6 +189,7 @@ namespace OnTheFlyCompiler
 			}
 
 			XmlNode nodeExecutable = nodeSettings.SelectSingleNode("executable");
+
 			XmlAttribute atrType = nodeExecutable.Attributes["type"];
 			if (atrType != null)
 			{
@@ -212,7 +214,14 @@ namespace OnTheFlyCompiler
 				settings.GenerateInMemory = Boolean.Parse(atrMemory.Value);
 			}
 
+			XmlAttribute atrExecute = nodeExecutable.Attributes["execute"];
+			if (atrExecute != null)
+			{
+				settings.Execute = Boolean.Parse(atrExecute.Value);
+			}
+
 			XmlNode nodeMethod = nodeSettings.SelectSingleNode("method");
+
 			XmlAttribute atrPath = nodeMethod.Attributes["path"];
 			if (atrPath != null)
 			{

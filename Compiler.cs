@@ -173,6 +173,7 @@ namespace OnTheFlyCompiler
 			{
 				this.OnBuildSuccess(this, new BuildSuccessEventArgs(this.ResultAssembly));
 			}
+			this.output.Add(1);
 		}
 		#endregion
 	}

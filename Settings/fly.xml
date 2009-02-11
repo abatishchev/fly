@@ -2,7 +2,7 @@
 <settings>
 	<compiler language="csharp" warning="3" />
 	<method path="Test" name="Main" />
-	<executable type="exe" memory="true" />
+	<executable type="exe" memory="true" execute="true" />
 	<references>
 		<item>System.dll</item>
 	</references>
