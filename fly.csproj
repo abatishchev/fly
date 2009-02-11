@@ -52,7 +52,9 @@
     <Content Include="Examples\world.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Compile Include="Examples\kill-excel.cs" />
+    <Compile Include="Examples\kill-excel.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Output.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Examples\test.cs">

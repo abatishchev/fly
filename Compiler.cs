@@ -111,6 +111,7 @@ namespace OnTheFlyCompiler
 
 		public void Execute()
 		{
+			this.output.Add(String.Format("Executing {0}.{1}..", settings.MethodPath, settings.MethodName), 1);
 			BindingFlags flags = BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static;
 			Type type = this.ResultAssembly.GetType(settings.MethodPath);
 			this.resultObj = type.InvokeMember(settings.MethodName, flags, null, null, null, CultureInfo.CurrentCulture);

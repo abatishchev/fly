@@ -187,25 +187,42 @@ namespace OnTheFlyCompiler
 				settings.WarningLevel = Convert.ToInt32(atrWarning.Value);
 			}
 
+			XmlNode nodeExecutable = nodeSettings.SelectSingleNode("executable");
+			XmlAttribute atrType = nodeExecutable.Attributes["type"];
+			if (atrType != null)
+			{
+				switch (atrType.Value)
+				{
+					case "exe":
+						{
+							settings.GenerateExecutable = true;
+							break;
+						}
+					case "dll":
+						{
+							settings.GenerateExecutable = false;
+							break;
+						}
+				}
+			}
+
+			XmlAttribute atrMemory = nodeExecutable.Attributes["memory"];
+			if (atrMemory != null)
+			{
+				settings.GenerateInMemory = Boolean.Parse(atrMemory.Value);
+			}
+
 			XmlNode nodeMethod = nodeSettings.SelectSingleNode("method");
 			XmlAttribute atrPath = nodeMethod.Attributes["path"];
 			if (atrPath != null)
 			{
 				settings.MethodPath = atrPath.Value;
 			}
-			else
-			{
-				throw new ReadingXmlDescriptionException(new XmlException("Required attribute 'Path' is missed"));
-			}
 
 			XmlAttribute atrName = nodeMethod.Attributes["name"];
 			if (atrName != null)
 			{
 				settings.MethodName = atrName.Value;
-			}
-			else
-			{
-				throw new ReadingXmlDescriptionException(new XmlException("Required attribute 'Name' is missed"));
 			}
 
 			foreach (XmlNode nodeRef in nodeSettings.SelectNodes("references/item"))
