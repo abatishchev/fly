@@ -1,11 +1,7 @@
 On-the-Fly .NET Compiler Project Changelog:
 
 2.0.2 (-)
-[+] New options are added to XmlConfiguration: generate executable, generate dll, generate in memory
-
-[~] CompilerSettings creation moved to CompilerSettingsParser class
-
-[-] No more ParameterContainer as proxy class for storing and accessing named properties
+[+] New options was added to XmlConfiguration: generate executable, generate dll, generate in memory
 
 2.0.1 (2008.12.24)
 [+] Public preview release as open source project
