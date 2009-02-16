@@ -4,10 +4,10 @@ using System;
 
 namespace OnTheFlyCompiler
 {
-	static class ConsoleStub
+	static class Program
 	{
 		[STAThread]
-		static void Main(string[] args)
+		public static void Main(string[] args)
 		{
 			Console.WriteLine(String.Format(System.Globalization.CultureInfo.CurrentCulture, "{0} version {1}", Core.ApplicationTitle, Core.ApplicationVersion));
 			Console.WriteLine(Core.ApplicationCopyright);
@@ -38,7 +38,7 @@ namespace OnTheFlyCompiler
 			}
 		}
 
-		static void PrintUsage()
+		private static void PrintUsage()
 		{
 			Console.WriteLine("Usage: fly -l <language> -f <path1;path2;..> -r <reference1;reference2;..> -p <MethodPath> -n <MethodName> [--debug] [--exe] [--memory] [-v <0-2>] [-w <0-4>] [--treat] | -x <XmlConfiguration>");
 		}

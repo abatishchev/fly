@@ -13,14 +13,14 @@ namespace OnTheFlyCompiler
 {
 	public class Compiler : IDisposable
 	{
-		CodeDomProvider provider;
-		CompilerSettings settings;
-		CompilerOutput output;
+		private CodeDomProvider provider;
+		private CompilerSettings settings;
+		private CompilerOutput output;
 
-		CompilerResults result;
-		object resultObj;
+		private CompilerResults result;
+		private object resultObj;
 
-		bool isReady = false;
+		private bool isReady;
 
 		#region Constructors
 		public Compiler(CompilerSettings settings)

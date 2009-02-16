@@ -7,13 +7,10 @@ namespace OnTheFlyCompiler.Settings
 {
 	public class CompilerSettings : System.CodeDom.Compiler.CompilerParameters
 	{
-		string language, methodName, methodPath;
-		int verbose = 2;
-		bool execute;
-		StringCollection sources = new StringCollection();
-
-		#region Constructors
-		#endregion
+		private string language, methodName, methodPath;
+		private int verbose = 2;
+		private bool execute;
+		private StringCollection sources = new StringCollection();
 
 		#region Properties
 		public bool Execute

@@ -10,11 +10,11 @@ namespace OnTheFlyCompiler
 {
 	static class Core
 	{
-		static string copyright, title;
-		static Compiler compiler;
+		private static string copyright, title;
+		private static Compiler compiler;
 
 		#region Properties
-		public static string ApplicationCopyright
+		internal static string ApplicationCopyright
 		{
 			get
 			{
@@ -30,7 +30,7 @@ namespace OnTheFlyCompiler
 			}
 		}
 
-		public static string ApplicationName
+		internal static string ApplicationName
 		{
 			get
 			{
@@ -38,7 +38,7 @@ namespace OnTheFlyCompiler
 			}
 		}
 
-		public static string ApplicationTitle
+		internal static string ApplicationTitle
 		{
 			get
 			{
@@ -54,7 +54,7 @@ namespace OnTheFlyCompiler
 			}
 		}
 
-		public static string ApplicationVersion
+		internal static string ApplicationVersion
 		{
 			get
 			{

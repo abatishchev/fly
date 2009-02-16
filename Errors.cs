@@ -6,7 +6,6 @@ using System.Globalization;
 namespace OnTheFlyCompiler.Errors
 {
 	#region Compiler
-
 	[Serializable]
 	public class CompilerNotReadyException : Exception
 	{
@@ -32,7 +31,7 @@ namespace OnTheFlyCompiler.Errors
 	[Serializable]
 	public abstract class ParameterException : Exception
 	{
-		string parameterName, parameterValue;
+		private string parameterName, parameterValue;
 
 		#region Constructors
 		protected ParameterException(string message, string name)

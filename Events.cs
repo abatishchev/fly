@@ -7,8 +7,8 @@ namespace OnTheFlyCompiler.Events
 {
 	public class BuildFailureEventArgs : EventArgs
 	{
-		CompilerOutput output;
-		int count;
+		private CompilerOutput output;
+		private int count;
 
 		public BuildFailureEventArgs(CompilerOutput output) : this(output, 0)
 		{
@@ -40,7 +40,7 @@ namespace OnTheFlyCompiler.Events
 
 	public class BuildStartEventArgs : EventArgs
 	{
-		bool cancel;
+		private bool cancel;
 
 		public bool Cancel
 		{
@@ -57,7 +57,7 @@ namespace OnTheFlyCompiler.Events
 
 	public class BuildSuccessEventArgs : EventArgs
 	{
-		Assembly resultAsm;
+		private Assembly resultAsm;
 
 		public BuildSuccessEventArgs(Assembly resultAsm)
 		{

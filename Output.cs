@@ -8,8 +8,8 @@ namespace OnTheFlyCompiler
 {
 	public class CompilerOutput
 	{
-		Compiler compiler;
-		Collection<String> output = new Collection<string>();
+		private Compiler compiler;
+		private Collection<String> output = new Collection<string>();
 
 		#region Constructors
 		public CompilerOutput(Compiler compiler)
@@ -19,12 +19,12 @@ namespace OnTheFlyCompiler
 		#endregion
 
 		#region Methods
-		public void Add(int verbose)
+		internal void Add(int verbose)
 		{
 			Add(String.Empty, verbose);
 		}
 
-		public void Add(string value, int verbose)
+		internal void Add(string value, int verbose)
 		{
 			if (this.compiler.Settings.Verbose >= verbose)
 			{
