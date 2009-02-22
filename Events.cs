@@ -7,10 +7,8 @@ namespace OnTheFlyCompiler.Events
 {
 	public class BuildFailureEventArgs : EventArgs
 	{
-		public BuildFailureEventArgs(CompilerOutput output) : this(output, 0)
-		{
-			//
-		}
+		public BuildFailureEventArgs(CompilerOutput output)
+			: this(output, 0) { }
 
 		public BuildFailureEventArgs(CompilerOutput output, int count)
 		{
@@ -18,14 +16,14 @@ namespace OnTheFlyCompiler.Events
 			this.ErrorsCount = count;
 		}
 
-		public CompilerOutput CompilerOutput { get; private set;  }
+		public CompilerOutput CompilerOutput { get; private set; }
 
-		public int ErrorsCount { get; private set;  }
+		public int ErrorsCount { get; private set; }
 	}
 
-	public class BuildStartEventArgs : EventArgs
+	public class BuildStartEventArgs : System.ComponentModel.CancelEventArgs
 	{
-		public bool Cancel { get; set; }
+		public BuildStartEventArgs() { }
 	}
 
 	public class BuildSuccessEventArgs : EventArgs
