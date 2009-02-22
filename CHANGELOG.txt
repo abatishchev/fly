@@ -1,6 +1,6 @@
 On-the-Fly .NET Compiler Project Changelog:
 
-2.0.2 (-)
+2.0.2 (2009.02.22)
 [+] New options was added to XmlConfiguration: generate executable, generate dll, generate in memory, verbose level
 
 [~] Errors and Events refactoring
