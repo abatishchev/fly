@@ -125,7 +125,7 @@ namespace OnTheFlyCompiler
 										xml = args[++i];
 										var doc = new XmlDocument();
 										doc.Load(xml);
-										settings = Parse(doc);
+										settings = Parse(doc); // TODO +=
 									}
 									catch (IndexOutOfRangeException)
 									{
