@@ -20,7 +20,7 @@ namespace OnTheFlyCompiler
 			{
 				if (String.IsNullOrEmpty(copyright))
 				{
-					object[] customAttributes = Assembly.GetEntryAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
+					var customAttributes = Assembly.GetEntryAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
 					if (customAttributes != null && customAttributes.Length > 0)
 					{
 						copyright = ((AssemblyCopyrightAttribute)customAttributes[0]).Copyright;
@@ -44,7 +44,7 @@ namespace OnTheFlyCompiler
 			{
 				if (String.IsNullOrEmpty(title))
 				{
-					object[] customAttributes = Assembly.GetEntryAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
+					var customAttributes = Assembly.GetEntryAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
 					if (customAttributes != null && customAttributes.Length > 0)
 					{
 						title = ((AssemblyTitleAttribute)customAttributes[0]).Title;

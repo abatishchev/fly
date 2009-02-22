@@ -34,7 +34,7 @@ namespace OnTheFlyCompiler
 
 		public override string ToString()
 		{
-			StringBuilder sb = new StringBuilder(this.output.Count);
+			var sb = new StringBuilder(this.output.Count);
 			foreach (string str in this.output)
 			{
 				sb.AppendLine(str);

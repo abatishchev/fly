@@ -13,10 +13,10 @@ namespace OnTheFlyCompiler
 	{
 		internal static CompilerSettings Parse(string[] args)
 		{
-			CompilerSettings settings = new CompilerSettings();
+			var settings = new CompilerSettings();
 			for (int i = 0; i < args.Length; i++)
 			{
-				string name = args[i];
+				var name = args[i];
 				try
 				{
 					switch (name)
@@ -38,7 +38,7 @@ namespace OnTheFlyCompiler
 							}
 						case "-f":
 							{
-								string[] arr = args[++i].Split(';');
+								var arr = args[++i].Split(';');
 								foreach (string str in arr)
 								{
 									settings.Sources.Add(System.IO.File.ReadAllText(str));
@@ -84,7 +84,7 @@ namespace OnTheFlyCompiler
 							}
 						case "-v":
 							{
-								int verbose = Convert.ToInt32(args[++i], CultureInfo.CurrentCulture);
+								var verbose = Convert.ToInt32(args[++i], CultureInfo.CurrentCulture);
 								if (verbose > 2)
 								{
 									throw new ParameterOutOfRangeException(name, verbose.ToString(CultureInfo.CurrentCulture));
@@ -99,7 +99,7 @@ namespace OnTheFlyCompiler
 							{
 								try
 								{
-									int warning = Convert.ToInt32(args[++i], CultureInfo.CurrentCulture);
+									var warning = Convert.ToInt32(args[++i], CultureInfo.CurrentCulture);
 									if (warning > 4)
 									{
 										throw new ParameterOutOfRangeException(name, warning.ToString(CultureInfo.CurrentCulture));
@@ -119,11 +119,11 @@ namespace OnTheFlyCompiler
 							{
 								try
 								{
-									string xml = String.Empty;
+									var xml = String.Empty;
 									try
 									{
 										xml = args[++i];
-										XmlDocument doc = new XmlDocument();
+										var doc = new XmlDocument();
 										doc.Load(xml);
 										settings = Parse(doc);
 									}
@@ -167,12 +167,12 @@ namespace OnTheFlyCompiler
 
 		internal static CompilerSettings Parse(XmlDocument doc)
 		{
-			CompilerSettings settings = new CompilerSettings();
+			var settings = new CompilerSettings();
 
-			XmlNode nodeSettings = doc.SelectSingleNode("//settings");
-			XmlNode nodeCompiler = nodeSettings.SelectSingleNode("compiler");
+			var nodeSettings = doc.SelectSingleNode("//settings");
+			var nodeCompiler = nodeSettings.SelectSingleNode("compiler");
 
-			XmlAttribute atrLanguage = nodeCompiler.Attributes["language"];
+			var atrLanguage = nodeCompiler.Attributes["language"];
 			if (atrLanguage != null)
 			{
 				settings.Language = atrLanguage.Value;
@@ -182,15 +182,15 @@ namespace OnTheFlyCompiler
 				throw new XmlDescriptionException(new XmlException("Required attribute 'Language' is missed"));
 			}
 
-			XmlAttribute atrWarning = nodeCompiler.Attributes["warning"];
+			var atrWarning = nodeCompiler.Attributes["warning"];
 			if (atrWarning != null)
 			{
 				settings.WarningLevel = Convert.ToInt32(atrWarning.Value);
 			}
 
-			XmlNode nodeExecutable = nodeSettings.SelectSingleNode("executable");
+			var nodeExecutable = nodeSettings.SelectSingleNode("executable");
 
-			XmlAttribute atrType = nodeExecutable.Attributes["type"];
+			var atrType = nodeExecutable.Attributes["type"];
 			if (atrType != null)
 			{
 				switch (atrType.Value)
@@ -208,27 +208,27 @@ namespace OnTheFlyCompiler
 				}
 			}
 
-			XmlAttribute atrMemory = nodeExecutable.Attributes["memory"];
+			var atrMemory = nodeExecutable.Attributes["memory"];
 			if (atrMemory != null)
 			{
 				settings.GenerateInMemory = Boolean.Parse(atrMemory.Value);
 			}
 
-			XmlAttribute atrExecute = nodeExecutable.Attributes["execute"];
+			var atrExecute = nodeExecutable.Attributes["execute"];
 			if (atrExecute != null)
 			{
 				settings.Execute = Boolean.Parse(atrExecute.Value);
 			}
 
-			XmlNode nodeMethod = nodeSettings.SelectSingleNode("method");
+			var nodeMethod = nodeSettings.SelectSingleNode("method");
 
-			XmlAttribute atrPath = nodeMethod.Attributes["path"];
+			var atrPath = nodeMethod.Attributes["path"];
 			if (atrPath != null)
 			{
 				settings.MethodPath = atrPath.Value;
 			}
 
-			XmlAttribute atrName = nodeMethod.Attributes["name"];
+			var atrName = nodeMethod.Attributes["name"];
 			if (atrName != null)
 			{
 				settings.MethodName = atrName.Value;

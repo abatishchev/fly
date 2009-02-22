@@ -101,11 +101,11 @@ namespace OnTheFlyCompiler
 		public void Execute()
 		{
 			this.output.Add(String.Format("Executing {0}.{1}..", settings.MethodPath, settings.MethodName), 1);
-			BindingFlags flags = BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static;
+			var flags = BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static;
 
 			try
 			{
-				Type type = this.ResultAssembly.GetType(settings.MethodPath);
+				var type = this.ResultAssembly.GetType(settings.MethodPath);
 				this.resultObj = type.InvokeMember(settings.MethodName, flags, null, null, null, CultureInfo.CurrentCulture);
 			}
 			catch
@@ -123,32 +123,26 @@ namespace OnTheFlyCompiler
 		{
 			if (this.settings == null || this.provider == null)
 			{
+				// TODO: this.output.Add(
 				OnBuildFailure(new BuildFailureEventArgs(this.Output));
 				throw new CompilerException(); // TODO
 			}
 
-			output.Add(String.Format(CultureInfo.CurrentCulture, "Build started at {0}", DateTime.Now), 1);
-			OnBuildStart(new BuildStartEventArgs());
+			this.output.Add(String.Format(CultureInfo.CurrentCulture, "Build started at {0}", DateTime.Now), 1);
+			var buildStart = new BuildStartEventArgs();
+			OnBuildStart(buildStart);
+			if (buildStart.Cancel)
+			{
+				this.output.Add(String.Format(CultureInfo.CurrentCulture, "Build canceled at {0}", DateTime.Now), 1);
+				throw new CompilerException(); // TODO
+			}
 
-			//TODO:			
-			//if (this.BuildStart != null)
-			//{
-
-			//    BuildStartEventArgs compilationStartArgs = new BuildStartEventArgs();
-			//    this.BuildStart(this, compilationStartArgs);
-			//    if (compilationStartArgs.Cancel)
-			//    {
-			//        this.output.Add(String.Format(CultureInfo.CurrentCulture, "Build canceled at {0}", DateTime.Now), 1);
-			//        throw new CompilerException(); // TODO
-			//    }
-			//}
-
-
-			CompilerResults result = this.provider.CompileAssemblyFromSource(this.settings, (string[])new System.Collections.ArrayList(sources).ToArray());
+			var result = this.provider.CompileAssemblyFromSource(this.settings, (string[])new System.Collections.ArrayList(sources).ToArray());
 			if (!result.Errors.HasErrors)
 			{
 				this.resultAssembly = result.CompiledAssembly;
 				this.output.Add(String.Format(CultureInfo.CurrentCulture, "Build succeeded at {0}", DateTime.Now), 1);
+				OnBuildSuccess(new BuildSuccessEventArgs(result.CompiledAssembly));
 			}
 			else
 			{
@@ -160,8 +154,6 @@ namespace OnTheFlyCompiler
 				OnBuildFailure(new BuildFailureEventArgs(this.output, result.Errors.Count));
 				throw new CompilerException(); // TODO
 			}
-
-			OnBuildSuccess(new BuildSuccessEventArgs(result.CompiledAssembly));
 		}
 
 		private void OnBuildFailure(BuildFailureEventArgs e)

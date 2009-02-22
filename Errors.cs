@@ -23,53 +23,38 @@ namespace OnTheFlyCompiler.Errors
 		public LanguageNotSupportedException(string language)
 			: base(String.Format(CultureInfo.CurrentCulture, "Specified language is not supported: '{0}'", language)) { }
 	}
+
+	[Serializable]
+	public class XmlDescriptionException : Exception
+	{
+		public XmlDescriptionException(Exception ex)
+			: base(String.Format(CultureInfo.CurrentCulture, "Error while reading Xml-description: {0}", ex.Message), ex) { }
+	}
 	#endregion
 
 	#region Parameters
 	[Serializable]
 	public abstract class ParameterException : Exception
 	{
-		private string parameterName, parameterValue;
-
 		#region Constructors
 		protected ParameterException(string message, string name)
 			: base(message)
 		{
-			this.parameterName = name;
+			this.ParameterName = name;
 		}
 
 		protected ParameterException(string message, string name, string value)
 			: base(message)
 		{
-			this.parameterName = name;
-			this.parameterValue = value;
+			this.ParameterName = name;
+			this.ParameterValue = value;
 		}
 		#endregion
 
 		#region Properties
-		public string ParameterName
-		{
-			get
-			{
-				return this.parameterName;
-			}
-			protected set
-			{
-				this.parameterName = value;
-			}
-		}
+		public string ParameterName { get; protected set; }
 
-		public string ParameterValue
-		{
-			get
-			{
-				return this.parameterValue;
-			}
-			protected set
-			{
-				this.parameterValue = value;
-			}
-		}
+		public string ParameterValue { get; protected set; }
 		#endregion
 	}
 
@@ -108,11 +93,4 @@ namespace OnTheFlyCompiler.Errors
 			: base(String.Format(CultureInfo.CurrentCulture, "Uknown parameter was specified: '{0}'", name), name) { }
 	}
 	#endregion
-
-	[Serializable]
-	public class XmlDescriptionException : Exception
-	{
-		public XmlDescriptionException(Exception ex)
-			: base(String.Format(CultureInfo.CurrentCulture, "Error while reading Xml-description: {0}", ex.Message), ex) { }
-	}
 }
