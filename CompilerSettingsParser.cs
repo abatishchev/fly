@@ -146,7 +146,7 @@ namespace OnTheFlyCompiler
 								}
 								catch (NullReferenceException ex)
 								{
-									throw new ReadingXmlDescriptionException(ex);
+									throw new XmlDescriptionException(ex);
 								}
 
 								break;
@@ -179,7 +179,7 @@ namespace OnTheFlyCompiler
 			}
 			else
 			{
-				throw new ReadingXmlDescriptionException(new XmlException("Required attribute 'Language' is missed"));
+				throw new XmlDescriptionException(new XmlException("Required attribute 'Language' is missed"));
 			}
 
 			XmlAttribute atrWarning = nodeCompiler.Attributes["warning"];

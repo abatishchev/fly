@@ -7,23 +7,21 @@ namespace OnTheFlyCompiler.Errors
 {
 	#region Compiler
 	[Serializable]
-	public class CompilerNotReadyException : Exception
+	public class CompilerException : Exception
 	{
-		public CompilerNotReadyException()
-			: base("Compiler is not ready")
-		{
-			//
-		}
+		public CompilerException()
+			: base() { }
+
+		//TODO: message
+		public CompilerException(string message)
+			: base(message) { }
 	}
 
 	[Serializable]
 	public class LanguageNotSupportedException : Exception
 	{
 		public LanguageNotSupportedException(string language)
-			: base(String.Format(CultureInfo.CurrentCulture, "Specified language is not supported: '{0}'", language))
-		{
-			//
-		}
+			: base(String.Format(CultureInfo.CurrentCulture, "Specified language is not supported: '{0}'", language)) { }
 	}
 	#endregion
 
@@ -79,60 +77,42 @@ namespace OnTheFlyCompiler.Errors
 	public class ParameterAlreadySetException : ParameterException
 	{
 		public ParameterAlreadySetException(string name)
-			: base(String.Format(CultureInfo.CurrentCulture, "Parameter '{0}' is already set", name), name)
-		{
-			//
-		}
+			: base(String.Format(CultureInfo.CurrentCulture, "Parameter '{0}' is already set", name), name) { }
 	}
 
 	[Serializable]
 	public class ParameterMissedException : ParameterException
 	{
 		public ParameterMissedException(string name)
-			: base(String.Format(CultureInfo.CurrentCulture, "Required parameter '{0}' is missed", name), name)
-		{
-			//
-		}
+			: base(String.Format(CultureInfo.CurrentCulture, "Required parameter '{0}' is missed", name), name) { }
 	}
 
 	[Serializable]
 	public class ParameterNotSetException : ParameterException
 	{
 		public ParameterNotSetException(string name)
-			: base(String.Format(CultureInfo.CurrentCulture, "Required parameter '{0}' must have a value", name), name)
-		{
-			//
-		}
+			: base(String.Format(CultureInfo.CurrentCulture, "Required parameter '{0}' must have a value", name), name) { }
 	}
 
 	[Serializable]
 	public class ParameterOutOfRangeException : ParameterException
 	{
 		public ParameterOutOfRangeException(string name, string value)
-			: base(String.Format(CultureInfo.CurrentCulture, "Wrong value for parameter '{0}': '{1}'", name, value), name, value)
-		{
-			//
-		}
+			: base(String.Format(CultureInfo.CurrentCulture, "Wrong value for parameter '{0}': '{1}'", name, value), name, value) { }
 	}
 
 	[Serializable]
 	public class UnknownParameterException : ParameterException
 	{
 		public UnknownParameterException(string name)
-			: base(String.Format(CultureInfo.CurrentCulture, "Uknown parameter was specified: '{0}'", name), name)
-		{
-			//
-		}
+			: base(String.Format(CultureInfo.CurrentCulture, "Uknown parameter was specified: '{0}'", name), name) { }
 	}
 	#endregion
 
 	[Serializable]
-	public class ReadingXmlDescriptionException : Exception
+	public class XmlDescriptionException : Exception
 	{
-		public ReadingXmlDescriptionException(Exception ex)
-			: base(String.Format(CultureInfo.CurrentCulture, "Error while reading Xml-description: {0}", ex.Message), ex)
-		{
-			//
-		}
+		public XmlDescriptionException(Exception ex)
+			: base(String.Format(CultureInfo.CurrentCulture, "Error while reading Xml-description: {0}", ex.Message), ex) { }
 	}
 }

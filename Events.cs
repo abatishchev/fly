@@ -7,9 +7,6 @@ namespace OnTheFlyCompiler.Events
 {
 	public class BuildFailureEventArgs : EventArgs
 	{
-		private CompilerOutput output;
-		private int count;
-
 		public BuildFailureEventArgs(CompilerOutput output) : this(output, 0)
 		{
 			//
@@ -17,59 +14,27 @@ namespace OnTheFlyCompiler.Events
 
 		public BuildFailureEventArgs(CompilerOutput output, int count)
 		{
-			this.output = output;
-			this.count = count;
+			this.CompilerOutput = output;
+			this.ErrorsCount = count;
 		}
 
-		public CompilerOutput CompilerOutput
-		{
-			get
-			{
-				return output;
-			}
-		}
+		public CompilerOutput CompilerOutput { get; private set;  }
 
-		public int ErrorsCount
-		{
-			get
-			{
-				return this.count;
-			}
-		}
+		public int ErrorsCount { get; private set;  }
 	}
 
 	public class BuildStartEventArgs : EventArgs
 	{
-		private bool cancel;
-
-		public bool Cancel
-		{
-			get
-			{
-				return this.cancel;
-			}
-			set
-			{
-				this.cancel = value;
-			}
-		}
+		public bool Cancel { get; set; }
 	}
 
 	public class BuildSuccessEventArgs : EventArgs
 	{
-		private Assembly resultAsm;
-
 		public BuildSuccessEventArgs(Assembly resultAsm)
 		{
-			this.resultAsm = resultAsm;
+			this.ResultAssembly = resultAsm;
 		}
 
-		public Assembly ResultAssembly
-		{
-			get
-			{
-				return this.resultAsm;
-			}
-		}
+		public Assembly ResultAssembly { get; private set; }
 	}
 }

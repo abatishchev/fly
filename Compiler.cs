@@ -17,10 +17,8 @@ namespace OnTheFlyCompiler
 		private CompilerSettings settings;
 		private CompilerOutput output;
 
-		private CompilerResults result;
+		private Assembly resultAssembly;
 		private object resultObj;
-
-		private bool isReady;
 
 		#region Constructors
 		public Compiler(CompilerSettings settings)
@@ -34,7 +32,6 @@ namespace OnTheFlyCompiler
 					throw new LanguageNotSupportedException(settings.Language);
 				}
 				this.provider = CodeDomProvider.CreateProvider(settings.Language);
-				this.isReady = true;
 			}
 			catch (Exception ex)
 			{
@@ -45,20 +42,12 @@ namespace OnTheFlyCompiler
 		#endregion
 
 		#region Events
-		public event EventHandler<BuildFailureEventArgs> OnBuildFailure;
-		public event EventHandler<BuildStartEventArgs> OnBuildStart;
-		public event EventHandler<BuildSuccessEventArgs> OnBuildSuccess;
+		public event EventHandler<BuildFailureEventArgs> BuildFailure;
+		public event EventHandler<BuildStartEventArgs> BuildStart;
+		public event EventHandler<BuildSuccessEventArgs> BuildSuccess;
 		#endregion
 
 		#region Properties
-		public bool IsReady
-		{
-			get
-			{
-				return this.isReady;
-			}
-		}
-
 		public CompilerSettings Settings
 		{
 			get
@@ -79,7 +68,7 @@ namespace OnTheFlyCompiler
 		{
 			get
 			{
-				return this.result.CompiledAssembly;
+				return this.resultAssembly;
 			}
 		}
 
@@ -113,67 +102,90 @@ namespace OnTheFlyCompiler
 		{
 			this.output.Add(String.Format("Executing {0}.{1}..", settings.MethodPath, settings.MethodName), 1);
 			BindingFlags flags = BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static;
-			Type type = this.ResultAssembly.GetType(settings.MethodPath);
-			this.resultObj = type.InvokeMember(settings.MethodName, flags, null, null, null, CultureInfo.CurrentCulture);
+
+			try
+			{
+				Type type = this.ResultAssembly.GetType(settings.MethodPath);
+				this.resultObj = type.InvokeMember(settings.MethodName, flags, null, null, null, CultureInfo.CurrentCulture);
+			}
+			catch
+			{
+				throw new CompilerException(); // TODO
+			}
 		}
 
 		public void Compile()
 		{
-			string[] sources = new string[settings.Sources.Count];
-			for (int i = 0; i < this.settings.Sources.Count; i++)
-			{
-				sources[i] = this.settings.Sources[i];
-			}
-			Compile(sources);
+			Compile(this.settings.Sources);
 		}
 
-		public void Compile(string[] sources)
+		public void Compile(System.Collections.Specialized.StringCollection sources)
 		{
-			if (!isReady)
+			if (this.settings == null || this.provider == null)
 			{
-				output.Add(new CompilerNotReadyException().Message, 1);
-				if (this.OnBuildFailure != null)
-				{
-					this.OnBuildFailure(this, new BuildFailureEventArgs(this.output));
-				}
-				return;
+				OnBuildFailure(new BuildFailureEventArgs(this.Output));
+				throw new CompilerException(); // TODO
 			}
 
 			output.Add(String.Format(CultureInfo.CurrentCulture, "Build started at {0}", DateTime.Now), 1);
-			if (this.OnBuildStart != null)
+			OnBuildStart(new BuildStartEventArgs());
+
+			//TODO:			
+			//if (this.BuildStart != null)
+			//{
+
+			//    BuildStartEventArgs compilationStartArgs = new BuildStartEventArgs();
+			//    this.BuildStart(this, compilationStartArgs);
+			//    if (compilationStartArgs.Cancel)
+			//    {
+			//        this.output.Add(String.Format(CultureInfo.CurrentCulture, "Build canceled at {0}", DateTime.Now), 1);
+			//        throw new CompilerException(); // TODO
+			//    }
+			//}
+
+
+			CompilerResults result = this.provider.CompileAssemblyFromSource(this.settings, (string[])new System.Collections.ArrayList(sources).ToArray());
+			if (!result.Errors.HasErrors)
 			{
-				BuildStartEventArgs compilationStartArgs = new BuildStartEventArgs();
-				this.OnBuildStart(this, compilationStartArgs);
-				if (compilationStartArgs.Cancel)
-				{
-					this.output.Add(String.Format(CultureInfo.CurrentCulture, "Build canceled at {0}", DateTime.Now), 1);
-					return;
-				}
+				this.resultAssembly = result.CompiledAssembly;
+				this.output.Add(String.Format(CultureInfo.CurrentCulture, "Build succeeded at {0}", DateTime.Now), 1);
 			}
-			this.result = this.provider.CompileAssemblyFromSource(this.settings, sources);
-			if (result.Errors.HasErrors)
+			else
 			{
 				foreach (CompilerError err in result.Errors)
 				{
 					this.output.Add(String.Format(CultureInfo.CurrentCulture, "{0}({1}.{2}): Error {3} - {4}", err.FileName, err.Line, err.Column, err.ErrorNumber, err.ErrorText), 2);
 				}
 				this.output.Add(String.Format(CultureInfo.CurrentCulture, "Build failed at {0} -- {1} errors", DateTime.Now, result.Errors.Count), 1);
+				OnBuildFailure(new BuildFailureEventArgs(this.output, result.Errors.Count));
+				throw new CompilerException(); // TODO
+			}
 
-				if (this.OnBuildFailure != null)
-				{
-					this.OnBuildFailure(this, new BuildFailureEventArgs(output, result.Errors.Count));
-				}
-				return;
-			}
-			else
+			OnBuildSuccess(new BuildSuccessEventArgs(result.CompiledAssembly));
+		}
+
+		private void OnBuildFailure(BuildFailureEventArgs e)
+		{
+			if (this.BuildFailure != null)
 			{
-				this.output.Add(String.Format(CultureInfo.CurrentCulture, "Build succeeded at {0}", DateTime.Now), 1);
+				this.BuildFailure(this, e);
 			}
-			if (this.OnBuildSuccess != null)
+		}
+
+		private void OnBuildStart(BuildStartEventArgs e)
+		{
+			if (this.BuildStart != null)
 			{
-				this.OnBuildSuccess(this, new BuildSuccessEventArgs(this.ResultAssembly));
+				this.BuildStart(this, e);
 			}
-			this.output.Add(1);
+		}
+
+		private void OnBuildSuccess(BuildSuccessEventArgs e)
+		{
+			if (this.BuildSuccess != null)
+			{
+				this.BuildSuccess(this, e);
+			}
 		}
 		#endregion
 	}
