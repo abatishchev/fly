@@ -72,10 +72,9 @@ namespace OnTheFlyCompiler
 		public void Execute()
 		{
 			this.Output.Add(String.Format("Executing {0}.{1}..", this.Settings.MethodPath, this.Settings.MethodName), 1);
-			var flags = BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static;
-
 			try
 			{
+				var flags = BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static;
 				var type = this.ResultAssembly.GetType(this.Settings.MethodPath);
 				this.ResultObject = type.InvokeMember(this.Settings.MethodName, flags, null, null, null, CultureInfo.CurrentCulture);
 			}
@@ -117,13 +116,16 @@ namespace OnTheFlyCompiler
 			}
 			else
 			{
-				foreach (CompilerError err in result.Errors)
+				if (this.Settings.VerboseLevel == 2)
 				{
-					this.Output.Add(String.Format(CultureInfo.CurrentCulture, "{0}({1}.{2}): Error {3} - {4}", err.FileName, err.Line, err.Column, err.ErrorNumber, err.ErrorText), 2);
+					foreach (CompilerError err in result.Errors)
+					{
+						this.Output.Add(String.Format(CultureInfo.CurrentCulture, "{0}({1},{2}): Error {3}: {4}", err.FileName, err.Line, err.Column, err.ErrorNumber, err.ErrorText), 2);
+					}
 				}
 				this.Output.Add(String.Format(CultureInfo.CurrentCulture, "Build failed at {0} -- {1} errors", DateTime.Now, result.Errors.Count), 1);
 				OnBuildFailure(new BuildFailureEventArgs(this.Output, result.Errors.Count));
-				throw new BuildFailureException(this.Output);
+				return;
 			}
 		}
 

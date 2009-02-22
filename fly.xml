@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <settings>
-	<compiler language="csharp" warning="3" verbose="3" />
+	<compiler language="csharp" warning="3" verbose="2" />
 	<method path="Test" name="Main" />
 	<executable type="exe" memory="true" execute="true" />
 	<references>

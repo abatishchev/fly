@@ -33,7 +33,7 @@ namespace OnTheFlyCompiler
 			}
 			catch (OnTheFlyCompiler.Errors.CompilerException ex)
 			{
-				Console.WriteLine(ex.CompilerOutput);
+				Console.WriteLine("Compiler error: {0}", ex.Message);
 			}
 			catch (Exception ex)
 			{
