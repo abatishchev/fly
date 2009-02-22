@@ -91,7 +91,7 @@ namespace OnTheFlyCompiler
 								}
 								else
 								{
-									settings.Verbose = verbose;
+									settings.VerboseLevel = verbose;
 								}
 								break;
 							}
@@ -180,6 +180,12 @@ namespace OnTheFlyCompiler
 			else
 			{
 				throw new XmlDescriptionException(new XmlException("Required attribute 'Language' is missed"));
+			}
+
+			var atrVerbose = nodeCompiler.Attributes["verbose"];
+			if (atrVerbose != null)
+			{
+				settings.VerboseLevel = Convert.ToInt32(atrVerbose.Value);
 			}
 
 			var atrWarning = nodeCompiler.Attributes["warning"];

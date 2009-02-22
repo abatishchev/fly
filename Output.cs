@@ -1,7 +1,7 @@
 ﻿// Copyright (C) 2007-2009 Alexander M. Batishchev aka Godfather (abatishchev at gmail.com)
 
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Text;
 
 namespace OnTheFlyCompiler
@@ -9,7 +9,7 @@ namespace OnTheFlyCompiler
 	public class CompilerOutput
 	{
 		private Compiler compiler;
-		private Collection<String> output = new Collection<string>();
+		private StringCollection output = new StringCollection();
 
 		#region Constructors
 		public CompilerOutput(Compiler compiler)
@@ -26,7 +26,7 @@ namespace OnTheFlyCompiler
 
 		internal void Add(string value, int verbose)
 		{
-			if (this.compiler.Settings.Verbose >= verbose)
+			if (this.compiler.Settings.VerboseLevel >= verbose)
 			{
 				this.output.Add(value);
 			}

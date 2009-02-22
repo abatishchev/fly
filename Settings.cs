@@ -11,6 +11,13 @@ namespace OnTheFlyCompiler.Settings
 		public CompilerSettings()
 		{
 			this.Sources = new StringCollection();
+
+			// default values
+			this.Execute = false;
+			this.GenerateExecutable = true;
+			this.GenerateInMemory = true;
+			this.VerboseLevel = 3;
+			this.WarningLevel = 3;
 		}
 		#endregion
 
@@ -25,7 +32,7 @@ namespace OnTheFlyCompiler.Settings
 
 		public StringCollection Sources { get; set; }
 
-		public int Verbose { get; set; }
+		public int VerboseLevel { get; set; }
 		#endregion
 	}
 }
