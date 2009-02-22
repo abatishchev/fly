@@ -13,7 +13,7 @@ set FILES-BIN=%PROJECT-BIN%.csproj Core.cs Program.cs SettingsParser.cs fly.xml 
 set DOCS=CHANGELOG.txt LICENSE.txt
 
 set LIB=bin\Release\libfly.dll
-set BINARY=bin\Release\fly.exe
+set BIN=bin\Release\fly.exe
 
 set BUILD=2
 set VERSION=2.0.%BUILD%
