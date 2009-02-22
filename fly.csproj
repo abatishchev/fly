@@ -14,7 +14,7 @@
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkSubset>
     </TargetFrameworkSubset>
-    <StartupObject>OnTheFlyCompiler.ConsoleStub</StartupObject>
+    <StartupObject>OnTheFlyCompiler.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,7 +42,6 @@
     <Compile Include="Compiler.cs" />
     <Compile Include="CompilerSettings.cs" />
     <Compile Include="CompilerSettingsParser.cs" />
-    <Compile Include="ConsoleStub.cs" />
     <Compile Include="Core.cs" />
     <Compile Include="Errors.cs" />
     <Compile Include="Events.cs" />
@@ -56,6 +55,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Output.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Examples\test.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
