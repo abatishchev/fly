@@ -4,33 +4,38 @@ set PATH=%PATH%;%PROGRAMFILES%\WinRar;%PROGRAMFILES%\PuTTY
 
 set CMD=A -afzip -o+ -s -ibck -t
 
+set PROJECT-LIB=libfly
+set PROJECT-BIN=fly
+
 set FILES=Compiler.cs Errors.cs Events.cs Output.cs Settings.cs Properties\AssemblyInfo.cs
-set FILES-LIB=libfly.csproj
-set FILES-BINARY=fly.csproj ConsoleStub.cs Core.cs Examples\*.cs Settings\*.xml
+set FILES-LIB=%PROJECT-LIB%.csproj
+set FILES-BIN=%PROJECT-BIN%.csproj Core.cs Program.cs SettingsParser.cs fly.xml Examples\*.*
+set DOCS=CHANGELOG.txt LICENSE.txt
 
 set LIB=bin\Release\libfly.dll
 set BINARY=bin\Release\fly.exe
 
 set BUILD=2
+set VERSION=2.0.%BUILD%
 
 set BATCH=batch.txt
 del %BATCH%
 echo cd uploads >> %BATCH%
 
-set NAME=libfly-2.0.%BUILD%.$WCREV$-source.zip
-call winrar.exe %CMD% %NAME% %FILES% %FILES-LIB%
+set NAME=%PROJECT-LIB%-%VERSION%.$WCREV$-source.zip
+call winrar.exe %CMD% %NAME% %FILES% %FILES-LIB% %DOCS%
 echo put %NAME% >> %BATCH%
 
-set NAME=libfly-2.0.%BUILD%.$WCREV$-binary.zip
+set NAME=%PROJECT-LIB%-%VERSION%.$WCREV$-binary.zip
 call winrar.exe -ep %CMD% %NAME% %LIB%
 echo put %NAME% >> %BATCH%
 
-set NAME=fly-2.0.%BUILD%.$WCREV$-source.zip
-call winrar.exe %CMD% %NAME% %FILES% %FILES-BINARY%
+set NAME=%PROJECT-BIN%-%VERSION%.$WCREV$-source.zip
+call winrar.exe %CMD% %NAME% %FILES% %FILES-BIN% %DOCS%
 echo put %NAME% >> %BATCH%
 
-set NAME=fly-2.0.%BUILD%.$WCREV$-binary.zip
-call winrar.exe -ep %CMD% %NAME% %BINARY%
+set NAME=%PROJECT-BIN%-%VERSION%.$WCREV$-binary.zip
+call winrar.exe -ep %CMD% %NAME% %BIN%
 echo put %NAME% >> %BATCH%
 
 call psftp.exe -b %BATCH% abatishchev@frs.sourceforge.net
@@ -40,7 +45,7 @@ del %BATCH%
 set DIST=..\..\release
 
 mkdir %DIST%
-move /y libfly-2.0.%BUILD%.$WCREV$-source.zip %DIST%
-move /y libfly-2.0.%BUILD%.$WCREV$-binary.zip %DIST%
-move /y fly-2.0.%BUILD%.$WCREV$-source.zip %DIST%
-move /y fly-2.0.%BUILD%.$WCREV$-binary.zip %DIST%
+move /y %PROJECT-LIB%-%VERSION%.$WCREV$-source.zip %DIST%
+move /y %PROJECT-LIB%-%VERSION%.$WCREV$-binary.zip %DIST%
+move /y %PROJECT-BIN%.$WCREV$-source.zip %DIST%
+move /y %PROJECT-BIN%.$WCREV$-binary.zip %DIST%
