@@ -7,6 +7,6 @@
 		<item>System.dll</item>
 	</references>
 	<files>
-		<item>Examples\kill-excel.cs</item>
+		<item>Examples\world.cs</item>
 	</files>
 </settings>

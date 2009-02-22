@@ -11,27 +11,38 @@ namespace OnTheFlyCompiler.Errors
 	{
 		public CompilerException(string message)
 			: base(message) { }
+
+		public CompilerOutput CompilerOutput { get; protected set; }
 	}
 
 	[Serializable]
 	public class BuildCanceledException : CompilerException
 	{
-		public BuildCanceledException()
-			: base("Build was canceled") { }
+		public BuildCanceledException(CompilerOutput output)
+			: base("Build was canceled")
+		{
+			this.CompilerOutput = output;
+		}
 	}
 
 	[Serializable]
 	public class BuildFailureException : CompilerException
 	{
-		public BuildFailureException()
-			: base("Build failed") { }
+		public BuildFailureException(CompilerOutput output)
+			: base("Build failed")
+		{
+			this.CompilerOutput = output;
+		}
 	}
 
 	[Serializable]
 	public class ExecutionFailureException : CompilerException
 	{
-		public ExecutionFailureException()
-			: base("Execution failed") { }
+		public ExecutionFailureException(CompilerOutput output)
+			: base("Execution failed")
+		{
+			this.CompilerOutput = output;
+		}
 	}
 
 	[Serializable]
