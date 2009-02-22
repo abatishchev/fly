@@ -137,7 +137,7 @@ namespace OnTheFlyCompiler
 				throw new BuildCanceledException();
 			}
 
-			var result = this.provider.CompileAssemblyFromSource(this.settings, (string[])new System.Collections.ArrayList(sources).ToArray());
+			var result = this.provider.CompileAssemblyFromSource(this.settings, (string[])(new System.Collections.ArrayList(sources).ToArray(typeof(string))));
 			if (!result.Errors.HasErrors)
 			{
 				this.resultAssembly = result.CompiledAssembly;
