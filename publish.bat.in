@@ -42,7 +42,7 @@ call psftp.exe -b %BATCH% abatishchev@frs.sourceforge.net
 
 del %BATCH%
 
-set DIST=..\..\release
+set DIST=..\release
 
 mkdir %DIST%
 move /y %PROJECT-LIB%-%VERSION%.$WCREV$-source.zip %DIST%

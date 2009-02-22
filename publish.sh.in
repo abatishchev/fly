@@ -7,15 +7,20 @@ then
 mode=$1
 fi
 
-source='CHANGELOG.txt Compiler.cs Errors.cs Events.cs LICENSE.txt Output.cs Settings.cs Properties/AssemblyInfo.cs'
-source_lib='libfly.csproj'
-source_binary='fly.csproj ConsoleStub.cs Core.cs Examples/*.cs Settings/*.xml'
+project_lib=libfly
+project_bin=fly
+
+files='Compiler.cs Errors.cs Events.cs Output.cs Settings.cs Properties\AssemblyInfo.cs'
+files_lib=$project_lib'.csproj'
+files_bin=$project_bin'.csproj ConsoleStub.cs Core.cs Examples/*.cs Settings/*.xml'
+docs='CHANGELOG.txt LICENSE.txt'
 
 release='bin/Release'
 lib='libfly.dll'
 binary='fly.exe'
 
 build=2
+version='2.0.'$build
 
 batch='batch'
 rm -f $batch
@@ -24,12 +29,12 @@ echo 'cd uploads' >> $batch
 #if [ mode=='all' || mode=='lib' ]
 #then
 
-name='libfly-2.0.$build.$WCREV$-source.tar.bz2'
-tar cfjv $name $source $source_lib
+name=$project_lib'-'$version'.$WCREV$-source.tar.bz2'
+tar cfjv $name $files $files_lib $docs
 echo 'put '$name >> $batch
 
-name='libfly-2.0.$build.$WCREV$-binary.tar.bz2'
-tar cfjv $name -C $release $lib
+name=$project_lib'-'$version'.$WCREV$-binary.tar.bz2'
+tar cfjv $name -C $release $lib $docs
 echo 'put '$name >> $batch
 
 #fi
@@ -37,12 +42,12 @@ echo 'put '$name >> $batch
 #if [ mode=='all' || mode=='bin' ]
 #then
 
-name='fly-2.0.$build.$WCREV$-source.tar.bz2'
-tar cfjv $name $source $source_binary
+name=$project_bin'-'$version'.$WCREV$-source.tar.bz2'
+tar cfjv $name $files $files_bin $docs
 echo 'put '$name >> $batch
 
-name='fly-2.0.$build.$WCREV$-binary.tar.bz2'
-tar cfjv $name -C $release $binary
+name=$project_bin'-'$version'.$WCREV$-binary.tar.bz2'
+tar cfjv $name -C $release $binary $docs
 echo 'put '$name >> $batch
 
 #fi
@@ -58,7 +63,7 @@ mkdir -p $dist
 #if [ mode=='all' || mode=='lib' ]
 #then
 
-mv -f libfly-2.0.$build.$WCREV$-source.tar.bz2 $dist
+mv -f libfly-2.0.$build.$WCREV$-files.tar.bz2 $dist
 mv -f libfly-2.0.$build.$WCREV$-binary.tar.bz2 $dist
 
 #fi
@@ -66,7 +71,7 @@ mv -f libfly-2.0.$build.$WCREV$-binary.tar.bz2 $dist
 #if [ mode=='all' || mode=='bin' ]
 #then
 
-mv -f fly-2.0.$build.$WCREV$-source.tar.bz2 $dist
+mv -f fly-2.0.$build.$WCREV$-files.tar.bz2 $dist
 mv -f fly-2.0.$build.$WCREV$-binary.tar.bz2 $dist
 
 #fi
