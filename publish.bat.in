@@ -1,4 +1,4 @@
-rem Copyright (C) 2007-2008 Alexander M. Batishchev aka Godfather (abatishchev at gmail.com)
+rem Copyright (C) 2007-2009 Alexander M. Batishchev aka Godfather (abatishchev at gmail.com)
 
 set PATH=%PATH%;%PROGRAMFILES%\WinRar;%PROGRAMFILES%\PuTTY
 
@@ -15,7 +15,7 @@ set DOCS=CHANGELOG.txt LICENSE.txt
 set LIB=bin\Release\libfly.dll
 set BIN=bin\Release\fly.exe
 
-set BUILD=2
+set BUILD=3
 set VERSION=2.0.%BUILD%
 
 set BATCH=batch.txt
@@ -47,5 +47,5 @@ set DIST=..\release
 mkdir %DIST%
 move /y %PROJECT-LIB%-%VERSION%.$WCREV$-source.zip %DIST%
 move /y %PROJECT-LIB%-%VERSION%.$WCREV$-binary.zip %DIST%
-move /y %PROJECT-BIN%.$WCREV$-source.zip %DIST%
-move /y %PROJECT-BIN%.$WCREV$-binary.zip %DIST%
+move /y %PROJECT-BIN%-%VERSION%.$WCREV$-source.zip %DIST%
+move /y %PROJECT-BIN%-%VERSION%.$WCREV$-binary.zip %DIST%

@@ -1,5 +1,5 @@
 #!/bin/bash
-#Copyright (C) 2007-2008 Alexander M. Batishchev aka Godfather (abatishchev at gmail.com)
+#Copyright (C) 2007-2009 Alexander M. Batishchev aka Godfather (abatishchev at gmail.com)
 
 mode='all'
 if [ ! $1 == '' ]
