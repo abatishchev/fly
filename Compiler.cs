@@ -110,7 +110,7 @@ namespace OnTheFlyCompiler
 			}
 			catch
 			{
-				throw new CompilerException(); // TODO
+				throw new ExecutionFailureException(); // TODO
 			}
 		}
 
@@ -123,9 +123,9 @@ namespace OnTheFlyCompiler
 		{
 			if (this.settings == null || this.provider == null)
 			{
-				// TODO: this.output.Add(
+				// TODO: this.output.Add()
 				OnBuildFailure(new BuildFailureEventArgs(this.Output));
-				throw new CompilerException(); // TODO
+				throw new BuildFailureException();
 			}
 
 			this.output.Add(String.Format(CultureInfo.CurrentCulture, "Build started at {0}", DateTime.Now), 1);
@@ -134,7 +134,7 @@ namespace OnTheFlyCompiler
 			if (buildStart.Cancel)
 			{
 				this.output.Add(String.Format(CultureInfo.CurrentCulture, "Build canceled at {0}", DateTime.Now), 1);
-				throw new CompilerException(); // TODO
+				throw new BuildCanceledException();
 			}
 
 			var result = this.provider.CompileAssemblyFromSource(this.settings, (string[])new System.Collections.ArrayList(sources).ToArray());
@@ -152,7 +152,7 @@ namespace OnTheFlyCompiler
 				}
 				this.output.Add(String.Format(CultureInfo.CurrentCulture, "Build failed at {0} -- {1} errors", DateTime.Now, result.Errors.Count), 1);
 				OnBuildFailure(new BuildFailureEventArgs(this.output, result.Errors.Count));
-				throw new CompilerException(); // TODO
+				throw new BuildFailureException();
 			}
 		}
 

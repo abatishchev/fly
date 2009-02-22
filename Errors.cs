@@ -7,14 +7,31 @@ namespace OnTheFlyCompiler.Errors
 {
 	#region Compiler
 	[Serializable]
-	public class CompilerException : Exception
+	public abstract class CompilerException : Exception
 	{
-		public CompilerException()
-			: base() { }
-
-		//TODO: message
 		public CompilerException(string message)
 			: base(message) { }
+	}
+
+	[Serializable]
+	public class BuildCanceledException : CompilerException
+	{
+		public BuildCanceledException()
+			: base("Build was canceled") { }
+	}
+
+	[Serializable]
+	public class BuildFailureException : CompilerException
+	{
+		public BuildFailureException()
+			: base("Build failed") { }
+	}
+
+	[Serializable]
+	public class ExecutionFailureException : CompilerException
+	{
+		public ExecutionFailureException()
+			: base("Execution failed") { }
 	}
 
 	[Serializable]
