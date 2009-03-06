@@ -9,36 +9,50 @@ namespace OnTheFlyCompiler.Errors
 	[Serializable]
 	public abstract class CompilerException : Exception
 	{
-		public CompilerException(string message)
-			: base(message) { }
+		public CompilerException(CompilerOutput output, string message)
+			: base(message)
+		{
+			this.CompilerOutput = output;
+		}
+
+		public CompilerOutput CompilerOutput { get; private set; }
+
+		//TODO: serialization
 	}
 
 	[Serializable]
 	public class BuildCanceledException : CompilerException
 	{
 		public BuildCanceledException(CompilerOutput output)
-			: base("Build was canceled") { }
+			: base(output, "Build canceled") { }
 	}
 
 	[Serializable]
 	public class BuildFailureException : CompilerException
 	{
 		public BuildFailureException(CompilerOutput output)
-			: base("Build failed") { }
+			: base(output, "Build failed") { }
 	}
 
 	[Serializable]
 	public class ExecutionFailureException : CompilerException
 	{
 		public ExecutionFailureException(CompilerOutput output)
-			: base("Execution failed") { }
+			: base(output, "Execution failed") { }
 	}
 
 	[Serializable]
 	public class LanguageNotSupportedException : Exception
 	{
 		public LanguageNotSupportedException(string language)
-			: base(String.Format(CultureInfo.CurrentCulture, "Specified language is not supported: '{0}'", language)) { }
+			: base(String.Format(CultureInfo.CurrentCulture, "Specified language '{0}' is not supported", language))
+		{
+			this.Language = language;
+		}
+
+		public string Language { get; private set; }
+
+		//TODO: serialization
 	}
 
 	[Serializable]
@@ -51,63 +65,31 @@ namespace OnTheFlyCompiler.Errors
 
 	#region Parameters
 	[Serializable]
-	public abstract class ParameterException : Exception
-	{
-		#region Constructors
-		protected ParameterException(string message, string name)
-			: base(message)
-		{
-			this.ParameterName = name;
-		}
-
-		protected ParameterException(string message, string name, string value)
-			: base(message)
-		{
-			this.ParameterName = name;
-			this.ParameterValue = value;
-		}
-		#endregion
-
-		#region Properties
-		public string ParameterName { get; protected set; }
-
-		public string ParameterValue { get; protected set; }
-		#endregion
-	}
-
-	[Serializable]
-	public class ParameterAlreadySetException : ParameterException
-	{
-		public ParameterAlreadySetException(string name)
-			: base(String.Format(CultureInfo.CurrentCulture, "Parameter '{0}' is already set", name), name) { }
-	}
-
-	[Serializable]
-	public class ParameterMissedException : ParameterException
+	public class ParameterMissedException : ArgumentNullException
 	{
 		public ParameterMissedException(string name)
-			: base(String.Format(CultureInfo.CurrentCulture, "Required parameter '{0}' is missed", name), name) { }
+			: base(String.Format(CultureInfo.CurrentCulture, "Required parameter '{0}' was not specified", name), name) { }
 	}
 
 	[Serializable]
-	public class ParameterNotSetException : ParameterException
+	public class ParameterNotSetException : ArgumentNullException
 	{
 		public ParameterNotSetException(string name)
 			: base(String.Format(CultureInfo.CurrentCulture, "Required parameter '{0}' must have a value", name), name) { }
 	}
 
 	[Serializable]
-	public class ParameterOutOfRangeException : ParameterException
+	public class ParameterOutOfRangeException : ArgumentOutOfRangeException
 	{
 		public ParameterOutOfRangeException(string name, string value)
-			: base(String.Format(CultureInfo.CurrentCulture, "Wrong value for parameter '{0}': '{1}'", name, value), name, value) { }
+			: base(name, value, String.Format(CultureInfo.CurrentCulture, "Wrong value for parameter '{0}': '{1}'", name, value)) { }
 	}
 
 	[Serializable]
-	public class UnknownParameterException : ParameterException
+	public class UnknownParameterException : ArgumentException
 	{
 		public UnknownParameterException(string name)
-			: base(String.Format(CultureInfo.CurrentCulture, "Uknown parameter was specified: '{0}'", name), name) { }
+			: base(String.Format(CultureInfo.CurrentCulture, "Unknown parameter was specified: '{0}'", name), name) { }
 	}
 	#endregion
 }

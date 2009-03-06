@@ -1,7 +1,7 @@
 ﻿// Copyright (C) 2007-2009 Alexander M. Batishchev aka Godfather (abatishchev at gmail.com)
 
 using System;
-using System.Collections.Specialized;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace OnTheFlyCompiler
@@ -9,7 +9,7 @@ namespace OnTheFlyCompiler
 	public class CompilerOutput
 	{
 		private Compiler compiler;
-		private StringCollection output = new StringCollection();
+		private Collection<OutputItem> container = new Collection<OutputItem>();
 
 		#region Constructors
 		public CompilerOutput(Compiler compiler)
@@ -24,20 +24,28 @@ namespace OnTheFlyCompiler
 			Add(String.Empty, verbose);
 		}
 
+		internal void Add(OutputItem item, int verbose)
+		{
+			if (this.compiler.Settings.VerboseLevel >= verbose)
+			{
+				this.container.Add(item);
+			}
+		}
+
 		internal void Add(string value, int verbose)
 		{
 			if (this.compiler.Settings.VerboseLevel >= verbose)
 			{
-				this.output.Add(value);
+				this.container.Add(new OutputItem(value));
 			}
 		}
 
 		public override string ToString()
 		{
-			var sb = new StringBuilder(this.output.Count);
-			foreach (string str in this.output)
+			var sb = new StringBuilder(this.container.Count);
+			foreach (OutputItem item in this.container)
 			{
-				sb.AppendLine(str);
+				sb.AppendLine(item.Value);
 			}
 			return sb.ToString();
 		}
