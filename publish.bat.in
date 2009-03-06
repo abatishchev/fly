@@ -15,26 +15,29 @@ set DOCS=CHANGELOG.txt LICENSE.txt
 set LIB=bin\Release\libfly.dll
 set BIN=bin\Release\fly.exe
 
+set MAJOR=2
+set MINOR=0
 set BUILD=3
-set VERSION=2.0.%BUILD%
+set REVISION=$WCREV$
+set VERSION=%MAJOR%.%MINOR%.%BUILD%.%REVISION%
 
 set BATCH=batch.txt
 del %BATCH%
 echo cd uploads >> %BATCH%
 
-set NAME=%PROJECT-LIB%-%VERSION%.$WCREV$-source.zip
+set NAME=%PROJECT-LIB%-%VERSION%-source.zip
 call winrar.exe %CMD% %NAME% %FILES% %FILES-LIB% %DOCS%
 echo put %NAME% >> %BATCH%
 
-set NAME=%PROJECT-LIB%-%VERSION%.$WCREV$-binary.zip
+set NAME=%PROJECT-LIB%-%VERSION%-binary.zip
 call winrar.exe -ep %CMD% %NAME% %LIB%
 echo put %NAME% >> %BATCH%
 
-set NAME=%PROJECT-BIN%-%VERSION%.$WCREV$-source.zip
+set NAME=%PROJECT-BIN%-%VERSION%-source.zip
 call winrar.exe %CMD% %NAME% %FILES% %FILES-BIN% %DOCS%
 echo put %NAME% >> %BATCH%
 
-set NAME=%PROJECT-BIN%-%VERSION%.$WCREV$-binary.zip
+set NAME=%PROJECT-BIN%-%VERSION%-binary.zip
 call winrar.exe -ep %CMD% %NAME% %BIN%
 echo put %NAME% >> %BATCH%
 
@@ -45,7 +48,7 @@ del %BATCH%
 set DIST=..\release
 
 mkdir %DIST%
-move /y %PROJECT-LIB%-%VERSION%.$WCREV$-source.zip %DIST%
-move /y %PROJECT-LIB%-%VERSION%.$WCREV$-binary.zip %DIST%
-move /y %PROJECT-BIN%-%VERSION%.$WCREV$-source.zip %DIST%
-move /y %PROJECT-BIN%-%VERSION%.$WCREV$-binary.zip %DIST%
+move /y %PROJECT-LIB%-%VERSION%-source.zip %DIST%
+move /y %PROJECT-LIB%-%VERSION%-binary.zip %DIST%
+move /y %PROJECT-BIN%-%VERSION%-source.zip %DIST%
+move /y %PROJECT-BIN%-%VERSION%-binary.zip %DIST%
