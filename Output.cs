@@ -18,27 +18,42 @@ namespace OnTheFlyCompiler
 		}
 		#endregion
 
-		#region Methods
-		internal void Add(int verbose)
+		#region Public Methods
+		#region Error
+		internal void AddError(string value, int verbose)
 		{
-			Add(String.Empty, verbose);
+			Add(new OutputItem(OutputItemType.Error, value), verbose);
 		}
 
-		internal void Add(OutputItem item, int verbose)
+		internal void AddError(int verbose)
 		{
-			if (this.compiler.Settings.VerboseLevel >= verbose)
-			{
-				this.container.Add(item);
-			}
+			Add(new OutputItem(OutputItemType.Error, String.Empty), verbose);
+		}
+		#endregion
+
+		#region Information
+		internal void AddInformation(string value, int verbose)
+		{
+			Add(new OutputItem(OutputItemType.Information, value), verbose);
 		}
 
-		internal void Add(string value, int verbose)
+		internal void AddInformation(int verbose)
 		{
-			if (this.compiler.Settings.VerboseLevel >= verbose)
-			{
-				this.container.Add(new OutputItem(value));
-			}
+			Add(new OutputItem(OutputItemType.Information, String.Empty), verbose);
 		}
+		#endregion
+
+		#region Warning
+		internal void AddWarning(string value, int verbose)
+		{
+			Add(new OutputItem(OutputItemType.Warning, value), verbose);
+		}
+
+		internal void AddWarning(int verbose)
+		{
+			Add(new OutputItem(OutputItemType.Warning, String.Empty), verbose);
+		}
+		#endregion
 
 		public override string ToString()
 		{
@@ -48,6 +63,31 @@ namespace OnTheFlyCompiler
 				sb.AppendLine(item.Value);
 			}
 			return sb.ToString();
+		}
+		#endregion
+
+		#region Private Methods
+		private void Add(int verbose)
+		{
+			Add(String.Empty, verbose);
+		}
+
+		private void Add(OutputItem item, int verbose)
+		{
+			if (this.compiler.Settings.VerboseLevel >= verbose)
+			{
+				this.container.Add(item);
+			}
+		}
+
+		private void Add(string value, int verbose)
+		{
+			Add(new OutputItem(value), verbose);
+		}
+
+		private void Add(OutputItemType type, string value, int verbose)
+		{
+			Add(new OutputItem(type, value), verbose);
 		}
 		#endregion
 	}
