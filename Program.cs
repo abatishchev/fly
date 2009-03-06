@@ -9,6 +9,15 @@ namespace OnTheFlyCompiler
 		[STAThread]
 		public static void Main(string[] args)
 		{
+
+			OutputItemType all = OutputItemType.All;
+			OutputItemType err = OutputItemType.Error;
+			OutputItemType info = OutputItemType.Information;
+			OutputItemType warn = OutputItemType.Warning;
+
+			OutputItemType r = all & warn;
+			
+			
 			Console.WriteLine(String.Format(System.Globalization.CultureInfo.CurrentCulture, "{0} version {1}", Core.ApplicationTitle, Core.ApplicationVersion));
 			Console.WriteLine(Core.ApplicationCopyright);
 			Console.WriteLine();

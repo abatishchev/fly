@@ -31,8 +31,8 @@ class Example : ThirdPartlyLib.I3rdParty
 
 	public void Debug()
 	{
-		StringBuilder sb = new StringBuilder();
-		foreach (AssemblyName asm in Assembly.GetExecutingAssembly().GetReferencedAssemblies())
+		var sb = new StringBuilder();
+		foreach (var asm in Assembly.GetExecutingAssembly().GetReferencedAssemblies())
 		{
 			sb.Append(String.Format("{0}, ", asm.FullName));
 		}

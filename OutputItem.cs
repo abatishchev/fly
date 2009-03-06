@@ -2,11 +2,14 @@
 
 namespace OnTheFlyCompiler
 {
+	[Flags]
 	public enum OutputItemType
 	{
-		Information,
-		Warning,
-		Error
+		Information = 1 << 1,
+		Warning = 1 << 2,
+		Error = 1 << 3,
+
+		All = Information | Warning | Error
 	}
 
 	public class OutputItem

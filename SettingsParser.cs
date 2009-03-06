@@ -39,7 +39,7 @@ namespace OnTheFlyCompiler
 						case "-f":
 							{
 								var arr = args[++i].Split(';');
-								foreach (string str in arr)
+								foreach (var str in arr)
 								{
 									settings.Sources.Add(System.IO.File.ReadAllText(str));
 								}
@@ -148,7 +148,6 @@ namespace OnTheFlyCompiler
 								{
 									throw new XmlDescriptionException(ex);
 								}
-
 								break;
 							}
 						default:

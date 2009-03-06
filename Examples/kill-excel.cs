@@ -5,7 +5,7 @@ class Test
 {
 	public static void Main()
 	{
-		foreach (Process p in Process.GetProcesses())
+		foreach (var p in Process.GetProcesses())
 		{
 			if (p.ProcessName.StartsWith("EXCEL"))
 			{
