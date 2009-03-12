@@ -1,8 +1,6 @@
 ﻿// Copyright (C) 2007-2009 Alexander M. Batishchev aka Godfather (abatishchev at gmail.com)
 
-using System;
 using System.Reflection;
-using System.Resources;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("On-the-Fly .NET Compiler")]
@@ -10,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("OnTheFlyCompiler")]
 [assembly: AssemblyCopyright("Copyright (C) 2007-2009 Alexander M. Batishchev aka Godfather")]
 
-[assembly: NeutralResourcesLanguageAttribute("en-US")]
+[assembly: System.Resources.NeutralResourcesLanguageAttribute("en-US")]
 
-[assembly: CLSCompliant(true)]
+[assembly: System.CLSCompliant(true)]
 [assembly: ComVisible(false)]
 
 [assembly: Guid("a3a1dbb5-408f-4e62-a3b4-c0de2f1591b8")]
