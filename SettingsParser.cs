@@ -193,9 +193,9 @@ namespace OnTheFlyCompiler
 				settings.WarningLevel = Convert.ToInt32(atrWarning.Value);
 			}
 
-			var nodeExecutable = nodeSettings.SelectSingleNode("executable");
+			var nodeOutput = nodeSettings.SelectSingleNode("output");
 
-			var atrType = nodeExecutable.Attributes["type"];
+			var atrType = nodeOutput.Attributes["type"];
 			if (atrType != null)
 			{
 				switch (atrType.Value)
@@ -213,13 +213,13 @@ namespace OnTheFlyCompiler
 				}
 			}
 
-			var atrMemory = nodeExecutable.Attributes["memory"];
+			var atrMemory = nodeOutput.Attributes["memory"];
 			if (atrMemory != null)
 			{
 				settings.GenerateInMemory = Boolean.Parse(atrMemory.Value);
 			}
 
-			var atrExecute = nodeExecutable.Attributes["execute"];
+			var atrExecute = nodeOutput.Attributes["execute"];
 			if (atrExecute != null)
 			{
 				settings.Execute = Boolean.Parse(atrExecute.Value);
