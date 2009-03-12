@@ -61,12 +61,12 @@ namespace OnTheFlyCompiler
 
 		public void Dispose(bool disposing)
 		{
-			// free managed resources
-			this.Settings.TempFiles.Delete();
 			if (disposing)
 			{
-				// free native resources
+				// free managed resources
+				this.Settings.TempFiles.Delete();
 			}
+			// free native resources
 		}
 
 		public void Execute()
