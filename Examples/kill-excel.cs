@@ -5,9 +5,9 @@ class Test
 {
 	public static void Main()
 	{
-		foreach (var p in Process.GetProcesses())
+		foreach (Process p in Process.GetProcesses())
 		{
-			if (p.ProcessName.StartsWith("EXCEL"))
+			if (p.ProcessName.StartsWith("excel", StringComparison.OrdinalIgnoreCase))
 			{
 				p.Kill();
 			}

@@ -9,15 +9,13 @@ namespace OnTheFlyCompiler
 		[STAThread]
 		public static void Main(string[] args)
 		{
+			//OutputItemType all = OutputItemType.All;
+			//OutputItemType err = OutputItemType.Error;
+			//OutputItemType info = OutputItemType.Information;
+			//OutputItemType warn = OutputItemType.Warning;
 
-			OutputItemType all = OutputItemType.All;
-			OutputItemType err = OutputItemType.Error;
-			OutputItemType info = OutputItemType.Information;
-			OutputItemType warn = OutputItemType.Warning;
+			//OutputItemType r = all & warn;			
 
-			OutputItemType r = all & warn;
-			
-			
 			Console.WriteLine(String.Format(System.Globalization.CultureInfo.CurrentCulture, "{0} version {1}", Core.ApplicationTitle, Core.ApplicationVersion));
 			Console.WriteLine(Core.ApplicationCopyright);
 			Console.WriteLine();
@@ -42,7 +40,8 @@ namespace OnTheFlyCompiler
 			}
 			catch (OnTheFlyCompiler.Errors.CompilerException ex)
 			{
-				Console.WriteLine("Compiler error: {0}", ex.Message);
+				Console.WriteLine("Compiler error:");
+				Console.WriteLine(ex.CompilerOutput);
 			}
 			catch (Exception ex)
 			{

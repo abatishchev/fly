@@ -125,7 +125,7 @@ namespace OnTheFlyCompiler
 				}
 				this.Output.AddError(String.Format(CultureInfo.CurrentCulture, "Build failed at {0} -- {1} errors", DateTime.Now, result.Errors.Count), 1);
 				OnBuildFailure(new BuildFailureEventArgs(this.Output, result.Errors.Count));
-				return;
+				throw new BuildFailureException(this.Output); // ??
 			}
 		}
 

@@ -57,10 +57,18 @@ namespace OnTheFlyCompiler
 
 		public override string ToString()
 		{
+			return ToString(OutputItemType.Error);
+		}
+
+		public string ToString(OutputItemType type)
+		{
 			var sb = new StringBuilder(this.container.Count);
-			foreach (OutputItem item in this.container)
+			foreach (var item in this.container)
 			{
-				sb.AppendLine(item.Value);
+				//if ((item.Type & type) == type)
+				//{
+					sb.AppendLine(item.Value);
+				//}
 			}
 			return sb.ToString();
 		}
