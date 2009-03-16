@@ -14,7 +14,7 @@ namespace OnTheFlyCompiler
 			//OutputItemType info = OutputItemType.Information;
 			//OutputItemType warn = OutputItemType.Warning;
 
-			//OutputItemType r = all & warn;			
+			//OutputItemType r = all & warn;
 
 			Console.WriteLine(String.Format(System.Globalization.CultureInfo.CurrentCulture, "{0} version {1}", Core.ApplicationTitle, Core.ApplicationVersion));
 			Console.WriteLine(Core.ApplicationCopyright);
