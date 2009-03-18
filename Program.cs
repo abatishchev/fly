@@ -16,7 +16,7 @@ namespace OnTheFlyCompiler
 
 			//OutputItemType r = all & warn;
 
-			Console.WriteLine(String.Format(System.Globalization.CultureInfo.CurrentCulture, "{0} version {1}", Core.ApplicationTitle, Core.ApplicationVersion));
+			Console.WriteLine("{0} version {1}", Core.ApplicationTitle, Core.ApplicationVersion);
 			Console.WriteLine(Core.ApplicationCopyright);
 			Console.WriteLine();
 
