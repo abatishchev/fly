@@ -2,3 +2,4 @@ On-the-Fly .NET Compiler Project TODO List
 
 1. Customize Output with flags
 2. Set executing options with flags
+3. Publish XML settings schema
