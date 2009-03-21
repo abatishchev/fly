@@ -78,9 +78,9 @@ namespace OnTheFlyCompiler
 				var type = this.ResultAssembly.GetType(this.Settings.MethodPath);
 				this.ResultObject = type.InvokeMember(this.Settings.MethodName, flags, null, null, null, CultureInfo.CurrentCulture);
 			}
-			catch
+			catch (Exception ex)
 			{
-				throw new ExecutionFailureException(this.Output); // TODO
+				throw new ExecutionFailureException(ex);
 			}
 		}
 
@@ -93,9 +93,8 @@ namespace OnTheFlyCompiler
 		{
 			if (this.Settings == null || this.provider == null)
 			{
-				// TODO: this.Output.Add()
 				OnBuildFailure(new BuildFailureEventArgs(this.Output));
-				throw new BuildFailureException(this.Output);
+				throw new BuildFailureException(new ArgumentNullException());
 			}
 
 			this.Output.AddInformation(String.Format(CultureInfo.CurrentCulture, "Build started at {0}", DateTime.Now), 1);
@@ -104,7 +103,7 @@ namespace OnTheFlyCompiler
 			if (buildStart.Cancel)
 			{
 				this.Output.AddInformation(String.Format(CultureInfo.CurrentCulture, "Build canceled at {0}", DateTime.Now), 1);
-				throw new BuildCanceledException(this.Output);
+				throw new BuildCanceledException();
 			}
 
 			var result = this.provider.CompileAssemblyFromSource(this.Settings, (string[])(new System.Collections.ArrayList(sources).ToArray(typeof(string))));
@@ -125,7 +124,7 @@ namespace OnTheFlyCompiler
 				}
 				this.Output.AddError(String.Format(CultureInfo.CurrentCulture, "Build failed at {0} -- {1} errors", DateTime.Now, result.Errors.Count), 1);
 				OnBuildFailure(new BuildFailureEventArgs(this.Output, result.Errors.Count));
-				throw new BuildFailureException(this.Output); // ??
+				throw new BuildFailureException(); // or do not throw?
 			}
 		}
 

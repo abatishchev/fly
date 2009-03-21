@@ -9,36 +9,38 @@ namespace OnTheFlyCompiler.Errors
 	[Serializable]
 	public abstract class CompilerException : Exception
 	{
-		public CompilerException(CompilerOutput output, string message)
-			: base(message)
-		{
-			this.CompilerOutput = output;
-		}
+		public CompilerException(string message)
+			: base(message) { }
 
-		public CompilerOutput CompilerOutput { get; private set; }
-
-		//TODO: serialization
+		public CompilerException(string message, Exception innerException)
+			: base(message, innerException) { }
 	}
 
 	[Serializable]
 	public class BuildCanceledException : CompilerException
 	{
-		public BuildCanceledException(CompilerOutput output)
-			: base(output, "Build canceled") { }
+		public BuildCanceledException()
+			: base("Build canceled") { }
 	}
 
 	[Serializable]
 	public class BuildFailureException : CompilerException
 	{
-		public BuildFailureException(CompilerOutput output)
-			: base(output, "Build failed") { }
+		public BuildFailureException()
+			: this(null) { }
+
+		public BuildFailureException(Exception exception)
+			: base("Build failed", exception) { }
 	}
 
 	[Serializable]
 	public class ExecutionFailureException : CompilerException
 	{
-		public ExecutionFailureException(CompilerOutput output)
-			: base(output, "Execution failed") { }
+		public ExecutionFailureException()
+			: this(null) { }
+
+		public ExecutionFailureException(Exception exception)
+			: base("Execution failed") { }
 	}
 
 	[Serializable]

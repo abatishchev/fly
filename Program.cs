@@ -41,7 +41,7 @@ namespace OnTheFlyCompiler
 			catch (OnTheFlyCompiler.Errors.CompilerException ex)
 			{
 				Console.WriteLine("Compiler error:");
-				Console.WriteLine(ex.CompilerOutput);
+				Console.WriteLine(ex.InnerException != null ? ex.InnerException.Message : Core.Compiler.Output.ToString());
 			}
 			catch (Exception ex)
 			{
