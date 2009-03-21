@@ -1,5 +1,4 @@
 On-the-Fly .NET Compiler Project TODO List
 
-1. Customize Output with flags
-2. Set executing options with flags
-3. Command line parameters overwrites settings given in Xml description file
+1. Set executing options with flags
+2. Command line parameters overwrites settings given in Xml description file

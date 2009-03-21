@@ -57,7 +57,7 @@ namespace OnTheFlyCompiler
 
 		public override string ToString()
 		{
-			return ToString(OutputItemType.Error);
+			return ToString(OutputItemType.All);
 		}
 
 		public string ToString(OutputItemType type)
@@ -65,10 +65,10 @@ namespace OnTheFlyCompiler
 			var sb = new StringBuilder(this.container.Count);
 			foreach (var item in this.container)
 			{
-				//if ((item.Type & type) == type)
-				//{
+				if ((type & item.Type) == item.Type)
+				{
 					sb.AppendLine(item.Value);
-				//}
+				}
 			}
 			return sb.ToString();
 		}

@@ -122,7 +122,7 @@ namespace OnTheFlyCompiler
 						this.Output.AddError(String.Format(CultureInfo.CurrentCulture, "{0}({1},{2}): Error {3}: {4}", err.FileName, err.Line, err.Column, err.ErrorNumber, err.ErrorText), 2);
 					}
 				}
-				this.Output.AddError(String.Format(CultureInfo.CurrentCulture, "Build failed at {0} -- {1} errors", DateTime.Now, result.Errors.Count), 1);
+				this.Output.AddInformation(String.Format(CultureInfo.CurrentCulture, "Build failed at {0} -- {1} errors", DateTime.Now, result.Errors.Count), 1);
 				OnBuildFailure(new BuildFailureEventArgs(this.Output, result.Errors.Count));
 				throw new BuildFailureException(); // or do not throw?
 			}
