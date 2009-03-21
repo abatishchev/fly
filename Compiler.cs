@@ -71,7 +71,7 @@ namespace OnTheFlyCompiler
 
 		public void Execute()
 		{
-			this.Output.AddInformation(String.Format("Executing {0}.{1}..", this.Settings.MethodPath, this.Settings.MethodName), 1);
+			this.Output.AddInformation(String.Format("Executing {0}.{1}", this.Settings.MethodPath, this.Settings.MethodName), 1);
 			try
 			{
 				var flags = BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static;
