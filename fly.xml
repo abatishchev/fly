@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<settings>
+<settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://fly.sf.net fly.xsd">
 	<compiler language="csharp" warning="3" verbose="2" />
 	<method path="Test" name="Main" />
 	<output type="exe" memory="true" execute="true" />

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:simpleType name="warningLevel">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="verboseLevel">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="outputType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="exe"/>
+			<xs:enumeration value="dll"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="settings">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="compiler">
+					<xs:complexType>
+						<xs:attribute name="language" type="xs:string" use="required" />
+						<xs:attribute name="warning" type="warningLevel" use="optional" />
+						<xs:attribute name="verbose" type="verboseLevel" use="optional" />
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="method">
+					<xs:complexType>
+						<xs:attribute name="path" type="xs:string" use="required" />
+						<xs:attribute name="name" type="xs:string" use="required" />
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="output">
+					<xs:complexType>
+						<xs:attribute name="type" type="outputType" use="required" />
+						<xs:attribute name="memory" type="xs:boolean" use="optional" />
+						<xs:attribute name="execute" type="xs:boolean" use="optional" />
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="references">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element maxOccurs="unbounded" name="item" type="xs:string" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="files">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element maxOccurs="unbounded" name="item" type="xs:string" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
