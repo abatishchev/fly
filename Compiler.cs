@@ -89,7 +89,7 @@ namespace OnTheFlyCompiler
 			Compile(this.Settings.Sources);
 		}
 
-		public void Compile(System.Collections.Specialized.StringCollection sources)
+		public void Compile(System.Collections.ICollection sources)
 		{
 			if (this.Settings == null || this.provider == null)
 			{
