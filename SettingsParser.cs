@@ -36,6 +36,16 @@ namespace OnTheFlyCompiler
 								settings.Execute = true;
 								break;
 							}
+						case "--disk":
+							{
+								settings.GenerateInMemory = false;
+								break;
+							}
+						case "--dll":
+							{
+								settings.GenerateExecutable = false;
+								break;
+							}
 						case "-f":
 							{
 								var arr = args[++i].Split(';');

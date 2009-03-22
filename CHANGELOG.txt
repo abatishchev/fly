@@ -1,7 +1,9 @@
 On-the-Fly .NET Compiler Project Changelog:
 
 2.0.2 (2009.02.22)
-[+] New options was added to XmlConfiguration: generate executable, generate dll, generate in memory, verbose level
+[+] New options were added to XmlConfiguration: generate executable, generate dll, generate in memory, verbose level
+[+] New command line parameters were added: --dll indicates output assembly type to library (--exe to executable respectively, by default),
+--disk indicates output assembly creation location to temporary folder on hard drive (--memory in respectively, by default)
 
 [~] Errors and Events refactoring
 
