@@ -63,7 +63,7 @@
     </Compile>
     <Compile Include="Resources\Test.Main.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="SettingsParser.cs" />
+    <Compile Include="SettingsHelper.cs" />
     <Compile Include="TemplateAttribute.cs" />
     <Content Include="Examples\test.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
