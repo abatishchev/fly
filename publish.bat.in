@@ -7,9 +7,9 @@ set CMD=A -afzip -o+ -s -ibck -t
 set PROJECT-LIB=libfly
 set PROJECT-BIN=fly
 
-set FILES=Compiler.cs Errors.cs Events.cs Output.cs OutputItem.cs Settings.cs Properties\AssemblyInfo.cs
+set FILES=Compiler.cs Errors.cs Events.cs Output.cs OutputItem.cs Settings.cs Properties\AssemblyInfo.cs Properties\Resources.resx Properties\Resources.resx.cs
 set FILES-LIB=%PROJECT-LIB%.csproj
-set FILES-BIN=%PROJECT-BIN%.csproj Core.cs Program.cs SettingsParser.cs fly.xml fly.xsd Examples\*.*
+set FILES-BIN=%PROJECT-BIN%.csproj Core.cs Program.cs SettingsParser.cs fly.xml fly.xsd TemplateAttribute.cs Examples\*.*
 set DOCS=CHANGELOG.txt LICENSE.txt
 
 set LIB=bin\Release\libfly.dll

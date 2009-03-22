@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
 
-class Test
+namespace OnTheFlyCompiler.Examples
 {
-	public static void Main()
+	class Test
 	{
-		MessageBox.Show("Hello World!");
+		public static void Main()
+		{
+			MessageBox.Show("Hello World!");
+		}
 	}
 }

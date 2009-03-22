@@ -1,6 +1,7 @@
 ﻿// Copyright (C) 2007-2009 Alexander M. Batishchev aka Godfather (abatishchev at gmail.com)
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Xml;
 
@@ -13,10 +14,13 @@ namespace OnTheFlyCompiler
 	{
 		internal static CompilerSettings Parse(string[] args)
 		{
+			var argList = new List<string>(args.Length);
+			argList.AddRange(args);
 			var settings = new CompilerSettings();
 			for (int i = 0; i < args.Length; i++)
 			{
 				var name = args[i];
+				var next = argList.Exists(a => argList.IndexOf(a) != 0);
 				try
 				{
 					switch (name)
@@ -24,16 +28,6 @@ namespace OnTheFlyCompiler
 						case "--debug":
 							{
 								settings.IncludeDebugInformation = true;
-								break;
-							}
-						case "--exe":
-							{
-								settings.GenerateExecutable = true;
-								break;
-							}
-						case "--exec":
-							{
-								settings.Execute = true;
 								break;
 							}
 						case "--disk":
@@ -44,6 +38,16 @@ namespace OnTheFlyCompiler
 						case "--dll":
 							{
 								settings.GenerateExecutable = false;
+								break;
+							}
+						case "--exe":
+							{
+								settings.GenerateExecutable = true;
+								break;
+							}
+						case "--exec":
+							{
+								settings.Execute = true;
 								break;
 							}
 						case "-f":
@@ -83,8 +87,12 @@ namespace OnTheFlyCompiler
 							}
 						case "-s":
 							{
-								string[] arr = args[++i].Split(';');
-								settings.Sources.AddRange(arr);
+								settings.Sources.Add(args[++i]);
+								break;
+							}
+						case "-t":
+							{
+								settings.Sources.Add(System.IO.File.ReadAllText(args[++i]));
 								break;
 							}
 						case "--threat":

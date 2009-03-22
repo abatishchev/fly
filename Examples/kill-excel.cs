@@ -1,15 +1,17 @@
 using System;
-using System.Diagnostics;
 
-class Test
+namespace OnTheFlyCompiler.Examples
 {
-	public static void Main()
+	class Test
 	{
-		foreach (Process p in Process.GetProcesses())
+		public static void Main()
 		{
-			if (p.ProcessName.StartsWith("excel", StringComparison.OrdinalIgnoreCase))
+			foreach (var p in System.Diagnostics.Process.GetProcesses())
 			{
-				p.Kill();
+				if (p.ProcessName.StartsWith("excel", StringComparison.OrdinalIgnoreCase))
+				{
+					p.Kill();
+				}
 			}
 		}
 	}

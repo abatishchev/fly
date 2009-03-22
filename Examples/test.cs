@@ -1,46 +1,47 @@
 ﻿using System;
-using System.Reflection;
 using System.Windows.Forms;
-using System.Text;
 
-class Test
+namespace OnTheFlyCompiler.Examples
 {
-	public static void Main()
+	class Test
 	{
-		Example example = new Example();
-		example.HelloWorld();
-	}
-
-	public static void Debug()
-	{
-		Example example = new Example();
-		example.Debug();
-	}
-}
-
-class Example : ThirdPartlyLib.I3rdParty
-{
-	public void HelloWorld()
-	{
-		string hello = "hello";
-		string world = "WORLD";
-
-		ThirdPartlyLib.c3rdParty c3rdParty = new ThirdPartlyLib.c3rdParty();
-		MessageBox.Show(String.Format("{0} {1}", Foo(hello), c3rdParty.Foo(world)));
-	}
-
-	public void Debug()
-	{
-		var sb = new StringBuilder();
-		foreach (var asm in Assembly.GetExecutingAssembly().GetReferencedAssemblies())
+		public static void Main()
 		{
-			sb.Append(String.Format("{0}, ", asm.FullName));
+			var example = new Example();
+			example.HelloWorld();
 		}
-		MessageBox.Show(sb.ToString());
+
+		public static void Debug()
+		{
+			var example = new Example();
+			example.Debug();
+		}
 	}
 
-	public string Foo(string value)
+	class Example : ThirdPartlyLib.I3rdParty
 	{
-		return value.ToUpper();
+		public void HelloWorld()
+		{
+			string hello = "hello";
+			string world = "WORLD";
+
+			var c3rdParty = new ThirdPartlyLib.c3rdParty();
+			MessageBox.Show(String.Format("{0} {1}", Foo(hello), c3rdParty.Foo(world)));
+		}
+
+		public void Debug()
+		{
+			var sb = new System.Text.StringBuilder();
+			foreach (var asm in System.Reflection.Assembly.GetExecutingAssembly().GetReferencedAssemblies())
+			{
+				sb.Append(String.Format("{0}, ", asm.FullName));
+			}
+			MessageBox.Show(sb.ToString());
+		}
+
+		public string Foo(string value)
+		{
+			return value.ToUpper();
+		}
 	}
 }
