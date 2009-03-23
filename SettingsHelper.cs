@@ -94,31 +94,35 @@ namespace OnTheFlyCompiler
 							}
 						case "-t":
 							{
-								var template = args[++i];
 								try
 								{
-									var language = String.Empty;
-									var sources = new System.Collections.Specialized.StringCollection();
-									switch (template)
+									var templateFile = args[++i];
+									var tempSetting = new CompilerSettings();
+									tempSetting.GenerateExecutable = false;
+									tempSetting.GenerateInMemory = false;
+									tempSetting.ReferencedAssemblies.Add(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+									switch (templateFile)
 									{
 
 										case "test":
 											{
-												sources.Add(Properties.Resources.Test);
-												language = "c#";
+												tempSetting.Sources.Add(Properties.Resources.Test);
+												tempSetting.Language = "c#";
 												break;
 											}
 										default:
 											{
-												throw new ParameterOutOfRangeException("template", template);
+												throw new ParameterOutOfRangeException("template", templateFile);
 											}
 									}
-									using (Compiler compiler = new Compiler(new CompilerSettings { GenerateExecutable = false, GenerateInMemory = false, Language = language, Sources = sources }))
+
+									using (Compiler compiler = new Compiler(tempSetting))
 									{
 										compiler.Compile();
-										AppDomain appDomain = AppDomain.CreateDomain("OnTheFlyCompiler.Template", null, null);
-										//OnTheFlyCompiler.Templates.TemplateBase templateBase = (OnTheFlyCompiler.Templates.Test)appDomain.CreateInstanceFromAndUnwrap(compiler.ResultAssembly.Location, "OnTheFlyCompiler.Templates.Test");
-										object obj = appDomain.CreateInstanceFromAndUnwrap(compiler.ResultAssembly.Location, "OnTheFlyCompiler.Templates.Test");
+										var appDomain = AppDomain.CreateDomain("OnTheFlyCompiler.Template", null, null);
+										var templateBase = (OnTheFlyCompiler.Templates.TemplateBase)appDomain.CreateInstanceFromAndUnwrap(compiler.ResultAssembly.Location, "OnTheFlyCompiler.Templates.Test");
+										templateBase.Main(null);
 									}
 								}
 								catch (CompilerException)
