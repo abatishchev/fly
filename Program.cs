@@ -28,18 +28,20 @@ namespace OnTheFlyCompiler
 					{
 						Core.Compiler.Execute();
 					}
-					Console.WriteLine(Core.Compiler.Output);
 				}
 			}
 			catch (OnTheFlyCompiler.Errors.CompilerException ex)
 			{
 				Console.WriteLine("Compiler error:");
-				Console.WriteLine(ex.InnerException != null ? ex.InnerException.Message : Core.Compiler.Output.ToString());
 			}
 			catch (Exception ex)
 			{
 				Console.WriteLine("Error! {0}", ex.Message);
 				return;
+			}
+			finally
+			{
+				Console.WriteLine(Core.Compiler.Output);
 			}
 		}
 

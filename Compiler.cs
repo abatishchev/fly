@@ -80,7 +80,8 @@ namespace OnTheFlyCompiler
 			}
 			catch (Exception ex)
 			{
-				throw new ExecutionFailureException(ex);
+				this.Output.AddInformation(new ExecutionFailureException(ex).Message);
+				this.Output.AddError(String.Format("Error: {0}", ex.Message));
 			}
 		}
 
@@ -126,7 +127,6 @@ namespace OnTheFlyCompiler
 				}
 				this.Output.AddInformation(String.Format(CultureInfo.CurrentCulture, "Build failed at {0} -- {1} errors", DateTime.Now, result.Errors.Count));
 				OnBuildFailure(new BuildFailureEventArgs(result.Errors.Count));
-				//throw new BuildFailureException(); // or throw?
 			}
 		}
 
