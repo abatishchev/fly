@@ -61,7 +61,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Test.Main.cs" />
+    <None Include="Templates\Test.cs" />
+    <Compile Include="Templates\Test.Main.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="SettingsHelper.cs" />
     <Compile Include="TemplateAttribute.cs" />

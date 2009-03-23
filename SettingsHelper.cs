@@ -92,8 +92,9 @@ namespace OnTheFlyCompiler
 							}
 						case "-t":
 							{
+								string test = Properties.Resources.Test;
 								CompilerSettings s = new CompilerSettings();
-								s.Sources.Add(System.IO.File.ReadAllText(args[++i]));
+								//s.Sources.Add(System.IO.File.ReadAllBytes(
 								using (Compiler c = new Compiler(s))
 								{
 									c.Compile();

@@ -63,18 +63,21 @@ namespace OnTheFlyCompiler.Properties {
         /// <summary>
         ///   Looks up a localized string similar to using System;
         ///
-        ///class Test
+        ///namespace OnTheFlyCompiler.Templates
         ///{
-        ///	public static void Main(string[] args)
+        ///	[Template]
+        ///	class Test
         ///	{
-        ///		{0}
+        ///		public static void Main(string[] args)
+        ///		{
+        ///			//
+        ///		}
         ///	}
-        ///}
-        ///.
+        ///}.
         /// </summary>
-        internal static string Test_Main {
+        internal static string Test {
             get {
-                return ResourceManager.GetString("Test_Main", resourceCulture);
+                return ResourceManager.GetString("Test", resourceCulture);
             }
         }
     }
