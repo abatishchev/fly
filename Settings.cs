@@ -7,6 +7,8 @@ namespace OnTheFlyCompiler.Settings
 {
 	public class CompilerSettings : System.CodeDom.Compiler.CompilerParameters
 	{
+		private int verboseLevel;
+
 		#region Constructors
 		public CompilerSettings()
 		{
@@ -16,9 +18,13 @@ namespace OnTheFlyCompiler.Settings
 			this.Execute = false;
 			this.GenerateExecutable = true;
 			this.GenerateInMemory = true;
-			this.VerboseLevel = 3;
+			this.VerboseLevel = CompilerSettings.MaxVerboseLevel;
 			this.WarningLevel = 3;
 		}
+		#endregion
+
+		#region Fields
+		public static int MaxVerboseLevel = 2;
 		#endregion
 
 		#region Properties
@@ -32,7 +38,24 @@ namespace OnTheFlyCompiler.Settings
 
 		public StringCollection Sources { get; set; }
 
-		public int VerboseLevel { get; set; }
+		public int VerboseLevel
+		{
+			get
+			{
+				return this.verboseLevel;
+			}
+			set
+			{
+				if (value < 0 || value > CompilerSettings.MaxVerboseLevel)
+				{
+					throw new Errors.ParameterOutOfRangeException("verbose", value.ToString(System.Globalization.CultureInfo.CurrentCulture));
+				}
+				else
+				{
+					this.verboseLevel = value;
+				}
+			}
+		}
 		#endregion
 	}
 }

@@ -7,16 +7,13 @@ namespace OnTheFlyCompiler.Events
 {
 	public class BuildFailureEventArgs : EventArgs
 	{
-		public BuildFailureEventArgs(CompilerOutput output)
-			: this(output, 0) { }
+		public BuildFailureEventArgs()
+			: this(0) { }
 
-		public BuildFailureEventArgs(CompilerOutput output, int count)
+		public BuildFailureEventArgs(int count)
 		{
-			this.CompilerOutput = output;
 			this.ErrorsCount = count;
 		}
-
-		public CompilerOutput CompilerOutput { get; private set; }
 
 		public int ErrorsCount { get; private set; }
 	}

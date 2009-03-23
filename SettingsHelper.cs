@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Xml;
 
 using OnTheFlyCompiler.Errors;
@@ -14,13 +15,14 @@ namespace OnTheFlyCompiler
 	{
 		internal static CompilerSettings Parse(string[] args)
 		{
-			var argList = new List<string>(args.Length);
-			argList.AddRange(args);
+			//TODO:
+			//var argList = new List<string>(args.Length);
+			//argList.AddRange(args);
 			var settings = new CompilerSettings();
 			for (int i = 0; i < args.Length; i++)
 			{
 				var name = args[i];
-				var next = argList.Exists(a => argList.IndexOf(a) != 0);
+				//TODO: var next = args[++i];
 				try
 				{
 					switch (name)
@@ -55,7 +57,7 @@ namespace OnTheFlyCompiler
 								var arr = args[++i].Split(';');
 								foreach (var str in arr)
 								{
-									settings.Sources.Add(System.IO.File.ReadAllText(str));
+									settings.Sources.Add(File.ReadAllText(str));
 								}
 								break;
 							}
@@ -81,7 +83,7 @@ namespace OnTheFlyCompiler
 							}
 						case "-r":
 							{
-								string[] arr = args[++i].Split(';');
+								var arr = args[++i].Split(';');
 								settings.ReferencedAssemblies.AddRange(arr);
 								break;
 							}
@@ -92,15 +94,36 @@ namespace OnTheFlyCompiler
 							}
 						case "-t":
 							{
-								string test = Properties.Resources.Test;
-								CompilerSettings s = new CompilerSettings();
-								//s.Sources.Add(System.IO.File.ReadAllBytes(
-								using (Compiler c = new Compiler(s))
+								var template = args[++i];
+								try
 								{
-									c.Compile();
-									System.Reflection.Assembly a = c.ResultAssembly;
-									AppDomain appd = AppDomain.CreateDomain("OnTheFlyCompiler.Template", null, null);
-									appd.CreateInstanceFrom(a.FullName, "OnTheFlyCompiler.Templates.Test");
+									var language = String.Empty;
+									var sources = new System.Collections.Specialized.StringCollection();
+									switch (template)
+									{
+
+										case "test":
+											{
+												sources.Add(Properties.Resources.Test);
+												language = "c#";
+												break;
+											}
+										default:
+											{
+												throw new ParameterOutOfRangeException("template", template);
+											}
+									}
+									using (Compiler compiler = new Compiler(new CompilerSettings { GenerateExecutable = false, GenerateInMemory = false, Language = language, Sources = sources }))
+									{
+										compiler.Compile();
+										AppDomain appDomain = AppDomain.CreateDomain("OnTheFlyCompiler.Template", null, null);
+										//OnTheFlyCompiler.Templates.TemplateBase templateBase = (OnTheFlyCompiler.Templates.Test)appDomain.CreateInstanceFromAndUnwrap(compiler.ResultAssembly.Location, "OnTheFlyCompiler.Templates.Test");
+										object obj = appDomain.CreateInstanceFromAndUnwrap(compiler.ResultAssembly.Location, "OnTheFlyCompiler.Templates.Test");
+									}
+								}
+								catch (CompilerException)
+								{
+									// skip this argument
 								}
 								break;
 							}
@@ -158,7 +181,7 @@ namespace OnTheFlyCompiler
 									{
 										throw new ParameterNotSetException(name);
 									}
-									catch (System.IO.FileNotFoundException)
+									catch (FileNotFoundException)
 									{
 										throw;
 									}
@@ -273,7 +296,7 @@ namespace OnTheFlyCompiler
 
 			foreach (XmlNode nodeFile in nodeSettings.SelectNodes("files/item"))
 			{
-				settings.Sources.Add(System.IO.File.ReadAllText(nodeFile.InnerText));
+				settings.Sources.Add(File.ReadAllText(nodeFile.InnerText));
 			}
 
 			return settings;

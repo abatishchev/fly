@@ -49,9 +49,9 @@
     <Content Include="Examples\world.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Compile Include="Examples\kill-excel.cs">
+    <Content Include="Examples\kill-excel.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
+    </Content>
     <Compile Include="Output.cs" />
     <Compile Include="OutputItem.cs" />
     <Compile Include="Program.cs" />
@@ -61,10 +61,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="Templates\Test.cs" />
+    <Compile Include="TemplateBase.cs" />
+    <Compile Include="Templates\Test.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="SettingsHelper.cs" />
-    <Compile Include="TemplateAttribute.cs" />
     <Content Include="Examples\test.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

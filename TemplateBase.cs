@@ -2,9 +2,9 @@
 
 namespace OnTheFlyCompiler.Templates
 {
-	class Test : TemplateBase
+	class TemplateBase : MarshalByRefObject
 	{
-		public override void Main(string[] args)
+		public virtual void Main(string[] args)
 		{
 			//
 		}

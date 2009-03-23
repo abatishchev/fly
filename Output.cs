@@ -4,6 +4,8 @@ using System;
 using System.Collections.ObjectModel;
 using System.Text;
 
+using OnTheFlyCompiler.Settings;
+
 namespace OnTheFlyCompiler
 {
 	public class CompilerOutput
@@ -20,38 +22,53 @@ namespace OnTheFlyCompiler
 
 		#region Public Methods
 		#region Error
+		internal void AddError(string value)
+		{
+			Add(value, CompilerSettings.MaxVerboseLevel);
+		}
+		
+		internal void AddError(int verbose)
+		{
+			Add(String.Empty, verbose);
+		}
+
 		internal void AddError(string value, int verbose)
 		{
 			Add(new OutputItem(OutputItemType.Error, value), verbose);
 		}
-
-		internal void AddError(int verbose)
-		{
-			Add(new OutputItem(OutputItemType.Error, String.Empty), verbose);
-		}
 		#endregion
 
 		#region Information
-		internal void AddInformation(string value, int verbose)
+		internal void AddInformation(string value)
 		{
-			Add(new OutputItem(OutputItemType.Information, value), verbose);
+			AddInformation(value, CompilerSettings.MaxVerboseLevel);
 		}
 
 		internal void AddInformation(int verbose)
 		{
-			Add(new OutputItem(OutputItemType.Information, String.Empty), verbose);
+			Add(String.Empty, verbose);
+		}
+
+		internal void AddInformation(string value, int verbose)
+		{
+			Add(new OutputItem(OutputItemType.Information, value), verbose);
 		}
 		#endregion
 
 		#region Warning
-		internal void AddWarning(string value, int verbose)
+		internal void AddWarning(string value)
 		{
-			Add(new OutputItem(OutputItemType.Warning, value), verbose);
+			Add(value, CompilerSettings.MaxVerboseLevel);
 		}
 
 		internal void AddWarning(int verbose)
 		{
-			Add(new OutputItem(OutputItemType.Warning, String.Empty), verbose);
+			Add(String.Empty, verbose);
+		}
+
+		internal void AddWarning(string value, int verbose)
+		{
+			Add(new OutputItem(OutputItemType.Warning, value), verbose);
 		}
 		#endregion
 

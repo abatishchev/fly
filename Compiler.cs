@@ -71,7 +71,7 @@ namespace OnTheFlyCompiler
 
 		public void Execute()
 		{
-			this.Output.AddInformation(String.Format("Executing {0}.{1}", this.Settings.MethodPath, this.Settings.MethodName), 1);
+			this.Output.AddInformation(String.Format("Executing {0}.{1}", this.Settings.MethodPath, this.Settings.MethodName));
 			try
 			{
 				var flags = BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static;
@@ -91,18 +91,23 @@ namespace OnTheFlyCompiler
 
 		public void Compile(System.Collections.ICollection sources)
 		{
-			if (this.Settings == null || this.provider == null)
+			if (this.Settings == null)
 			{
-				OnBuildFailure(new BuildFailureEventArgs(this.Output));
-				throw new BuildFailureException(new ArgumentNullException());
+				OnBuildFailure(new BuildFailureEventArgs());
+				throw new BuildFailureException(new ArgumentNullException("source"));
+			}
+			else if (this.provider == null)
+			{
+				OnBuildFailure(new BuildFailureEventArgs());
+				throw new BuildFailureException(new ArgumentNullException("provider"));
 			}
 
-			this.Output.AddInformation(String.Format(CultureInfo.CurrentCulture, "Build started at {0}", DateTime.Now), 1);
+			this.Output.AddInformation(String.Format(CultureInfo.CurrentCulture, "Build started at {0}", DateTime.Now));
 			var buildStart = new BuildStartEventArgs();
 			OnBuildStart(buildStart);
 			if (buildStart.Cancel)
 			{
-				this.Output.AddInformation(String.Format(CultureInfo.CurrentCulture, "Build canceled at {0}", DateTime.Now), 1);
+				this.Output.AddInformation(String.Format(CultureInfo.CurrentCulture, "Build canceled at {0}", DateTime.Now));
 				throw new BuildCanceledException();
 			}
 
@@ -110,21 +115,18 @@ namespace OnTheFlyCompiler
 			if (!result.Errors.HasErrors)
 			{
 				this.ResultAssembly = result.CompiledAssembly;
-				this.Output.AddInformation(String.Format(CultureInfo.CurrentCulture, "Build succeeded at {0}", DateTime.Now), 1);
+				this.Output.AddInformation(String.Format(CultureInfo.CurrentCulture, "Build succeeded at {0}", DateTime.Now));
 				OnBuildSuccess(new BuildSuccessEventArgs(result.CompiledAssembly));
 			}
 			else
 			{
-				if (this.Settings.VerboseLevel == 2)
+				foreach (CompilerError err in result.Errors)
 				{
-					foreach (CompilerError err in result.Errors)
-					{
-						this.Output.AddError(String.Format(CultureInfo.CurrentCulture, "{0}({1},{2}): Error {3}: {4}", err.FileName, err.Line, err.Column, err.ErrorNumber, err.ErrorText), 2);
-					}
+					this.Output.AddError(String.Format(CultureInfo.CurrentCulture, "{0}({1},{2}): Error {3}: {4}", err.FileName, err.Line, err.Column, err.ErrorNumber, err.ErrorText), 1);
 				}
-				this.Output.AddInformation(String.Format(CultureInfo.CurrentCulture, "Build failed at {0} -- {1} errors", DateTime.Now, result.Errors.Count), 1);
-				OnBuildFailure(new BuildFailureEventArgs(this.Output, result.Errors.Count));
-				throw new BuildFailureException(); // or do not throw?
+				this.Output.AddInformation(String.Format(CultureInfo.CurrentCulture, "Build failed at {0} -- {1} errors", DateTime.Now, result.Errors.Count));
+				OnBuildFailure(new BuildFailureEventArgs(result.Errors.Count));
+				//throw new BuildFailureException(); // or throw?
 			}
 		}
 
