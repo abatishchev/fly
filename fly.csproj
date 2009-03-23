@@ -62,7 +62,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="Templates\Test.cs" />
-    <Compile Include="Templates\Test.Main.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="SettingsHelper.cs" />
     <Compile Include="TemplateAttribute.cs" />
