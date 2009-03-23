@@ -92,7 +92,15 @@ namespace OnTheFlyCompiler
 							}
 						case "-t":
 							{
-								settings.Sources.Add(System.IO.File.ReadAllText(args[++i]));
+								CompilerSettings s = new CompilerSettings();
+								s.Sources.Add(System.IO.File.ReadAllText(args[++i]));
+								using (Compiler c = new Compiler(s))
+								{
+									c.Compile();
+									System.Reflection.Assembly a = c.ResultAssembly;
+									AppDomain appd = AppDomain.CreateDomain("OnTheFlyCompiler.Template", null, null);
+									appd.CreateInstanceFrom(a.FullName, "OnTheFlyCompiler.Templates.Test");
+								}
 								break;
 							}
 						case "--threat":

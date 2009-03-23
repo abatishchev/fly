@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OnTheFlyCompiler.Resources
+namespace OnTheFlyCompiler.Templates
 {
 	[Template]
 	class Test
