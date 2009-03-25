@@ -74,9 +74,15 @@ namespace OnTheFlyCompiler
 			this.Output.AddInformation(String.Format("Executing {0}.{1}", this.Settings.MethodPath, this.Settings.MethodName));
 			try
 			{
-				var flags = BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static;
-				var type = this.ResultAssembly.GetType(this.Settings.MethodPath);
-				this.ResultObject = type.InvokeMember(this.Settings.MethodName, flags, null, null, null, CultureInfo.CurrentCulture);
+				var appDomain = AppDomain.CreateDomain("OnTheFlyCompiler", null, null);
+				var instance = appDomain.CreateInstanceFromAndUnwrap(this.ResultAssembly.Location, "OnTheFlyCompiler.Templates.Test");
+				if(intance != null)
+				{
+					var flags = BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static;
+					this.ResultObject = instance.GetType().InvokeMember(this.Settings.MethodName, flags, null, null, null, CultureInfo.CurrentCulture);
+				}
+
+				//this.ResultObject = type.InvokeMember(this.Settings.MethodName, flags, null, null, null, CultureInfo.CurrentCulture);
 			}
 			catch (Exception ex)
 			{

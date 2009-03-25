@@ -108,7 +108,14 @@ namespace OnTheFlyCompiler
 												settings.MethodPath = "OnTheFlyCompiler.Templates";
 												settings.MethodName = "Main";
 												string source = File.ReadAllText(Path.Combine(Properties.Resources.TemplatesDirectory, "Test.cs"));
-												settings.Sources[0] = source.Replace("// template code here", settings.Sources[0]);
+												try
+												{
+													settings.Sources[0] = source.Replace("// template code here", settings.Sources[0]);
+												}
+												catch (IndexOutOfRangeException ex)
+												{
+													// TODO
+												}
 												break;
 											}
 										default:
@@ -118,17 +125,6 @@ namespace OnTheFlyCompiler
 									}
 
 									settings.Execute = true;
-
-									//using (Compiler compiler = new Compiler(tempSetting))
-									//{
-									//    compiler.Compile();
-									//    var appDomain = AppDomain.CreateDomain("OnTheFlyCompiler.Template", null, null);
-									//    var templateBase = appDomain.CreateInstanceFromAndUnwrap(compiler.ResultAssembly.Location, "OnTheFlyCompiler.Templates.Test") as OnTheFlyCompiler.Templates.TemplateBase;
-									//    if (templateBase != null)
-									//    {
-									//        templateBase.Main(null);
-									//    }
-									//}
 								}
 								catch (CompilerException)
 								{
