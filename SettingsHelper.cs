@@ -96,20 +96,19 @@ namespace OnTheFlyCompiler
 							{
 								try
 								{
-									var templateFile = args[++i];
-									var tempSetting = new CompilerSettings();
-									tempSetting.GenerateExecutable = false;
-									tempSetting.GenerateInMemory = false;
-									tempSetting.ReferencedAssemblies.Add(System.Reflection.Assembly.GetExecutingAssembly().Location);
+									settings.ReferencedAssemblies.Add(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
+									var templateFile = args[++i];
 									switch (templateFile)
 									{
 
 										case "test":
 											{
+												settings.Language = "c#";
+												settings.MethodPath = "OnTheFlyCompiler.Templates";
+												settings.MethodName = "Main";
 												string source = File.ReadAllText(Path.Combine(Properties.Resources.TemplatesDirectory, "Test.cs"));
 												settings.Sources[0] = source.Replace("// template code here", settings.Sources[0]);
-												tempSetting.Language = "c#";
 												break;
 											}
 										default:
@@ -118,16 +117,18 @@ namespace OnTheFlyCompiler
 											}
 									}
 
-									using (Compiler compiler = new Compiler(tempSetting))
-									{
-										compiler.Compile();
-										var appDomain = AppDomain.CreateDomain("OnTheFlyCompiler.Template", null, null);
-										var templateBase = appDomain.CreateInstanceFromAndUnwrap(compiler.ResultAssembly.Location, "OnTheFlyCompiler.Templates.Test") as OnTheFlyCompiler.Templates.TemplateBase;
-										if (templateBase != null)
-										{
-											templateBase.Main(null);
-										}
-									}
+									settings.Execute = true;
+
+									//using (Compiler compiler = new Compiler(tempSetting))
+									//{
+									//    compiler.Compile();
+									//    var appDomain = AppDomain.CreateDomain("OnTheFlyCompiler.Template", null, null);
+									//    var templateBase = appDomain.CreateInstanceFromAndUnwrap(compiler.ResultAssembly.Location, "OnTheFlyCompiler.Templates.Test") as OnTheFlyCompiler.Templates.TemplateBase;
+									//    if (templateBase != null)
+									//    {
+									//        templateBase.Main(null);
+									//    }
+									//}
 								}
 								catch (CompilerException)
 								{
