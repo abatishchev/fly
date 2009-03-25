@@ -1,17 +1,18 @@
 On-the-Fly .NET Compiler Project Changelog:
 
-2.0.2 (2009.03.25)
+2.0.3 (2009.03.25)
 
-[+] New options were added to XmlConfiguration: generate executable, generate dll, generate in memory, verbose level
 [+] New command line parameters were added: --dll indicates output assembly type to library (--exe to executable respectively, by default),
 --disk indicates output assembly creation location to temporary folder on hard drive (--memory in respectively, by default)
 
-[~] Errors and events refactoring
+2.0.2 (2009.02.22)
+
+[+] New options were added to XmlConfiguration: generate executable, generate dll, generate in memory, verbose level
+
+[~] Errors and Events refactoring
 
 2.0.1 (2008.12.24)
-
 [+] Public preview release as open source project
 
 1.0.1 (2007.06.03)
-
 [+] Version 1.0 released as core module of the CHLOE project in ICIE
