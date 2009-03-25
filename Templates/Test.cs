@@ -6,7 +6,7 @@ namespace OnTheFlyCompiler.Templates
 	{
 		public override void Main(string[] args)
 		{
-			//
+			// template code here
 		}
 	}
 }

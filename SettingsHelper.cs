@@ -87,6 +87,54 @@ namespace OnTheFlyCompiler
 								settings.ReferencedAssemblies.AddRange(arr);
 								break;
 							}
+						case "-s":
+							{
+								settings.Sources.Add(args[++i]);
+								break;
+							}
+						case "-t":
+							{
+								try
+								{
+									var templateFile = args[++i];
+									var tempSetting = new CompilerSettings();
+									tempSetting.GenerateExecutable = false;
+									tempSetting.GenerateInMemory = false;
+									tempSetting.ReferencedAssemblies.Add(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+									switch (templateFile)
+									{
+
+										case "test":
+											{
+												string source = File.ReadAllText(Path.Combine(Properties.Resources.TemplatesDirectory, "Test.cs"));
+												settings.Sources[0] = source.Replace("// template code here", settings.Sources[0]);
+												tempSetting.Language = "c#";
+												break;
+											}
+										default:
+											{
+												throw new ParameterOutOfRangeException("template", templateFile);
+											}
+									}
+
+									using (Compiler compiler = new Compiler(tempSetting))
+									{
+										compiler.Compile();
+										var appDomain = AppDomain.CreateDomain("OnTheFlyCompiler.Template", null, null);
+										var templateBase = appDomain.CreateInstanceFromAndUnwrap(compiler.ResultAssembly.Location, "OnTheFlyCompiler.Templates.Test") as OnTheFlyCompiler.Templates.TemplateBase;
+										if (templateBase != null)
+										{
+											templateBase.Main(null);
+										}
+									}
+								}
+								catch (CompilerException)
+								{
+									// skip this argument
+								}
+								break;
+							}
 						case "--threat":
 							{
 								settings.TreatWarningsAsErrors = true;
