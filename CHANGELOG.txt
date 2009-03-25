@@ -1,5 +1,9 @@
 On-the-Fly .NET Compiler Project Changelog:
 
+2.0.4 (-)
+
+[+] New command line parameters were added: -t indicates template file, -s escaped source string to add into it
+
 2.0.3 (2009.03.25)
 
 [+] New command line parameters were added: --dll indicates output assembly type to library (--exe to executable respectively, by default),

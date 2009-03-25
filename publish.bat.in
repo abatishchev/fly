@@ -17,7 +17,7 @@ set BIN=bin\Release\fly.exe
 
 set MAJOR=2
 set MINOR=0
-set BUILD=3
+set BUILD=4
 set REVISION=$WCREV$
 set VERSION=%MAJOR%.%MINOR%.%BUILD%.%REVISION%
 
