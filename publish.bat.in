@@ -9,10 +9,8 @@ set PROJECT-BIN=fly
 
 set FILES=Compiler.cs Errors.cs Events.cs Output.cs OutputItem.cs Settings.cs Properties\AssemblyInfo.cs
 set FILES-LIB=%PROJECT-LIB%.csproj
-set FILES-BIN=%PROJECT-BIN%.csproj Core.cs Program.cs SettingsHelper.cs fly.xml fly.xsd TemplateBase.cs Examples\*.*
+set FILES-BIN=%PROJECT-BIN%.csproj Core.cs Program.cs SettingsHelper.cs fly.xml fly.xsd Examples\*.*
 set DOCS=CHANGELOG.txt LICENSE.txt
-set RESOURCES=Properties\Resources.resx Properties\Resources.Designer.cs
-set TEMPLATES=Templates\Test.cs
 
 set LIB=bin\Release\libfly.dll
 set BIN=bin\Release\fly.exe
@@ -36,7 +34,7 @@ call winrar.exe -ep %CMD% %NAME% %LIB%
 echo put %NAME% >> %BATCH%
 
 set NAME=%PROJECT-BIN%-%VERSION%-source.zip
-call winrar.exe %CMD% %NAME% %FILES% %FILES-BIN% %DOCS% %RESOURCES% %TEMPLATES%
+call winrar.exe %CMD% %NAME% %FILES% %FILES-BIN% %DOCS%
 echo put %NAME% >> %BATCH%
 
 set NAME=%PROJECT-BIN%-%VERSION%-binary.zip
