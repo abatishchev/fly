@@ -1,12 +1,14 @@
 On-the-Fly .NET Compiler Project Changelog:
 
 2.0.4 (-)
-
+[+] Strong name assembly signing
 [+] New command line parameters were added: -t indicates template file, -s escaped source string to add into it
+[+] New command line flag '--appd' were added that forces new AppDomain creation and result assembly following execution into it's context
+[+] Xml Schema for XmlDescription was used and published
 
 2.0.3 (2009.03.25)
 
-[+] New command line parameters were added: --dll indicates output assembly type to library (--exe to executable respectively, by default),
+[+] New command line flags were added: --dll indicates output assembly type to library (--exe to executable respectively, by default),
 --disk indicates output assembly creation location to temporary folder on hard drive (--memory in respectively, by default)
 
 2.0.2 (2009.02.22)

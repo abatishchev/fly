@@ -16,18 +16,20 @@ namespace OnTheFlyCompiler
 	{
 		internal static CompilerSettings Parse(string[] args)
 		{
-			//TODO:
-			//var argList = new List<string>(args.Length);
-			//argList.AddRange(args);
 			var settings = new CompilerSettings();
 			for (int i = 0; i < args.Length; i++)
 			{
-				var name = args[i];
-				//TODO: var next = args[++i];
+				string name = args[i];
 				try
 				{
 					switch (name)
 					{
+						case "--appd":
+						case "--appdomain":
+							{
+								settings.AppDomainCreation = true;
+								break;
+							}
 						case "--debug":
 							{
 								settings.IncludeDebugInformation = true;
@@ -51,6 +53,10 @@ namespace OnTheFlyCompiler
 						case "--exec":
 							{
 								settings.Execute = true;
+								break;
+							}
+						case "-a":
+							{
 								break;
 							}
 						case "-f":
@@ -250,6 +256,20 @@ namespace OnTheFlyCompiler
 				settings.WarningLevel = Convert.ToInt32(atrWarning.Value);
 			}
 
+			var nodeMethod = nodeSettings.SelectSingleNode("method");
+
+			var atrPath = nodeMethod.Attributes["path"];
+			if (atrPath != null)
+			{
+				settings.MethodPath = atrPath.Value;
+			}
+
+			var atrName = nodeMethod.Attributes["name"];
+			if (atrName != null)
+			{
+				settings.MethodName = atrName.Value;
+			}
+
 			var nodeOutput = nodeSettings.SelectSingleNode("output");
 
 			var atrType = nodeOutput.Attributes["type"];
@@ -282,18 +302,24 @@ namespace OnTheFlyCompiler
 				settings.Execute = Boolean.Parse(atrExecute.Value);
 			}
 
-			var nodeMethod = nodeSettings.SelectSingleNode("method");
+			var nodeAppDomain = nodeSettings.SelectSingleNode("appDomain");
 
-			var atrPath = nodeMethod.Attributes["path"];
-			if (atrPath != null)
+			bool create = false;
+
+			var atrAppDomainCreation = nodeAppDomain.Attributes["create"];
+			if (atrAppDomainCreation != null)
 			{
-				settings.MethodPath = atrPath.Value;
+				Boolean.TryParse(atrAppDomainCreation.Value, out create);
+				settings.AppDomainCreation = create;
 			}
 
-			var atrName = nodeMethod.Attributes["name"];
-			if (atrName != null)
+			if (create)
 			{
-				settings.MethodName = atrName.Value;
+				var atrAppDomainName = nodeAppDomain.Attributes["name"];
+				if (atrAppDomainName != null)
+				{
+					settings.AppDomainName = atrAppDomainName.Value;
+				}
 			}
 
 			foreach (XmlNode nodeRef in nodeSettings.SelectNodes("references/item"))

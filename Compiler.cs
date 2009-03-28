@@ -59,58 +59,59 @@ namespace OnTheFlyCompiler
 			GC.SuppressFinalize(this);
 		}
 
-		public void Dispose(bool disposing)
+		protected virtual void Dispose(bool disposing)
 		{
 			if (disposing)
 			{
 				// free managed resources
 				this.Settings.TempFiles.Delete();
+				this.provider.Dispose();
 			}
 			// free native resources
 		}
 
 		public object ExecuteStatic()
 		{
-			this.Output.AddInformation(String.Format("Executing {0}.{1}", this.Settings.MethodPath, this.Settings.MethodName));
+			this.Output.AddInformation(String.Format(CultureInfo.CurrentCulture, "Executing {0}.{1}", this.Settings.MethodPath, this.Settings.MethodName));
 			try
 			{
 				if (this.Settings.BindingFlag == BindingFlags.Default)
 				{
 					this.Settings.BindingFlag = BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static;
 				}
-				switch (this.Settings.AppDomainType)
+
+				Type type;
+				if (Settings.AppDomainCreation)
 				{
-					case AppDomainType.Own:
-						{
-							return type.InvokeMember(this.Settings.MethodName, this.Settings.BindingFlag, null, null, null, CultureInfo.CurrentCulture);
-						}
-					case AppDomainType.New:
-						{
-							var appDomain = AppDomain.CreateDomain("OnTheFlyCompiler", null, null);
-							this.ResultObject = appDomain.CreateInstanceFromAndUnwrap(this.ResultAssembly.Location, "OnTheFlyCompiler.Templates.Test") as CompilerResultObject;
-							if (this.ResultObject != null)
-							{
-								return this.ResultObject.GetType().InvokeMember(this.Settings.MethodName, this.Settings.BindingFlag, null, null, null, CultureInfo.CurrentCulture);
-							}
-							else
-							{
-								return null;
-							}
-						}
+					var appDomain = AppDomain.CreateDomain("OnTheFlyCompiler", null, null);
+					this.ResultObject = appDomain.CreateInstanceFromAndUnwrap(this.ResultAssembly.Location, "OnTheFlyCompiler.Templates.Test") as CompilerResultObject;
+					if (this.ResultObject != null)
+					{
+						type = this.ResultObject.GetType();
+					}
+					else
+					{
+						return null;
+					}
 				}
+				else
+				{
+					type = this.ResultAssembly.GetType(this.Settings.MethodPath);
+				}
+				return type.InvokeMember(this.Settings.MethodName, this.Settings.BindingFlag, null, null, null, CultureInfo.CurrentCulture);
 			}
 			catch (Exception ex)
 			{
 				this.Output.AddInformation(new ExecutionFailureException(ex).Message);
-				this.Output.AddError(String.Format("Error: {0}", ex.Message));
+				this.Output.AddError(String.Format(CultureInfo.CurrentCulture, "Error: {0}", ex.Message));
 				return null;
 			}
 		}
 
 		public object ExecuteStatic<T>()
 		{
-			//return (T)ExecuteStatic();
-			return ExecuteStatic() as T;
+			return (T)ExecuteStatic();
+			//return ExecuteStatic() as T;
 		}
 
 		public void Compile()

@@ -30,14 +30,6 @@ namespace OnTheFlyCompiler
 			}
 		}
 
-		internal static string ApplicationName
-		{
-			get
-			{
-				return Application.ProductName;
-			}
-		}
-
 		internal static string ApplicationTitle
 		{
 			get

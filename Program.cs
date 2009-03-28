@@ -26,7 +26,7 @@ namespace OnTheFlyCompiler
 					Core.Compiler.Compile();
 					if (Core.Compiler.Settings.Execute)
 					{
-						Core.Compiler.Execute();
+						Core.Compiler.ExecuteStatic();
 					}
 				}
 			}

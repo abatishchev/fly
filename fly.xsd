@@ -18,12 +18,6 @@
 			<xs:enumeration value="dll" />
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:simpleType name="appDomainType">
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="own" />
-			<xs:enumeration value="new" />
-		</xs:restriction>
-	</xs:simpleType>
 	<xs:element name="settings">
 		<xs:complexType>
 			<xs:sequence>
@@ -49,8 +43,8 @@
 				</xs:element>
 				<xs:element name="appDomain">
 					<xs:complexType>
+						<xs:attribute name="create" type="xs:boolean" use="required" />
 						<xs:attribute name="name" type="xs:string" use="optional" />
-						<xs:attribute name="type" type="appDomainType" use="required" />
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="references">

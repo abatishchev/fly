@@ -9,6 +9,7 @@ namespace OnTheFlyCompiler.Settings
 	public class CompilerSettings : System.CodeDom.Compiler.CompilerParameters
 	{
 		private int verboseLevel;
+		private string appDomainName;
 
 		#region Constructors
 		public CompilerSettings()
@@ -24,12 +25,27 @@ namespace OnTheFlyCompiler.Settings
 		}
 		#endregion
 
-		#region Fields
-		public static int MaxVerboseLevel = 2;
+		#region Constants
+		public const int MaxVerboseLevel = 2;
 		#endregion
 
 		#region Properties
 		public BindingFlags BindingFlag { get; set; }
+
+		public bool AppDomainCreation { get; set; }
+
+		public string AppDomainName
+		{
+			get
+			{
+				return this.appDomainName;
+			}
+			set
+			{
+				this.appDomainName = value;
+				this.AppDomainCreation = !String.IsNullOrEmpty(value);
+			}
+		}
 
 		public bool Execute { get; set; }
 
