@@ -11,7 +11,7 @@ using OnTheFlyCompiler.Settings;
 
 namespace OnTheFlyCompiler
 {
-	abstract class CompilerSettingsHelper
+	abstract class CompilerSettingsParser
 	{
 		internal static CompilerSettings Parse(string[] args)
 		{

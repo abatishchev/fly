@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2007-2009 Alexander M. Batishchev aka Godfather (abatishchev at gmail.com)
+﻿// Copyright (C) 2008-2009 Alexander M. Batishchev aka Godfather (abatishchev at gmail.com)
 
 using System;
 using System.Globalization;

@@ -20,7 +20,7 @@ namespace OnTheFlyCompiler
 			}
 			try
 			{
-				Core.Init(CompilerSettingsHelper.Parse(args));
+				Core.Init(CompilerSettingsParser.Parse(args));
 				using (Core.Compiler)
 				{
 					Core.Compiler.Compile();

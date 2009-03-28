@@ -9,7 +9,7 @@ set PROJECT-BIN=fly
 
 set FILES=Compiler.cs Errors.cs Events.cs Output.cs OutputItem.cs Settings.cs Properties\AssemblyInfo.cs
 set FILES-LIB=%PROJECT-LIB%.csproj
-set FILES-BIN=%PROJECT-BIN%.csproj Core.cs Program.cs SettingsHelper.cs fly.xml fly.xsd
+set FILES-BIN=%PROJECT-BIN%.csproj Core.cs Program.cs SettingsParses.cs fly.xml fly.xsd
 
 set DOCS=CHANGELOG.txt LICENSE.txt
 set EXAMPLES=Examples\*.*
