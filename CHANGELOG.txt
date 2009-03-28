@@ -5,6 +5,7 @@ On-the-Fly .NET Compiler Project Changelog:
 [+] New command line parameters were added: -t indicates template file, -s escaped source string to add into it
 [+] New command line flag '--appd' were added that forces new AppDomain creation and result assembly following execution into it's context
 [+] Xml Schema for XmlDescription was used and published
+[+] Generic classes support on execution added
 
 2.0.3 (2009.03.25)
 
