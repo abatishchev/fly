@@ -96,6 +96,8 @@ namespace OnTheFlyCompiler
 							{
 								try
 								{
+									settings.Execute = true;
+									settings.MethodPath = "OnTheFlyCompiler.Templates";
 									settings.ReferencedAssemblies.Add(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
 									var templateFile = args[++i];
@@ -105,16 +107,15 @@ namespace OnTheFlyCompiler
 										case "test":
 											{
 												settings.Language = "c#";
-												settings.MethodPath = "OnTheFlyCompiler.Templates";
 												settings.MethodName = "Main";
-												string source = File.ReadAllText(Path.Combine(Properties.Resources.TemplatesDirectory, "Test.cs"));
+												string source = File.ReadAllText(Path.Combine(Properties.Resources.TemplateDirectory, "Test.cs"));
 												try
 												{
-													settings.Sources[0] = source.Replace("// template code here", settings.Sources[0]);
+													settings.Sources[0] = source.Replace(Properties.Resources.TemplateMarkerSharp, settings.Sources[0]);
 												}
-												catch (IndexOutOfRangeException ex)
+												catch (IndexOutOfRangeException)
 												{
-													// TODO
+													throw new TemplateException("No source code was loaded");
 												}
 												break;
 											}
@@ -123,8 +124,6 @@ namespace OnTheFlyCompiler
 												throw new ParameterOutOfRangeException("template", templateFile);
 											}
 									}
-
-									settings.Execute = true;
 								}
 								catch (CompilerException)
 								{

@@ -63,9 +63,18 @@ namespace OnTheFlyCompiler.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Templates.
         /// </summary>
-        internal static string TemplatesDirectory {
+        internal static string TemplateDirectory {
             get {
-                return ResourceManager.GetString("TemplatesDirectory", resourceCulture);
+                return ResourceManager.GetString("TemplateDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to // template marker.
+        /// </summary>
+        internal static string TemplateMarkerSharp {
+            get {
+                return ResourceManager.GetString("TemplateMarkerSharp", resourceCulture);
             }
         }
     }

@@ -76,7 +76,7 @@ namespace OnTheFlyCompiler
 			{
 				var appDomain = AppDomain.CreateDomain("OnTheFlyCompiler", null, null);
 				var instance = appDomain.CreateInstanceFromAndUnwrap(this.ResultAssembly.Location, "OnTheFlyCompiler.Templates.Test");
-				if(intance != null)
+				if (instance != null)
 				{
 					var flags = BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static;
 					this.ResultObject = instance.GetType().InvokeMember(this.Settings.MethodName, flags, null, null, null, CultureInfo.CurrentCulture);

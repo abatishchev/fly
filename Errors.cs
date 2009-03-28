@@ -94,4 +94,10 @@ namespace OnTheFlyCompiler.Errors
 			: base(String.Format(CultureInfo.CurrentCulture, "Unknown parameter was specified: '{0}'", name), name) { }
 	}
 	#endregion
+
+	[Serializable]
+	public class TemplateException : Exception
+	{
+		public TemplateException(string message) : base(message) { }
+	}
 }
