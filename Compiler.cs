@@ -49,7 +49,7 @@ namespace OnTheFlyCompiler
 
 		public Assembly ResultAssembly { get; private set; }
 
-		public object ResultObject { get; private set; }
+		public CompilerResultObject ResultObject { get; private set; }
 		#endregion
 
 		#region Methods
@@ -69,26 +69,48 @@ namespace OnTheFlyCompiler
 			// free native resources
 		}
 
-		public void Execute()
+		public object ExecuteStatic()
 		{
 			this.Output.AddInformation(String.Format("Executing {0}.{1}", this.Settings.MethodPath, this.Settings.MethodName));
 			try
 			{
-				var appDomain = AppDomain.CreateDomain("OnTheFlyCompiler", null, null);
-				var instance = appDomain.CreateInstanceFromAndUnwrap(this.ResultAssembly.Location, "OnTheFlyCompiler.Templates.Test");
-				if (instance != null)
+				if (this.Settings.BindingFlag == BindingFlags.Default)
 				{
-					var flags = BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static;
-					this.ResultObject = instance.GetType().InvokeMember(this.Settings.MethodName, flags, null, null, null, CultureInfo.CurrentCulture);
+					this.Settings.BindingFlag = BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static;
 				}
-
-				//this.ResultObject = type.InvokeMember(this.Settings.MethodName, flags, null, null, null, CultureInfo.CurrentCulture);
+				switch (this.Settings.AppDomainType)
+				{
+					case AppDomainType.Own:
+						{
+							return type.InvokeMember(this.Settings.MethodName, this.Settings.BindingFlag, null, null, null, CultureInfo.CurrentCulture);
+						}
+					case AppDomainType.New:
+						{
+							var appDomain = AppDomain.CreateDomain("OnTheFlyCompiler", null, null);
+							this.ResultObject = appDomain.CreateInstanceFromAndUnwrap(this.ResultAssembly.Location, "OnTheFlyCompiler.Templates.Test") as CompilerResultObject;
+							if (this.ResultObject != null)
+							{
+								return this.ResultObject.GetType().InvokeMember(this.Settings.MethodName, this.Settings.BindingFlag, null, null, null, CultureInfo.CurrentCulture);
+							}
+							else
+							{
+								return null;
+							}
+						}
+				}
 			}
 			catch (Exception ex)
 			{
 				this.Output.AddInformation(new ExecutionFailureException(ex).Message);
 				this.Output.AddError(String.Format("Error: {0}", ex.Message));
+				return null;
 			}
+		}
+
+		public object ExecuteStatic<T>()
+		{
+			//return (T)ExecuteStatic();
+			return ExecuteStatic() as T;
 		}
 
 		public void Compile()

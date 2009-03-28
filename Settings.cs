@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Specialized;
+using System.Reflection;
 
 namespace OnTheFlyCompiler.Settings
 {
@@ -28,6 +29,8 @@ namespace OnTheFlyCompiler.Settings
 		#endregion
 
 		#region Properties
+		public BindingFlags BindingFlag { get; set; }
+
 		public bool Execute { get; set; }
 
 		public string Language { get; set; }

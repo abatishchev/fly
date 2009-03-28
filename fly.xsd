@@ -2,20 +2,26 @@
 <xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 	<xs:simpleType name="warningLevel">
 		<xs:restriction base="xs:integer">
-			<xs:minInclusive value="0"/>
-			<xs:maxInclusive value="3"/>
+			<xs:minInclusive value="0" />
+			<xs:maxInclusive value="3" />
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="verboseLevel">
 		<xs:restriction base="xs:integer">
-			<xs:minInclusive value="0"/>
-			<xs:maxInclusive value="2"/>
+			<xs:minInclusive value="0 " />
+			<xs:maxInclusive value="2" />
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="outputType">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="exe"/>
-			<xs:enumeration value="dll"/>
+			<xs:enumeration value="exe" />
+			<xs:enumeration value="dll" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="appDomainType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="own" />
+			<xs:enumeration value="new" />
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:element name="settings">
@@ -39,6 +45,12 @@
 						<xs:attribute name="type" type="outputType" use="required" />
 						<xs:attribute name="memory" type="xs:boolean" use="optional" />
 						<xs:attribute name="execute" type="xs:boolean" use="optional" />
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="appDomain">
+					<xs:complexType>
+						<xs:attribute name="name" type="xs:string" use="optional" />
+						<xs:attribute name="type" type="appDomainType" use="required" />
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="references">

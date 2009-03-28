@@ -3,6 +3,7 @@
 	<compiler language="csharp" warning="3" verbose="2" />
 	<method path="OnTheFlyCompiler.Examples.Test" name="Main" />
 	<output type="exe" memory="true" execute="true" />
+	<appDomain type="own" />
 	<references>
 		<item>System.dll</item>
 		<item>System.Windows.Forms.dll</item>

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Reflection;
 using System.Xml;
 
 using OnTheFlyCompiler.Errors;
@@ -96,7 +97,9 @@ namespace OnTheFlyCompiler
 							{
 								try
 								{
-									settings.Execute = true;
+									settings.BindingFlag = BindingFlags.InvokeMethod | BindingFlags.Public;
+									settings.GenerateExecutable = false;
+									settings.GenerateInMemory = false;
 									settings.MethodPath = "OnTheFlyCompiler.Templates";
 									settings.ReferencedAssemblies.Add(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
