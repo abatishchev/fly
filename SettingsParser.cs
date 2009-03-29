@@ -104,16 +104,17 @@ namespace OnTheFlyCompiler
 								settings.BindingFlag = BindingFlags.InvokeMethod | BindingFlags.Public;
 								settings.GenerateExecutable = false;
 								settings.GenerateInMemory = false;
-								settings.MethodPath = "OnTheFlyCompiler.Templates.Test";
 								settings.ReferencedAssemblies.Add(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
 								settings.Language = "c#";
+								settings.MethodPath = "OnTheFlyCompiler.Templates.Test";
 								settings.MethodName = "Main";
+
 								var templateFile = args[++i];
 								try
 								{
 									string source = File.ReadAllText(templateFile);
-									settings.Sources[0] = source.Replace(Properties.Resources.TemplateMarkerSharp, settings.Sources[0]);
+									settings.Sources[0] = source.Replace(Properties.Resources.TemplateSourceCodeSharpMarker, settings.Sources[0]);
 								}
 								catch (IOException)
 								{

@@ -96,8 +96,6 @@ namespace OnTheFlyCompiler
 					{
 						this.Settings.BindingFlag = BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static;
 					}
-					var mm = type.GetMethods();
-					type.GetConstructor(new Type[] { }).Invoke(null);
 					return type.InvokeMember(this.Settings.MethodName, this.Settings.BindingFlag, null, null, null, CultureInfo.CurrentCulture);
 				}
 				else
