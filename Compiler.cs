@@ -72,33 +72,38 @@ namespace OnTheFlyCompiler
 
 		public object ExecuteStatic()
 		{
-			this.Output.AddInformation(String.Format(CultureInfo.CurrentCulture, "Executing {0}.{1}", this.Settings.MethodPath, this.Settings.MethodName));
+			var fullPath = String.Format(CultureInfo.CurrentCulture, "{0}.{1}", this.Settings.MethodPath, this.Settings.MethodName);
+			this.Output.AddInformation(String.Format("Executing {0}", fullPath));
 			try
 			{
-				if (this.Settings.BindingFlag == BindingFlags.Default)
-				{
-					this.Settings.BindingFlag = BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static;
-				}
-
-				Type type;
+				Type type = null;
 				if (Settings.AppDomainCreation)
 				{
-					var appDomain = AppDomain.CreateDomain("OnTheFlyCompiler", null, null);
-					this.ResultObject = appDomain.CreateInstanceFromAndUnwrap(this.ResultAssembly.Location, "OnTheFlyCompiler.Templates.Test") as CompilerResultObject;
+					var appDomain = AppDomain.CreateDomain(this.Settings.AppDomainName != null ? this.Settings.AppDomainName : "OnTheFlyCompiler", null, null);
+					this.ResultObject = appDomain.CreateInstanceFromAndUnwrap(this.ResultAssembly.Location, fullPath) as CompilerResultObject;
 					if (this.ResultObject != null)
 					{
 						type = this.ResultObject.GetType();
-					}
-					else
-					{
-						return null;
 					}
 				}
 				else
 				{
 					type = this.ResultAssembly.GetType(this.Settings.MethodPath);
 				}
-				return type.InvokeMember(this.Settings.MethodName, this.Settings.BindingFlag, null, null, null, CultureInfo.CurrentCulture);
+				if (type != null)
+				{
+					if (this.Settings.BindingFlag == BindingFlags.Default)
+					{
+						this.Settings.BindingFlag = BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static;
+					}
+					var mm = type.GetMethods();
+					type.GetConstructor(new Type[] { }).Invoke(null);
+					return type.InvokeMember(this.Settings.MethodName, this.Settings.BindingFlag, null, null, null, CultureInfo.CurrentCulture);
+				}
+				else
+				{
+					throw new ExecutionFailureException();
+				}
 			}
 			catch (Exception ex)
 			{
@@ -108,10 +113,9 @@ namespace OnTheFlyCompiler
 			}
 		}
 
-		public object ExecuteStatic<T>()
+		public object ExecuteStatic<T>() where T : class
 		{
-			return (T)ExecuteStatic();
-			//return ExecuteStatic() as T;
+			return ExecuteStatic() as T;
 		}
 
 		public void Compile()

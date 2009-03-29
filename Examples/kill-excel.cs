@@ -2,7 +2,7 @@ using System;
 
 namespace OnTheFlyCompiler.Examples
 {
-	class Test
+	public class Test
 	{
 		public static void Main()
 		{

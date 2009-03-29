@@ -106,7 +106,7 @@ namespace OnTheFlyCompiler
 									settings.BindingFlag = BindingFlags.InvokeMethod | BindingFlags.Public;
 									settings.GenerateExecutable = false;
 									settings.GenerateInMemory = false;
-									settings.MethodPath = "OnTheFlyCompiler.Templates";
+									settings.MethodPath = "OnTheFlyCompiler.Templates.Test";
 									settings.ReferencedAssemblies.Add(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
 									var templateFile = args[++i];

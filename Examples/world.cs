@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace OnTheFlyCompiler.Examples
 {
-	class Test
+	public class Test
 	{
 		public static void Main()
 		{
