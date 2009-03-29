@@ -1,6 +1,7 @@
 ﻿// Copyright (C) 2009 Alexander M. Batishchev aka Godfather (abatishchev at gmail.com)
 
 using System;
+// references marker
 
 namespace OnTheFlyCompiler.Templates
 {
@@ -8,7 +9,7 @@ namespace OnTheFlyCompiler.Templates
 	{
 		public override void Main(string[] args)
 		{
-			//templateMarker
+			// source code marker
 		}
 	}
 }

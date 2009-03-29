@@ -116,12 +116,12 @@ namespace OnTheFlyCompiler
 			return ExecuteStatic() as T;
 		}
 
-		public void Compile()
+		public Assembly Compile()
 		{
-			Compile(this.Settings.Sources);
+			return Compile(this.Settings.Sources);
 		}
 
-		public void Compile(System.Collections.ICollection sources)
+		public Assembly Compile(System.Collections.ICollection sources)
 		{
 			if (this.Settings == null)
 			{
@@ -149,6 +149,7 @@ namespace OnTheFlyCompiler
 				this.ResultAssembly = result.CompiledAssembly;
 				this.Output.AddInformation(String.Format(CultureInfo.CurrentCulture, "Build succeeded at {0}", DateTime.Now));
 				OnBuildSuccess(new BuildSuccessEventArgs(result.CompiledAssembly));
+				return this.ResultAssembly;
 			}
 			else
 			{
@@ -158,6 +159,7 @@ namespace OnTheFlyCompiler
 				}
 				this.Output.AddInformation(String.Format(CultureInfo.CurrentCulture, "Build failed at {0} -- {1} errors", DateTime.Now, result.Errors.Count));
 				OnBuildFailure(new BuildFailureEventArgs(result.Errors.Count));
+				return null;
 			}
 		}
 
