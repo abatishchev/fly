@@ -101,20 +101,88 @@ namespace OnTheFlyCompiler
 							}
 						case "-t":
 							{
-								settings.BindingFlag = BindingFlags.InvokeMethod | BindingFlags.Public;
-								settings.GenerateExecutable = false;
-								settings.GenerateInMemory = false;
-								settings.ReferencedAssemblies.Add(System.Reflection.Assembly.GetExecutingAssembly().Location);
+								//settings.BindingFlag = BindingFlags.InvokeMethod | BindingFlags.Public;
+								//settings.GenerateExecutable = false;
+								//settings.GenerateInMemory = false;
+								//settings.ReferencedAssemblies.Add(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
-								settings.Language = "c#";
-								settings.MethodPath = "OnTheFlyCompiler.Templates.Test";
-								settings.MethodName = "Main";
+								//settings.Language = "c#";
+								//settings.MethodPath = "OnTheFlyCompiler.Templates.Test";
+								//settings.MethodName = "Main";
+
+								//var templateFile = args[++i];
+								//try
+								//{
+								//    var templateSource = File.ReadAllText(templateFile, System.Text.Encoding.Unicode);
+								//    var currentSouce = settings.Sources[0];
+
+								//    var refSb = new System.Text.StringBuilder(settings.ReferencedAssemblies.Count);
+								//    foreach (var r in settings.ReferencedAssemblies)
+								//    {
+								//        settings.ReferencedAssemblies.Add(r);
+
+								//        var newRef = r;
+								//        newRef = newRef.Replace(".dll", String.Empty);
+								//        newRef = newRef.Replace(".exe", String.Empty);
+								//        refSb.AppendLine(String.Format(CultureInfo.CurrentCulture, "using {0};", newRef));
+								//    }
+
+								//    templateSource = templateSource.Replace(Properties.Resources.TemplateReferencesSharpMarker, refSb.ToString());
+								//    templateSource = templateSource.Replace(Properties.Resources.TemplateSourceCodeSharpMarker, currentSouce);
+
+								//    settings.Sources = new System.Collections.Specialized.StringCollection { templateSource };
+								//}
+								//catch (IOException)
+								//{
+								//    throw new ParameterOutOfRangeException("template", templateFile);
+								//}
+								//catch (IndexOutOfRangeException)
+								//{
+								//    throw new TemplateException("No source code was loaded");
+								//}
+
+								var templateSettings = new CompilerSettings();
+								templateSettings.BindingFlag = BindingFlags.InvokeMethod | BindingFlags.Public;
+								templateSettings.GenerateExecutable = false;
+								templateSettings.GenerateInMemory = false;
+								templateSettings.ReferencedAssemblies.Add(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+								templateSettings.Language = "c#";
+								templateSettings.MethodPath = "OnTheFlyCompiler.Templates.Test";
+								templateSettings.MethodName = "Main";
 
 								var templateFile = args[++i];
 								try
 								{
-									string source = File.ReadAllText(templateFile);
-									settings.Sources[0] = source.Replace(Properties.Resources.TemplateSourceCodeSharpMarker, settings.Sources[0]);
+									var templateSource = File.ReadAllText(templateFile, System.Text.Encoding.Unicode);
+									var currentSouce = settings.Sources[0];
+
+									var refSb = new System.Text.StringBuilder(settings.ReferencedAssemblies.Count);
+									foreach (var r in settings.ReferencedAssemblies)
+									{
+										templateSettings.ReferencedAssemblies.Add(r);
+
+										var newRef = r;
+										newRef = newRef.Replace(".dll", String.Empty);
+										newRef = newRef.Replace(".exe", String.Empty);
+										refSb.AppendLine(String.Format(CultureInfo.CurrentCulture, "using {0};", newRef));
+									}
+
+									templateSource = templateSource.Replace(Properties.Resources.TemplateReferencesSharpMarker, refSb.ToString());
+									templateSource = templateSource.Replace(Properties.Resources.TemplateSourceCodeSharpMarker, currentSouce);
+
+									templateSettings.Sources = new System.Collections.Specialized.StringCollection { templateSource };
+
+									using (Compiler compiler = new Compiler(templateSettings))
+									{
+										var asm = compiler.Compile();
+										if (asm != null)
+										{
+											var t = asm.GetType(templateSettings.MethodPath);
+											var obj = Activator.CreateInstance<OnTheFlyCompiler.Templates.TemplateBase>();
+											obj.GetType().InvokeMember("Main", BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static, null, null, null);
+										}
+									}
 								}
 								catch (IOException)
 								{
@@ -124,6 +192,7 @@ namespace OnTheFlyCompiler
 								{
 									throw new TemplateException("No source code was loaded");
 								}
+
 								break;
 							}
 						case "--threat":
