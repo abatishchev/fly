@@ -2,7 +2,7 @@
 <settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://fly.sf.net fly.xsd">
 	<compiler language="csharp" warning="3" verbose="2" />
 	<method path="OnTheFlyCompiler.Examples.Test" name="Main" />
-	<output type="exe" memory="true" execute="true" />
+	<output type="dll" memory="false" execute="true" />
 	<appDomain create="false" />
 	<references>
 		<item>System.dll</item>

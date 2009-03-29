@@ -101,42 +101,27 @@ namespace OnTheFlyCompiler
 							}
 						case "-t":
 							{
+								settings.BindingFlag = BindingFlags.InvokeMethod | BindingFlags.Public;
+								settings.GenerateExecutable = false;
+								settings.GenerateInMemory = false;
+								settings.MethodPath = "OnTheFlyCompiler.Templates.Test";
+								settings.ReferencedAssemblies.Add(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+								settings.Language = "c#";
+								settings.MethodName = "Main";
+								var templateFile = args[++i];
 								try
 								{
-									settings.BindingFlag = BindingFlags.InvokeMethod | BindingFlags.Public;
-									settings.GenerateExecutable = false;
-									settings.GenerateInMemory = false;
-									settings.MethodPath = "OnTheFlyCompiler.Templates.Test";
-									settings.ReferencedAssemblies.Add(System.Reflection.Assembly.GetExecutingAssembly().Location);
-
-									var templateFile = args[++i];
-									switch (templateFile)
-									{
-
-										case "test":
-											{
-												settings.Language = "c#";
-												settings.MethodName = "Main";
-												string source = File.ReadAllText(Path.Combine(Properties.Resources.TemplateDirectory, "Test.cs"));
-												try
-												{
-													settings.Sources[0] = source.Replace(Properties.Resources.TemplateMarkerSharp, settings.Sources[0]);
-												}
-												catch (IndexOutOfRangeException)
-												{
-													throw new TemplateException("No source code was loaded");
-												}
-												break;
-											}
-										default:
-											{
-												throw new ParameterOutOfRangeException("template", templateFile);
-											}
-									}
+									string source = File.ReadAllText(templateFile);
+									settings.Sources[0] = source.Replace(Properties.Resources.TemplateMarkerSharp, settings.Sources[0]);
 								}
-								catch (CompilerException)
+								catch (IOException)
 								{
-									// skip this argument
+									throw new ParameterOutOfRangeException("template", templateFile);
+								}
+								catch (IndexOutOfRangeException)
+								{
+									throw new TemplateException("No source code was loaded");
 								}
 								break;
 							}
