@@ -18,12 +18,19 @@ namespace OnTheFlyCompiler
 		{
 			get
 			{
-				if (String.IsNullOrEmpty(copyright))
+				if (copyright == null)
 				{
-					var customAttributes = Assembly.GetEntryAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
-					if (customAttributes != null && customAttributes.Length > 0)
+					try
 					{
-						copyright = ((AssemblyCopyrightAttribute)customAttributes[0]).Copyright;
+						var customAttributes = Assembly.GetEntryAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
+						if (customAttributes != null && customAttributes.Length > 0)
+						{
+							copyright = ((AssemblyCopyrightAttribute)customAttributes[0]).Copyright;
+						}
+					}
+					catch
+					{
+						copyright = String.Empty;
 					}
 				}
 				return copyright;
@@ -34,12 +41,19 @@ namespace OnTheFlyCompiler
 		{
 			get
 			{
-				if (String.IsNullOrEmpty(title))
+				if (title == null)
 				{
-					var customAttributes = Assembly.GetEntryAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
-					if (customAttributes != null && customAttributes.Length > 0)
+					try
 					{
-						title = ((AssemblyTitleAttribute)customAttributes[0]).Title;
+						var customAttributes = Assembly.GetEntryAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
+						if (customAttributes != null && customAttributes.Length > 0)
+						{
+							title = ((AssemblyTitleAttribute)customAttributes[0]).Title;
+						}
+					}
+					catch
+					{
+						title = String.Empty;
 					}
 				}
 				return title;
