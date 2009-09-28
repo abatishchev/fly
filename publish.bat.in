@@ -1,8 +1,8 @@
 rem Copyright (C) 2007-2009 Alexander M. Batishchev aka Godfather (abatishchev at gmail.com)
 
-set PATH=%PATH%;%PROGRAMFILES%\WinRar;%PROGRAMFILES%\PuTTY
+set PATH=%PATH%;%WINDIR%\Microsoft.NET\Framework\v3.5;%PROGRAMFILES%\WinRar
 
-set CMD=A -afzip -o+ -s -ibck -t
+set RARCMD=A -afzip -o+ -s -ibck -t
 
 set PROJECT-LIB=libfly
 set PROJECT-BIN=fly
@@ -25,34 +25,24 @@ set BUILD=4
 set REVISION=$WCREV$
 set VERSION=%MAJOR%.%MINOR%.%BUILD%.%REVISION%
 
-set BATCH=batch.txt
-del %BATCH%
-echo cd uploads >> %BATCH%
+set DIST=..\release
+mkdir %DIST%
+
+msbuild /nologo OnTheFlyCompiler.sln /t:Clean /p:Configuration=Release
+msbuild /nologo OnTheFlyCompiler.sln /t:Build /p:Configuration=Release
 
 set NAME=%PROJECT-LIB%-%VERSION%-source.zip
-call winrar.exe %CMD% %NAME% %FILES% %FILES-LIB% %DOCS%
-echo put %NAME% >> %BATCH%
+call winrar.exe %RARCMD% %NAME% %FILES% %FILES-LIB% %DOCS%
+move /y %NAME% %DIST%
 
 set NAME=%PROJECT-LIB%-%VERSION%-binary.zip
-call winrar.exe -ep %CMD% %NAME% %LIB%
-echo put %NAME% >> %BATCH%
+call winrar.exe -ep %RARCMD% %NAME% %LIB%
+move /y %NAME% %DIST%
 
 set NAME=%PROJECT-BIN%-%VERSION%-source.zip
-call winrar.exe %CMD% %NAME% %FILES% %FILES-BIN% %DOCS% %EXAMPLES% %RESOURCES% %TEMPLATES%
-echo put %NAME% >> %BATCH%
+call winrar.exe %RARCMD% %NAME% %FILES% %FILES-BIN% %DOCS% %EXAMPLES% %RESOURCES% %TEMPLATES%
+move /y %NAME% %DIST%
 
 set NAME=%PROJECT-BIN%-%VERSION%-binary.zip
-call winrar.exe -ep %CMD% %NAME% %BIN%
-echo put %NAME% >> %BATCH%
-
-call psftp.exe -b %BATCH% abatishchev@frs.sourceforge.net
-
-del %BATCH%
-
-set DIST=..\release
-
-mkdir %DIST%
-move /y %PROJECT-LIB%-%VERSION%-source.zip %DIST%
-move /y %PROJECT-LIB%-%VERSION%-binary.zip %DIST%
-move /y %PROJECT-BIN%-%VERSION%-source.zip %DIST%
-move /y %PROJECT-BIN%-%VERSION%-binary.zip %DIST%
+call winrar.exe -ep %RARCMD% %NAME% %BIN%
+move /y %NAME% %DIST%
