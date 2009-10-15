@@ -10,11 +10,8 @@ namespace OnTheFlyCompiler
 {
 	static class Core
 	{
-		private static string copyright, title;
-		private static Compiler compiler;
-
 		#region Properties
-		internal static string ApplicationCopyright
+		public static string ApplicationCopyright
 		{
 			get
 			{
@@ -22,11 +19,10 @@ namespace OnTheFlyCompiler
 				{
 					try
 					{
-						var customAttributes = Assembly.GetEntryAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
-						if (customAttributes != null && customAttributes.Length > 0)
-						{
-							copyright = ((AssemblyCopyrightAttribute)customAttributes[0]).Copyright;
-						}
+						copyright = ((AssemblyCopyrightAttribute)Assembly
+							.GetEntryAssembly()
+							.GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false)[0])
+								.Copyright;
 					}
 					catch
 					{
@@ -37,7 +33,23 @@ namespace OnTheFlyCompiler
 			}
 		}
 
-		internal static string ApplicationTitle
+		public static string ApplicationName
+		{
+			get
+			{
+				return System.Windows.Forms.Application.ProductName;
+			}
+		}
+
+		public static string ApplicationVersion
+		{
+			get
+			{
+				return System.Windows.Forms.Application.ProductVersion;
+			}
+		}
+
+		public static string ApplicationTitle
 		{
 			get
 			{
@@ -45,11 +57,10 @@ namespace OnTheFlyCompiler
 				{
 					try
 					{
-						var customAttributes = Assembly.GetEntryAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
-						if (customAttributes != null && customAttributes.Length > 0)
-						{
-							title = ((AssemblyTitleAttribute)customAttributes[0]).Title;
-						}
+						title = ((AssemblyTitleAttribute)Assembly
+							.GetEntryAssembly()
+							.GetCustomAttributes(typeof(AssemblyTitleAttribute), false)[0])
+								.Title;
 					}
 					catch
 					{
@@ -60,25 +71,11 @@ namespace OnTheFlyCompiler
 			}
 		}
 
-		internal static string ApplicationVersion
-		{
-			get
-			{
-				return Application.ProductVersion;
-			}
-		}
-
-		internal static Compiler Compiler
-		{
-			get
-			{
-				return compiler;
-			}
-		}
+		internal static Compiler Compiler { get; private set; }
 		#endregion
 
 		#region Methods
-		internal static void Init(CompilerSettings settings)
+		public static void Init(CompilerSettings settings)
 		{
 			compiler = new Compiler(settings);
 		}
