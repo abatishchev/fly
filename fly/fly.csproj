@@ -62,6 +62,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SettingsParser.cs" />
     <Compile Include="TemplateBase.cs" />
     <Content Include="Templates\Test.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

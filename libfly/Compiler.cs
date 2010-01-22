@@ -111,7 +111,7 @@ namespace OnTheFlyCompiler
 			}
 		}
 
-		public object ExecuteStatic<T>() where T : class
+		public T ExecuteStatic<T>() where T : class
 		{
 			return ExecuteStatic() as T;
 		}

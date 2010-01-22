@@ -11,6 +11,7 @@ namespace OnTheFlyCompiler
 	static class Core
 	{
 		#region Properties
+		private static string copyright;
 		public static string ApplicationCopyright
 		{
 			get
@@ -49,6 +50,7 @@ namespace OnTheFlyCompiler
 			}
 		}
 
+		private static string title;
 		public static string ApplicationTitle
 		{
 			get
@@ -77,7 +79,7 @@ namespace OnTheFlyCompiler
 		#region Methods
 		public static void Init(CompilerSettings settings)
 		{
-			compiler = new Compiler(settings);
+			Compiler = new Compiler(settings);
 		}
 		#endregion
 	}
