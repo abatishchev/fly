@@ -47,7 +47,7 @@ namespace OnTheFlyCompiler.Errors
 	public class LanguageNotSupportedException : Exception
 	{
 		public LanguageNotSupportedException(string language)
-			: base(String.Format(CultureInfo.CurrentCulture, "Specified language '{0}' is not supported", language))
+			: base(String.Format(CultureInfo.InvariantCulture, "Specified language '{0}' is not supported", language))
 		{
 			this.Language = language;
 		}
@@ -61,7 +61,7 @@ namespace OnTheFlyCompiler.Errors
 	public class XmlDescriptionException : Exception
 	{
 		public XmlDescriptionException(Exception ex)
-			: base(String.Format(CultureInfo.CurrentCulture, "Error while reading Xml-description: {0}", ex.Message), ex) { }
+			: base(String.Format(CultureInfo.InvariantCulture, "Error while reading Xml-description: {0}", ex.Message), ex) { }
 	}
 	#endregion
 
@@ -70,28 +70,28 @@ namespace OnTheFlyCompiler.Errors
 	public class ParameterMissedException : ArgumentNullException
 	{
 		public ParameterMissedException(string name)
-			: base(String.Format(CultureInfo.CurrentCulture, "Required parameter '{0}' was not specified", name), name) { }
+			: base(String.Format(CultureInfo.InvariantCulture, "Required parameter '{0}' was not specified", name), name) { }
 	}
 
 	[Serializable]
 	public class ParameterNotSetException : ArgumentNullException
 	{
 		public ParameterNotSetException(string name)
-			: base(String.Format(CultureInfo.CurrentCulture, "Required parameter '{0}' must have a value", name), name) { }
+			: base(String.Format(CultureInfo.InvariantCulture, "Required parameter '{0}' must have a value", name), name) { }
 	}
 
 	[Serializable]
 	public class ParameterOutOfRangeException : ArgumentOutOfRangeException
 	{
 		public ParameterOutOfRangeException(string name, string value)
-			: base(name, value, String.Format(CultureInfo.CurrentCulture, "Wrong value for parameter '{0}': '{1}'", name, value)) { }
+			: base(name, value, String.Format(CultureInfo.InvariantCulture, "Wrong value for parameter '{0}': '{1}'", name, value)) { }
 	}
 
 	[Serializable]
 	public class UnknownParameterException : ArgumentException
 	{
 		public UnknownParameterException(string name)
-			: base(String.Format(CultureInfo.CurrentCulture, "Unknown parameter was specified: '{0}'", name), name) { }
+			: base(String.Format(CultureInfo.InvariantCulture, "Unknown parameter was specified: '{0}'", name), name) { }
 	}
 	#endregion
 

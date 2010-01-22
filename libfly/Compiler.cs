@@ -72,7 +72,7 @@ namespace OnTheFlyCompiler
 
 		public object ExecuteStatic()
 		{
-			var fullPath = String.Format(CultureInfo.CurrentCulture, "{0}.{1}", this.Settings.MethodPath, this.Settings.MethodName);
+			var fullPath = String.Format(CultureInfo.InvariantCulture, "{0}.{1}", this.Settings.MethodPath, this.Settings.MethodName);
 			this.Output.AddInformation(String.Format("Executing {0}", fullPath));
 			try
 			{
@@ -96,7 +96,7 @@ namespace OnTheFlyCompiler
 					{
 						this.Settings.BindingFlag = BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static;
 					}
-					return type.InvokeMember(this.Settings.MethodName, this.Settings.BindingFlag, null, null, null, CultureInfo.CurrentCulture);
+					return type.InvokeMember(this.Settings.MethodName, this.Settings.BindingFlag, null, null, null, CultureInfo.InvariantCulture);
 				}
 				else
 				{
@@ -106,7 +106,7 @@ namespace OnTheFlyCompiler
 			catch (Exception ex)
 			{
 				this.Output.AddInformation(new ExecutionFailureException(ex).Message);
-				this.Output.AddError(String.Format(CultureInfo.CurrentCulture, "Error: {0}", ex.Message));
+				this.Output.AddError(String.Format(CultureInfo.InvariantCulture, "Error: {0}", ex.Message));
 				return null;
 			}
 		}
@@ -134,12 +134,12 @@ namespace OnTheFlyCompiler
 				throw new BuildFailureException(new ArgumentNullException("provider"));
 			}
 
-			this.Output.AddInformation(String.Format(CultureInfo.CurrentCulture, "Build started at {0}", DateTime.Now));
+			this.Output.AddInformation(String.Format(CultureInfo.InvariantCulture, "Build started at {0}", DateTime.Now));
 			var buildStart = new BuildStartEventArgs();
 			OnBuildStart(buildStart);
 			if (buildStart.Cancel)
 			{
-				this.Output.AddInformation(String.Format(CultureInfo.CurrentCulture, "Build canceled at {0}", DateTime.Now));
+				this.Output.AddInformation(String.Format(CultureInfo.InvariantCulture, "Build canceled at {0}", DateTime.Now));
 				throw new BuildCanceledException();
 			}
 
@@ -147,7 +147,7 @@ namespace OnTheFlyCompiler
 			if (!result.Errors.HasErrors)
 			{
 				this.ResultAssembly = result.CompiledAssembly;
-				this.Output.AddInformation(String.Format(CultureInfo.CurrentCulture, "Build succeeded at {0}", DateTime.Now));
+				this.Output.AddInformation(String.Format(CultureInfo.InvariantCulture, "Build succeeded at {0}", DateTime.Now));
 				OnBuildSuccess(new BuildSuccessEventArgs(result.CompiledAssembly));
 				return this.ResultAssembly;
 			}
@@ -155,9 +155,9 @@ namespace OnTheFlyCompiler
 			{
 				foreach (CompilerError err in result.Errors)
 				{
-					this.Output.AddError(String.Format(CultureInfo.CurrentCulture, "{0}({1},{2}): Error {3}: {4}", err.FileName, err.Line, err.Column, err.ErrorNumber, err.ErrorText), 1);
+					this.Output.AddError(String.Format(CultureInfo.InvariantCulture, "{0}({1},{2}): Error {3}: {4}", err.FileName, err.Line, err.Column, err.ErrorNumber, err.ErrorText), 1);
 				}
-				this.Output.AddInformation(String.Format(CultureInfo.CurrentCulture, "Build failed at {0} -- {1} errors", DateTime.Now, result.Errors.Count));
+				this.Output.AddInformation(String.Format(CultureInfo.InvariantCulture, "Build failed at {0} -- {1} errors", DateTime.Now, result.Errors.Count));
 				OnBuildFailure(new BuildFailureEventArgs(result.Errors.Count));
 				return null;
 			}

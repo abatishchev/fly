@@ -124,7 +124,7 @@ namespace OnTheFlyCompiler
 								//        var newRef = r;
 								//        newRef = newRef.Replace(".dll", String.Empty);
 								//        newRef = newRef.Replace(".exe", String.Empty);
-								//        refSb.AppendLine(String.Format(CultureInfo.CurrentCulture, "using {0};", newRef));
+								//        refSb.AppendLine(String.Format(CultureInfo.InvariantCulture, "using {0};", newRef));
 								//    }
 
 								//    templateSource = templateSource.Replace(Properties.Resources.TemplateReferencesSharpMarker, refSb.ToString());
@@ -165,7 +165,7 @@ namespace OnTheFlyCompiler
 										var newRef = r;
 										newRef = newRef.Replace(".dll", String.Empty);
 										newRef = newRef.Replace(".exe", String.Empty);
-										refSb.AppendLine(String.Format(CultureInfo.CurrentCulture, "using {0};", newRef));
+										refSb.AppendLine(String.Format(CultureInfo.InvariantCulture, "using {0};", newRef));
 									}
 
 									templateSource = templateSource.Replace(Properties.Resources.TemplateReferencesSharpMarker, refSb.ToString());
@@ -202,10 +202,10 @@ namespace OnTheFlyCompiler
 							}
 						case "-v":
 							{
-								var verbose = Convert.ToInt32(args[++i], CultureInfo.CurrentCulture);
+								var verbose = Convert.ToInt32(args[++i], CultureInfo.InvariantCulture);
 								if (verbose > 2)
 								{
-									throw new ParameterOutOfRangeException(name, verbose.ToString(CultureInfo.CurrentCulture));
+									throw new ParameterOutOfRangeException(name, verbose.ToString(CultureInfo.InvariantCulture));
 								}
 								else
 								{
@@ -217,10 +217,10 @@ namespace OnTheFlyCompiler
 							{
 								try
 								{
-									var warning = Convert.ToInt32(args[++i], CultureInfo.CurrentCulture);
+									var warning = Convert.ToInt32(args[++i], CultureInfo.InvariantCulture);
 									if (warning > 4)
 									{
-										throw new ParameterOutOfRangeException(name, warning.ToString(CultureInfo.CurrentCulture));
+										throw new ParameterOutOfRangeException(name, warning.ToString(CultureInfo.InvariantCulture));
 									}
 									else
 									{
@@ -255,7 +255,7 @@ namespace OnTheFlyCompiler
 									}
 									catch (XmlException ex)
 									{
-										throw new Exception(String.Format(CultureInfo.CurrentCulture, "Error parsing XmlConfiguration: {0}", ex.Message));
+										throw new Exception(String.Format(CultureInfo.InvariantCulture, "Error parsing XmlConfiguration: {0}", ex.Message));
 									}
 									catch (Exception)
 									{

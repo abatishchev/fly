@@ -18,7 +18,7 @@ namespace OnTheFlyCompiler.Examples
 			string hello = "hello";
 			string world = "WORLD";
 
-			var c3rdParty = new ThirdPartlyLib.c3rdParty();
+			ThirdPartlyLib.I3rdParty c3rdParty = new ThirdPartlyLib.c3rdParty();
 			MessageBox.Show(String.Format("{0} {1}", Foo(hello), c3rdParty.Foo(world)));
 		}
 

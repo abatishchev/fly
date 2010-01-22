@@ -67,7 +67,7 @@ namespace OnTheFlyCompiler.Settings
 			{
 				if (value < 0 || value > CompilerSettings.MaxVerboseLevel)
 				{
-					throw new Errors.ParameterOutOfRangeException("verbose", value.ToString(System.Globalization.CultureInfo.CurrentCulture));
+					throw new Errors.ParameterOutOfRangeException("verbose", value.ToString(System.Globalization.CultureInfo.InvariantCulture));
 				}
 				else
 				{

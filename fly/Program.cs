@@ -9,7 +9,7 @@ namespace OnTheFlyCompiler
 		[STAThread]
 		public static void Main(string[] args)
 		{
-			Console.WriteLine("{0} version {1}", Core.ApplicationTitle, Core.ApplicationVersion);
+			Console.WriteLine("{0}, version {1}", Core.ApplicationTitle, Core.ApplicationVersion);
 			Console.WriteLine(Core.ApplicationCopyright);
 			Console.WriteLine();
 
@@ -39,10 +39,13 @@ namespace OnTheFlyCompiler
 			{
 				Console.WriteLine("Error:");
 				Console.WriteLine(ex.Message);
-				return;
 			}
 			finally
 			{
+				if (Core.Compiler == null)
+				{
+					Core.Init(new OnTheFlyCompiler.Settings.CompilerSettings());
+				}
 				Console.WriteLine(Core.Compiler.Output);
 			}
 		}
