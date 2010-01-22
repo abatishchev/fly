@@ -7,6 +7,8 @@ On-the-Fly .NET Compiler Project Changelog:
 [+] Xml Schema for XmlDescription was used and published
 [+] Generic classes support on execution added
 
+[~] Code tree refactoring
+
 2.0.3 (2009.03.25)
 
 [+] New command line flags were added: --dll indicates output assembly type to library (--exe to executable respectively, by default),

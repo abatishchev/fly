@@ -3,7 +3,7 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("On-the-Fly .NET Compiler console front-end")]
+[assembly: AssemblyTitle("On-the-Fly .NET Compiler core library")]
 [assembly: AssemblyCompany("Godfather Software Foundation")]
 [assembly: AssemblyProduct("OnTheFlyCompiler")]
 [assembly: AssemblyCopyright("Copyright (C) 2007-2010 Alexander M. Batishchev aka Godfather")]
@@ -15,4 +15,4 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("a3a1dbb5-408f-4e62-a3b4-c0de2f1591b8")]
 
-[assembly: AssemblyVersion("2.0.4.0")]
+[assembly: AssemblyVersion("2.0.5.0")]
