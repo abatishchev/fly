@@ -1,12 +1,12 @@
-﻿// Copyright (C) 2007-2009 Alexander M. Batishchev aka Godfather (abatishchev at gmail.com)
+﻿// Copyright (C) 2007-2010 Alexander M. Batishchev aka Godfather (abatishchev at gmail.com)
 
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("On-the-Fly .NET Compiler")]
+[assembly: AssemblyTitle("On-the-Fly .NET Compiler console front-end")]
 [assembly: AssemblyCompany("Godfather Software Foundation")]
 [assembly: AssemblyProduct("OnTheFlyCompiler")]
-[assembly: AssemblyCopyright("Copyright (C) 2007-2009 Alexander M. Batishchev aka Godfather")]
+[assembly: AssemblyCopyright("Copyright (C) 2007-2010 Alexander M. Batishchev aka Godfather")]
 
 [assembly: System.Resources.NeutralResourcesLanguageAttribute("en-US")]
 
