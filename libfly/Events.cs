@@ -7,8 +7,7 @@ namespace OnTheFlyCompiler.Events
 {
 	public class BuildFailureEventArgs : EventArgs
 	{
-		public BuildFailureEventArgs()
-			: this(0) { }
+		public BuildFailureEventArgs() { }
 
 		public BuildFailureEventArgs(int count)
 		{

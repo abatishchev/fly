@@ -10,8 +10,10 @@ namespace OnTheFlyCompiler
 {
 	public class CompilerOutput
 	{
+		#region Fields
 		private Compiler compiler;
 		private Collection<OutputItem> container = new Collection<OutputItem>();
+		#endregion
 
 		#region Constructors
 		public CompilerOutput(Compiler compiler)

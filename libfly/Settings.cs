@@ -8,8 +8,10 @@ namespace OnTheFlyCompiler.Settings
 {
 	public class CompilerSettings : System.CodeDom.Compiler.CompilerParameters
 	{
+		#region Fields
 		private int verboseLevel;
 		private string appDomainName;
+		#endregion
 
 		#region Constructors
 		public CompilerSettings()

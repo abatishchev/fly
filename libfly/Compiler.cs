@@ -13,7 +13,9 @@ namespace OnTheFlyCompiler
 {
 	public class Compiler : IDisposable
 	{
+		#region Fields
 		private CodeDomProvider provider;
+		#endregion
 
 		#region Constructors
 		public Compiler(CompilerSettings settings)
@@ -55,19 +57,8 @@ namespace OnTheFlyCompiler
 		#region Methods
 		public void Dispose()
 		{
-			Dispose(true);
-			GC.SuppressFinalize(this);
-		}
-
-		protected virtual void Dispose(bool disposing)
-		{
-			if (disposing)
-			{
-				// free managed resources
-				this.Settings.TempFiles.Delete();
-				this.provider.Dispose();
-			}
-			// free native resources
+			this.Settings.TempFiles.Delete();
+			this.provider.Dispose();
 		}
 
 		public object ExecuteStatic()
